@@ -1,0 +1,41 @@
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.box {
+  border-radius: 5px;
+  background-image: linear-gradient(
+    rgba(37, 36, 34, 1),
+    rgba(50, 50, 50, 1),
+    rgba(0, 0, 0, 0.2)
+  );
+  box-shadow: #3f3e3e 3px 3px 4px 0px inset;
+}
+.centerBox {
+  border-radius: 5px;
+  border: 2.5px solid #cccccc;
+  background-color: #e5e5f7;
+  background-color: rgb(1, 39, 3, 1);
+  opacity: 1;
+  background-image: linear-gradient(0deg, #042d01 70%, #0a0a0a 50%);
+  background-size: 18px 3px;
+}
+
+.homeCenterButton {
+  color: rgb(41, 173, 48);
+  font-family: myFirstFont;
+  font-weight: 400;
+  background-image: url("../assets/images/Rectangle.png");
+  background-position: center;
+  object-fit: contain;
+  background-repeat: no-repeat;
+  background-size: 100%, 100%;
+}
+/* rgb(1, 39, 3) */
+.bottomtab {
+  padding: 0 10px;
+}
+.bottomImg {
+  transform: rotateX("10");
+}

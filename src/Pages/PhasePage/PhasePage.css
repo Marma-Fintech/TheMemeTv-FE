@@ -1,0 +1,150 @@
+.totalpoints {
+  font-family: "Press Start 2P", system-ui;
+  background: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-style: normal;
+}
+.phaseContainer {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background: #000;
+  border: 2px solid #252525;
+  border-radius: 5px;
+}
+.phase {
+  width: 100%;
+  padding: 5px;
+  border: 2px solid #313231;
+  border-radius: 5px;
+}
+.phase-text {
+  font-size: 15px !important;
+  color: #fff;
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: mySecondFont;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+.phase-point {
+  color: antiquewhite;
+  margin: 0 !important;
+  font-family: mySecondFont;
+  font-size: 13px;
+  text-align: right;
+}
+.stake-days {
+  border-radius: 5px;
+  font-size: 17px;
+  text-align: center;
+  color: #454545;
+  padding: 3px;
+  margin: 0;
+  background: #050505;
+}
+.stake-days h3 {
+  margin: 0;
+}
+.stuff-body1 {
+  margin-bottom: 20%;
+  padding: 10px 50px;
+}
+.phase-stuff {
+  width: 100%;
+  background: #212121;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.phase-para {
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 16px;
+}
+.phase-para img {
+  width: 20%;
+}
+.stake-display {
+  display: flex;
+  align-items: center;
+  background: #7475ff;
+  padding: 4px;
+  border-radius: 0px 0px 5px 5px;
+}
+.stake-display h2 {
+  font-size: 16px;
+  color: white;
+  margin: 0;
+}
+.p4 {
+  padding: 5px;
+}
+.stake-color {
+  background: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: press;
+  font-size: 20px;
+}
+.arrows {
+  width: 13px;
+    height: 13px;
+    border-color: #ffffff;
+    position: absolute;
+    top: 50%;
+}
+.prev {
+  border-bottom: 4px solid #282828;
+  border-left: 4px solid #282828;
+  transform: rotate(45deg);
+  left: 33px;
+}
+
+.prevact {
+  border-bottom: 4px solid #4cf038;
+  border-left: 4px solid #4cf038;
+  transform: rotate(45deg);
+  left: 9%
+}
+
+.next {
+  border-bottom: 4px solid #4cf038;
+  border-left: 4px solid #4cf038;
+  transform: rotate(-135deg);
+  right: 9%;
+}
+.stuff-unclaim {
+  background: #2e2e2e;
+  border: 1px solid #909090;
+  border-radius: 5px;
+  height: 35px;
+  color: #909090;
+  line-height: 0;
+  font-size: 13px;
+  width: 100%;
+}

@@ -1,0 +1,83 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url("../../assets/FontFamily/VCR_OSD_MONO_1.001.ttf");
+  }
+  @font-face {
+    font-family: mySecondFont;
+    src: url("../../assets/FontFamily/PressStart.ttf");
+  }
+  .header-logo
+  {
+    padding: 5px;
+  }
+  .header-part
+  {
+    background-color:#453522;
+    /* box-shadow: 10px 10px 17.1px 0px #0000006B inset; */
+    box-shadow: -4px -5px 14.8px 0px #0000008C inset;
+    border: 2px solid #000000;
+    font-family: myFirstFont;
+    
+  }
+  .top-bar
+  {
+    position: relative; 
+    list-style-type: none;
+    margin-bottom: 0;
+    float: inline-end;
+    right: 5px;
+  }
+  .align-items-center
+  {
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+    .d-flex {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+  }
+  .nav-bar
+  {
+    padding: 0;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    /* -webkit-box-align: center; */
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .topbar-menu
+  {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .gap-2
+  {
+    gap: 2;
+  }
+  .token
+  {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: black;
+    border: 2px solid #515151;
+    color: #fff;
+  }
+  .profile
+  {
+    border: 2px solid #000;
+    /* padding: 5px; */
+    border-radius: 5px;
+  }

@@ -1,0 +1,49 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url("../../assets/FontFamily/VCR_OSD_MONO_1.001.ttf");
+}
+
+.centerSocial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 70px;
+}
+.Socialintro {
+  font-family: myFirstFont;
+  font-size: 14px;
+  color: rgb(246, 217, 232);
+  text-shadow: 2px 5px 4px rgba(248, 47, 155, 1);
+}
+
+.namastay {
+  font-family: myFirstFont;
+
+  font-size: 48px;
+  color: rgba(67, 141, 57, 1);
+  text-shadow: 2px 5px 4px rgba(248, 47, 155, 1);
+}
+.socialIcon {
+  height: 56px;
+  width: 56px;
+  /* background-color: red; */
+}
+/* rgba(253, 141, 35, 1) */
+.socialInstyle {
+  text-shadow: 1px 1px 1px rgba(248, 47, 155, 1);
+  color: rgba(253, 141, 35, 1);
+}
+.socialPara {
+  font-size: 14px;
+  text-shadow: 1px 2.5px 2px rgba(248, 47, 155, 1);
+  color: rgba(238, 247, 59, 1);
+  text-align: center;
+}
+
+.socialPadding {
+  font-family: myFirstFont;
+  padding: 0px 35px 0px 35px;
+  font-size: 12px;
+  margin-top: 30px;
+}

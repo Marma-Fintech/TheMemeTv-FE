@@ -1,0 +1,77 @@
+.quiz-task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-family: myFirstFont;
+}
+.quiz-task h1,
+.quiz-task h2,
+.quiz-task p {
+  text-align: center;
+}
+.days-container {
+  /* display: flex; */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+.day-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* width: 350px; */
+  height: 45px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #212121;
+  border: 2px solid #212121; /* Adding a yellow border */
+}
+.play-status {
+  margin: 10px;
+  font-size: 14px;
+  border: 2px solid rgb(224, 224, 209);
+  border-radius: 5px;
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
+}
+.day-label {
+  margin: 40px;
+  font-size: 14px;
+}
+.cancel-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+.cancel-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+.cancel-icon:hover {
+  color: #f00;
+}
+.welcome-text {
+  background: linear-gradient(
+    180deg,
+    #eef73b 38.45%,
+    #79e56c 45.86%,
+    #00c0ff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: press;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.phase-text {
+  color: white;
+  font-size: 12px !important;
+  font-family: press;
+}
+.daily-text {
+  color: gray;
+}

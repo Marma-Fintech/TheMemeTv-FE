@@ -1,0 +1,12 @@
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.grow-img {
+  animation: grow 2s ease-in-out forwards;
+}

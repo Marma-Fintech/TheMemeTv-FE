@@ -1,0 +1,12 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url("../../assets/FontFamily/VCR_OSD_MONO_1.001.ttf");
+  }
+
+  .explain-page
+  {
+    font-family: myFirstFont;
+    padding: 60px;
+    text-align: center;
+    font-size: 14px;
+  }

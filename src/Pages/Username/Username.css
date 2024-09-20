@@ -1,0 +1,78 @@
+/* Username.css */
+
+.gradient-welcome {
+  color: greenyellow;
+}
+
+.welcomText {
+  font-family: myFirstFont;
+  font-size: 26px;
+  text-shadow: 0px 2px 0px rgba(248, 47, 155, 1);
+  font-family: myFirstFont;
+}
+
+.gradient-welcome2 {
+  color: greenyellow;
+}
+
+.welcomText2 {
+  font-family: myFirstFont;
+  font-size: 26px;
+  text-shadow: 0px 2px 0px rgba(248, 47, 155, 1);
+  font-family: myFirstFont;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.usernameContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.inputContainer {
+  padding: 40px 0 0 0;
+  color: white;
+}
+.user-introtext {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0 50px 0 50px;
+  color: rgb(149, 131, 131);
+  font-size: 12px;
+  font-family: myFirstFont;
+}
+
+.inputUsername {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  flex-direction: column;
+  padding: 0 0 0 50px;
+}
+
+.input-text {
+  font-size: 14px;
+  font-family: myFirstFont;
+  color: rgb(255, 255, 255);
+}
+
+.user-introtext {
+  padding: 20px 40px 0px 40px;
+}
+
+.inputStyle {
+  border: 0.6px solid rgba(121, 121, 121, 1);
+  padding: 0 35px 0 10px;
+}
+
+.inputStyle :active {
+  border: none;
+}
+
+.input-field {
+  position: relative;
+}

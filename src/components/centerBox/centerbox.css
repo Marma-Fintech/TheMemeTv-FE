@@ -1,0 +1,17 @@
+.centerbox {
+  /* border-radius: 5px; */
+  /* background-image: linear-gradient(
+    rgba(37, 36, 34, 1),
+    rgba(50, 50, 50, 1),
+    rgba(0, 0, 0, 0.2)
+  ); */
+  /* box-shadow: #595959 3px 3px 4px 0px inset; */
+  /* border-left: 3px solid #666666;
+      border-top: 3px solid #666666; */
+  /* border: 0.6px solid red; */
+  background-image: url("../../assets/images/Rectangle.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  /* pointer-events: none; */
+}

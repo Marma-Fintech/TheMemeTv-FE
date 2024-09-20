@@ -1,0 +1,173 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url("../../assets/FontFamily/VCR_OSD_MONO_1.001.ttf");
+}
+@font-face {
+  font-family: mySecondFont;
+  src: url("../../assets/FontFamily/PressStart.ttf");
+}
+.info-img {
+  background-position: center;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/images/rise-bg.png");
+  font-family: myFirstFont;
+  object-fit: contain;
+}
+hr {
+  margin: 10px !important;
+  color: #3E3E3E !important;
+  border: 1px solid #fff;
+  /* padding-bottom: 5px; */
+  border-top: var(--bs-border-width) solid;
+  opacity: 1 !important;
+}
+.market-place {
+  width: 100%;
+  padding: 2px 45px;
+}
+/* .market-pick img {
+  width: 60%;
+} */
+.mb0 {
+  margin-bottom: 0px;
+}
+.text-right {
+  text-align: right;
+}
+.rewards {
+  color: #746E6E;
+  font-family: mySecondFont;
+  font-size: 10px;
+}
+.bg-market {
+  background: #201C1C;
+  padding: 8px;
+  border-radius: 5px;
+}
+.display-flex {
+  display: flex;
+  align-items: center;
+}
+.market-color {
+  background: linear-gradient(
+    180deg,
+    #FD8D23 -1.34%,
+    #FAE61C 10.31%,
+    #EEF73B 20.95%,
+    #4CF038 42.23%,
+    #33C6F6 65.04%,
+    #7475FF 80.74%,
+    #D457FF 100%
+  );
+  font-size: 16px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: mySecondFont;
+}
+.mt15 {
+  margin-top: 15px !important;
+}
+.mb15 {
+  margin-bottom: 8px;
+  margin-top: 5px;
+}
+.market-card {
+  padding: 5px;
+  background: #212121;
+  border-radius: 5px;
+  margin: 22px 5px;
+}
+.market-pick {
+  background: #000000;
+  padding: 5px;
+  border-radius: 5px;
+}
+.p10 {
+  padding: 10px;
+}
+.p5 {
+  padding: 5px;
+}
+.flex {
+  padding-top: 10px;
+  display: flex;
+  align-items: self-end;
+  justify-content: center;
+}
+.booster-margin {
+  margin-top: -35px;
+}
+.mr5 {
+  margin-right: 10px;
+}
+.btn-card {
+  width: 100%;
+  background: #002F03;
+  border: 1px solid #4CF038;
+  border-radius: 5px;
+  color: #4CF038;
+  margin-top: 5px;
+  height: 40px;
+  line-height: 0px;
+}
+.p10 {
+  padding: 5px;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.count {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background: green;
+  margin-bottom: 0;
+  padding: 10px;
+}
+.decre {
+  background: #00ffff00;
+  border: none;
+  color: azure;
+  font-size: 35px;
+}
+.epic-market {
+  padding: 10px 10px;
+  margin: 15px;
+  width: 265px;
+  height: 100%;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("../../assets/images/epic-bg.svg");
+}
+.booster1 {
+  padding: 10px;
+  border-top: none;
+  align-items: revert;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: -35px;
+  border-radius: 0px 0px 10px 10px;
+}
+.btn-reward1 {
+  width: 80%;
+  background: #277E1E;
+  border-radius: 5px;
+  color: #fff;
+  margin-top: 30px;
+  border: 2px solid #079B16;
+}
+.epic-m {
+  color: #fff;
+  font-family: press;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+.mb0 {
+  margin-bottom: 0;
+}

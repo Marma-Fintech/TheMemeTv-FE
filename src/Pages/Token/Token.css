@@ -1,0 +1,89 @@
+.Tokenintro {
+  font-family: myFirstFont;
+  font-size: 14px;
+  color: rgb(246, 217, 232);
+  text-shadow: 3px 3px 4px rgba(248, 47, 155, 1);
+  text-align: start;
+}
+.tokenstyle {
+  font-size: 18px;
+  color: rgb(246, 217, 232);
+  text-shadow: 3px 3px 4px rgba(248, 47, 155, 1);
+  text-align: start;
+  background: linear-gradient(
+    rgba(253, 141, 35, 1),
+    rgba(250, 230, 28, 1),
+    rgba(238, 247, 59, 1),
+    rgba(76, 240, 56, 1),
+    rgba(51, 198, 246, 1),
+    rgba(85, 156, 251, 1),
+    rgba(116, 117, 255, 1),
+    rgba(212, 87, 255, 1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.Tokenpara1 {
+  font-family: myFirstFont;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* color: ; */
+}
+.tokengradient1 {
+  background: linear-gradient(
+    to right,
+    rgba(51, 198, 246, 1),
+    rgba(116, 117, 255, 1),
+    /* rgba(212, 87, 255, 1),
+    rgba(253, 141, 35, 1),
+    rgba(250, 230, 28, 1), */
+      rgba(238, 247, 59, 1),
+    rgba(76, 240, 56, 1),
+    /* rgba(238, 247, 59, 1),
+    rgba(76, 240, 56, 1), */ rgba(51, 198, 246, 1),
+    rgba(116, 117, 255, 1),
+    rgba(212, 87, 255, 1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 15 px;
+}
+
+.tokengradient2 {
+  background: linear-gradient(
+    to right,
+    rgba(212, 87, 255, 1),
+    rgba(212, 87, 255, 1),
+    rgba(51, 198, 246, 1),
+    /* rgba(116, 117, 255, 1), */
+      /* rgba(212, 87, 255, 1),
+      rgba(253, 141, 35, 1),
+      rgba(250, 230, 28, 1), */
+      rgba(238, 247, 59, 1),
+    rgba(76, 240, 56, 1),
+    /* rgba(238, 247, 59, 1),
+      rgba(76, 240, 56, 1), */
+      rgba(51, 198, 246, 1),
+    rgba(116, 117, 255, 1),
+    rgba(212, 87, 255, 1),
+    rgba(212, 87, 255, 1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* margin-top: 15 px; */
+}
+
+.TokenPadding {
+  font-family: myFirstFont;
+  padding: 0px 15px 0px 15px;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+.TokenPadding2 {
+  font-family: myFirstFont;
+  padding: 0px 15px 0px 15px;
+  font-size: 15px;
+}

@@ -1,0 +1,68 @@
+.quiz-task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.quiz-task h1,
+.quiz-task h2,
+.quiz-task p {
+  text-align: center;
+}
+.days-container {
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+.day-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* width: 350px; */
+  height: 40px;
+  margin: 8px;
+  border-radius: 2px;
+  background-color: #212121;
+  border: 2px solid #212121;
+}
+.play-status {
+  padding: 4px;
+  font-size: 13px;
+  border: 1px solid #939598;
+  border-radius: 2px;
+  width: 170px;
+  text-align: center;
+  cursor: pointer;
+  color: #7c7676;
+}
+.day-label {
+  margin: 25px;
+  font-size: 14px;
+  color: white;
+}
+.cancel-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.cancel-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+.cancel-icon:hover {
+  color: #f00;
+}
+.welcome-text {
+  color: yellow;
+}
+.phase-text {
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.daily-text {
+  color: gray;
+  margin-bottom: 0px;
+}

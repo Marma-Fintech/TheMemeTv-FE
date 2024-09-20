@@ -1,0 +1,19 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url("../../assets/FontFamily/VCR_OSD_MONO_1.001.ttf");
+}
+.textColor {
+  color: white;
+  font-family: myFirstFont;
+  font-size: 20px;
+}
+.menuButton {
+  width: "100%";
+  display: "flex";
+  align-items: "center";
+  justify-self: "center";
+  text-align: center;
+}
+.menupointer {
+  pointer-events: all;
+}

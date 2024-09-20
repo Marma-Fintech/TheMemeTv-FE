@@ -1,0 +1,220 @@
+.quiz-play-task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  pointer-events: fill;
+  font-family: myFirstFont;
+}
+.question-section {
+  width: 100%;
+  max-width: 600px;
+  margin: 0px auto;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+.question-count {
+  text-align: center;
+  color: gray;
+}
+.quizgame-datetext {
+  font-size: 20px;
+  color: yellow;
+}
+.answer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quitz-btn {
+  position: fixed;
+  bottom: 17% !important;
+  /* padding-top: 15px; */
+  border-radius: 100px;
+  width: 95%;
+  border: none;
+  height: 60px !important;
+  background-color: #034807;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.answer-section button {
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 300px;
+  margin: 5px 0;
+  background-color: #363736;
+  border: 1px solid #363736;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.answer-section button:hover {
+  background-color: #e9e9e9;
+}
+.answer-section button.selected {
+  background-color: #4caf50;
+  color: white;
+}
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  pointer-events: fill;
+}
+.next-button:disabled {
+  background-color: #ccc;
+}
+.cancel-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  pointer-events: fill;
+}
+.cancel-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  pointer-events: fill;
+}
+.cancel-icon:hover {
+  color: #f00;
+  pointer-events: fill;
+}
+.question-text {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+button:hover {
+  opacity: 0.8; /* Only allow hover effects if not answered yet */
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  aspect-ratio: 0.87;
+  max-width: 342px;
+  align-items: center;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 43px 10px 9px;
+  height: 45vh;
+  width: 100vw;
+  border: 0.85px solid rgba(57, 56, 56, 1);
+  border-radius: 25px;
+  margin-top: 10px;
+  font-family: myFirstFont;
+}
+.title-epic {
+  color: white;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.bottom-text {
+  color: rgba(126, 121, 121, 1);
+  font-size: medium;
+  font-family: myFirstFont;
+  text-align: center;
+  margin-top: 10px;
+}
+.pointsInnerContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  aspect-ratio: 1.77;
+  width: 100%;
+  padding: 39px 59px;
+  border: 5px solid rgba(18, 18, 18, 1);
+  border-radius: 25px;
+}
+.pointsLabel {
+  position: relative;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+}
+.pointsValue {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  white-space: nowrap;
+  line-height: 180%;
+}
+.pointsIcon {
+  aspect-ratio: 1.05;
+  object-fit: auto;
+  object-position: center;
+  width: 39px;
+}
+.pointsNumber {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+  margin: auto 0;
+}
+.description {
+  position: relative;
+  text-align: center;
+  color: #7e7979;
+  margin-top: 28px;
+  font: 12px/19px "VCR OSD Mono", -apple-system, Roboto, Helvetica, sans-serif;
+}
+.claimButton {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 12px;
+  aspect-ratio: 5.02;
+  margin-top: 29px;
+  width: 100%;
+  color: #fff;
+  white-space: nowrap;
+  text-align: center;
+  padding: 27px 60px;
+  font: 16px "VCR OSD Mono", sans-serif;
+}
+.claimButtonText {
+  position: relative;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

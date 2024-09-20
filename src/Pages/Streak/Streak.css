@@ -1,0 +1,288 @@
+.streaktext {
+  font-size: 20px;
+  background: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+  font-family: mySecondFont;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 60px;
+  margin-left: 62px;
+}
+.sos {
+  color: #4cf038;
+}
+.sos-none {
+  color: #081706;
+  background: grey;
+  border: none;
+}
+.btn-none {
+  background: none;
+  border: none;
+  /* color: #fff; */
+  padding: 2px;
+}
+.com-days {
+  color: #363636;
+}
+.card-block button {
+  color: #ffffff;
+}
+.card-block2 button {
+  color: greenyellow;
+}
+.complete-btn {
+  background-color: none;
+  border: none;
+  color: #262626;
+  padding: 2px;
+}
+.stuff-text h4 {
+  color: beige;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.tv-body1 {
+  pointer-events: fill;
+  width: 100%;
+}
+.mt-15 {
+  margin-top: 15%;
+}
+.streakContainer {
+  display: flex;
+  align-items: center;
+}
+.info-img {
+  background-position: center;
+  background-size: 100% 100%;
+  /* background-size: cover; */
+  width: 100%;
+  height: 100%;
+  font-family: myFirstFont;
+  object-fit: contain;
+  color: #000;
+}
+.scroll {
+  overflow: scroll !important;
+}
+.questionMarkIcon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+}
+.invite-fri h2 {
+  color: #4cf038 !important;
+}
+.invite-fri {
+  pointer-events: fill;
+}
+.invite-fri-sos {
+  background-color: rgba(60, 61, 60, 1);
+  position: fixed;
+  bottom: 17% !important;
+  padding-top: 10px;
+  border-radius: 100px;
+  width: 95%;
+  height: 60px !important;
+  text-align: center;
+  color: #fff;
+  pointer-events: fill;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.margintop {
+  margin-top: 10px;
+}
+.streak-btn {
+  position: fixed;
+  bottom: 17% !important;
+  /* padding-top: 15px; */
+  border-radius: 100px;
+  width: 95%;
+  height: 60px !important;
+  background-color: #034807;
+  right: 1%;
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: rgba(76, 240, 56, 1);
+}
+/*  Streak */
+.cardContainer {
+  border-radius: 8px;
+  background-color: rgba(33, 33, 33, 1);
+  display: flex;
+  width: 100%;
+  font-family: myFirstFont;
+  gap: 20px;
+  justify-content: space-between;
+}
+.cardContent {
+  display: flex;
+  gap: 13px;
+  padding: 5px;
+}
+.image {
+  aspect-ratio: 0.87;
+  object-fit: contain;
+  object-position: center;
+  width: 49px;
+}
+.referInfo {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+}
+.referStreak {
+  font-size: 13px;
+  line-height: 25px;
+  text-transform: uppercase;
+  background: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: linear-gradient(
+    180deg,
+    #fd8d23 -1.34%,
+    #fae61c 10.31%,
+    #eef73b 20.95%,
+    #4cf038 42.23%,
+    #33c6f6 65.04%,
+    #7475ff 80.74%,
+    #d457ff 100%
+  );
+}
+.pointContainer {
+  display: flex;
+  min-height: 27px;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  color: rgba(76, 240, 56, 0.58);
+  white-space: nowrap;
+  line-height: 26px;
+  justify-content: start;
+}
+.pointImage {
+  aspect-ratio: 1.1;
+  object-fit: contain;
+  object-position: center;
+  width: 23px;
+  align-self: stretch;
+  margin: auto 0;
+}
+.pointValue {
+  align-self: stretch;
+  margin: auto 0;
+}
+.claimedLabel {
+  border-radius: 2px;
+  background-color: rgba(50, 50, 50, 1);
+  font-size: 12px;
+  color: rgba(76, 240, 56, 1);
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: auto 0;
+  padding: 3px 12px;
+  border: 1px solid rgba(76, 240, 56, 1);
+  margin-right: 6px;
+}
+.claimed {
+  background-color: rgba(60, 61, 60, 1);
+  color: rgba(101, 101, 101, 1);
+  border-color: rgba(60, 61, 60, 1);
+}
+.claimedLabel:disabled {
+  cursor: not-allowed;
+}
+.scrolling-wrapper {
+  overflow-x: auto;
+}
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.card-block {
+  height: auto !important;
+  background-color: #034807 !important;
+  border: none;
+  color: #4cf038 !important;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.2s ease-in-out !important;
+  border-radius: 0px !important;
+}
+.card-block1 {
+  height: auto !important;
+  background-color: #363636 !important;
+  border: none;
+  color: #505050 !important;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.2s ease-in-out !important;
+  border-radius: 0px !important;
+}
+.card-block2 {
+  height: auto !important;
+  background-color: #034807 !important;
+  border: none;
+  color: #4cf038 !important;
+  background-position: center;
+  background-size: cover;
+  transition: all 0.2s ease-in-out !important;
+  border-radius: 0px !important;
+  border: 1px solid #adff2e !important;
+}
+.card-1 {
+  padding: 5px;
+  text-align: center;
+}
+.card-2 {
+  padding: 5px;
+  text-align: center;
+}
+.card-3 {
+  padding: 5px;
+  text-align: center;
+}
+.card-4 {
+  padding: 5px;
+  text-align: center;
+}
+.card-5 {
+  padding: 5px;
+  text-align: center;
+}
+.card-6 {
+  padding: 5px;
+  text-align: center;
+}
+.card-7 {
+  padding: 5px;
+  text-align: center;
+}
