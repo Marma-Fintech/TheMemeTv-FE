@@ -2,22 +2,8 @@ import React from "react";
 import PhaseDetails from "../PhaseDetails/PhaseDetails";
 import useUserInfo from "../../Hooks/useUserInfo";
 const Info = () => {
-  const { userDetails, updateUserInfo } = useUserInfo();
+  
 
-  const goToThePage = (component, name) => {
-    updateUserInfo((prev) => {
-      return {
-        ...prev,
-        ...{
-          currentComponent: component,
-          currentComponentText: name,
-          lastComponent: userDetails.currentComponent,
-          lastComponentText: userDetails.currentComponentText,
-          isMenu: false,
-        },
-      };
-    });
-  };
   return (
     <div className="info-img">
       <div
@@ -31,12 +17,10 @@ const Info = () => {
           flexDirection: "column",
           pointerEvents: "all",
         }}
-        onClick={() => {
-          goToThePage(PhaseDetails, "PhaseDetailsPage");
-        }}
       >
+        <div style={{maxWidth:"380px"}}>
         <div className="phase-details">
-          <h3>Here’s how it works</h3>
+          <h3>Here’s how it wors</h3>
         </div>
         <div className="phase-para1">
           <p className="font-2">Start Watching</p>
@@ -57,6 +41,8 @@ const Info = () => {
             innovative approach to combining fun with rewards.
           </p>
         </div>
+        </div>
+       
       </div>
     </div>
   );

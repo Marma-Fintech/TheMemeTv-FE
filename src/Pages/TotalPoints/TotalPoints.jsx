@@ -61,6 +61,7 @@ const TotalPoints = () => {
             pointerEvents: "all",
           }}
         >
+          <div>
           <div className="streakContainer">
             {/* <img
               onClick={() => {
@@ -157,6 +158,8 @@ const TotalPoints = () => {
               </div>
             </div>
           </div>
+          </div>
+          
         </div>
       </div>
     </>

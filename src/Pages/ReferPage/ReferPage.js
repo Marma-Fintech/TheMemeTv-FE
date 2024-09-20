@@ -62,9 +62,7 @@ const ReferPage = () => {
             <img src={Invite} />
           </h3>
         </div>
-        <div
-          className="row d-flex align-items-center justify-content-center 
-            "
+        <div className="row d-flex align-items-center justify-content-center"
         >
           <div className="col-7 refer-head">
             <p className="refer-earn">
@@ -76,11 +74,11 @@ const ReferPage = () => {
                 goToTheMilstonePage(Milestone, "Milestone");
               }}
             >
-              HoW IT WORK'S
+              HoW IT’S WORK
             </p>
           </div>
         </div>
-        <div className="col-9 mt-20">
+        <div className="col-9 mt-20 refer">
           <div className="row claim-ref">
             <div className="col-8">
               <h2 className="refer-table text-color">My Referral</h2>

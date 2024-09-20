@@ -9,6 +9,73 @@
 .mb10 {
   margin-bottom: 15%;
 }
+@media only screen and (max-height:778px)
+{
+  .streakBreakPointsContainer
+  {
+    margin-top: 10%;
+  }
+  
+  .cheap-stuff-container
+  {
+    /* height: 400px !important; */
+    overflow-y: scroll;
+  }
+  .scrollableContainer {
+    /* height: 400px !important; */
+    overflow-y: auto;
+    width: 100%;
+    margin-bottom: 20%;
+}
+}
+@media only screen and (min-height:779px)
+{
+  .cheap-stuff-container
+  {
+    height: 400px !important;
+    overflow-y: scroll;
+  }
+  .scrollableContainer {
+    max-height: 600px !important;
+    overflow-y: auto;
+    width: 100%;
+    margin-bottom: 10%;
+}
+}
+@media only screen and (min-width:450px)
+{
+
+  .level-div {
+    margin: 54px 75px 0px 75px !important;
+    font-family: myFirstFont;
+}
+.market-place{
+  max-width: 380px;
+}
+.phasediv
+{
+  max-width: 380px;
+}
+.refer-res, .refer
+{
+  max-width: 380px !important;
+}
+.phase {
+  max-width: 380px;
+  padding: 5px;
+  border: 2px solid #313231;
+  border-radius: 5px;
+
+}
+.phase-res
+{
+  max-width: 380px;
+}
+.market-place
+{
+width: 80% !important;
+}
+}
 .tvContainer {
   background-position: center;
   background-size: 100% 100%;
@@ -26,7 +93,7 @@
 }
 
 .level-div {
-  margin: 55px 35px 0px 35px !important;
+  margin: 55px 35px 0px 35px ;
   font-family: myFirstFont;
 }
 .level-h2 {

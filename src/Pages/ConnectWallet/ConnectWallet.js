@@ -38,6 +38,9 @@ const Info = () => {
           goToThePage(ConnectWallet, "ConnectWalletPage");
         }}
       >
+        <div style={{
+          maxWidth:"380px"
+        }}>
         <TonConnectUIProvider manifestUrl="https://sapphire-large-cougar-300.mypinata.cloud/ipfs/QmYaJ9J2XgrPVsj6hQc5M2M23Wf41DwRvJptcKPKQXmr8N">
           <div className="phase-details">
             <h4 className="airdrop-tasks">AIRDROP TASKS</h4>
@@ -47,6 +50,8 @@ const Info = () => {
             <ConnectWalletPage></ConnectWalletPage>
           </div>
         </TonConnectUIProvider>
+        </div>
+      
       </div>
     </div>
   );

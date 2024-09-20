@@ -71,7 +71,7 @@ body {
   color: rgba(192, 192, 192, 1);
 }
 .cancel-imgleaderboard {
-  width: 5%;
+  width: 20px;
   position: fixed;
   right: 12%;
   top: 7%;
@@ -83,7 +83,7 @@ body {
 .cheap-stuff1 {
   background-image: url("../../assets/images/leaderbg.svg");
   width: 100%;
-  padding: 8px;
+  padding: 4px 12px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
