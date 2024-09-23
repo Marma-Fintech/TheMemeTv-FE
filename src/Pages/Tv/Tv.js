@@ -19,6 +19,7 @@ import Streak from "../Streak/Streak";
 import tapAudio from "../../assets/audio/tapSound.mp3";
 import { FaChevronRight } from "react-icons/fa";
 import clock from "../../assets/images/clock.svg";
+import karathe from "../../assets/images/karath.webp";
 import LeaderBoard from "../LeaderBoard/LeaderBoard";
 import beatAudio from "../../assets/audio/MemetvAudio.mp3";
 import inviteFriends from "../../assets/images/invitetv.svg";
@@ -695,8 +696,7 @@ const Tv = () => {
           }}
         >
           <div className="floor"></div>
-          <img
-            src="https://i.imgur.com/pXALzSc.gif"
+          <img  src={karathe}
             className="woot-dance"
             width="328"
             height="272"
