@@ -48,7 +48,7 @@ const Tv = () => {
   const tapSound = new Audio(tapAudio);
 
   const audioRef = useRef(new Audio(beatAudio));
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     // Set the volume low
     audioRef.current.loop = true;
@@ -270,6 +270,7 @@ const Tv = () => {
   };
 
   const addWatchSecapiTotal = async (data) => {
+    setIsLoading(true);
     clearInterval(intervalRef.current);
     const res = await addWatchSeconds(data);
     localStorage.setItem(
@@ -301,6 +302,7 @@ const Tv = () => {
   };
 
   const addWatchSecapiStake = async (data) => {
+    setIsLoading(true);
     const res = await addWatchSeconds(data);
 
     localStorage.setItem(
@@ -452,12 +454,18 @@ const Tv = () => {
       className="tvContainer menupointer"
       style={{ height: "100%", width: "100%" }}
     >
+      {isLoading && (
+        <div className="loaderstyle">
+          <div className="spinner"></div>
+        </div>
+      )}
       <div className="line arrow"></div>
-      <div className="row level-div text-center" style={
-        {
+      <div
+        className="row level-div text-center"
+        style={{
           margin: "55px 35px",
-        }
-      }>
+        }}
+      >
         <div className="col-6">
           <div className="level-h2">
             <h2
@@ -680,7 +688,12 @@ const Tv = () => {
         onTouchStart={handleTap}
         onMouseDown={handleTap}
       >
-        <div className="col-12">
+        <div
+          className="col-12"
+          style={{
+            zIndex: "-1",
+          }}
+        >
           <div className="floor"></div>
           <img
             src="https://i.imgur.com/pXALzSc.gif"

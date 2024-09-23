@@ -9,15 +9,12 @@
 .mb10 {
   margin-bottom: 15%;
 }
-@media only screen and (max-height:778px)
-{
-  .streakBreakPointsContainer
-  {
+@media only screen and (max-height: 778px) {
+  .streakBreakPointsContainer {
     margin-top: 10%;
   }
-  
-  .cheap-stuff-container
-  {
+
+  .cheap-stuff-container {
     /* height: 400px !important; */
     overflow-y: scroll;
   }
@@ -26,12 +23,10 @@
     overflow-y: auto;
     width: 100%;
     margin-bottom: 20%;
+  }
 }
-}
-@media only screen and (min-height:779px)
-{
-  .cheap-stuff-container
-  {
+@media only screen and (min-height: 779px) {
+  .cheap-stuff-container {
     height: 400px !important;
     overflow-y: scroll;
   }
@@ -40,41 +35,35 @@
     overflow-y: auto;
     width: 100%;
     margin-bottom: 10%;
+  }
 }
-}
-@media only screen and (min-width:450px)
-{
-
+@media only screen and (min-width: 450px) {
   .level-div {
     margin: 54px 75px 0px 75px !important;
     font-family: myFirstFont;
-}
-.market-place{
-  max-width: 380px;
-}
-.phasediv
-{
-  max-width: 380px;
-}
-.refer-res, .refer
-{
-  max-width: 380px !important;
-}
-.phase {
-  max-width: 380px;
-  padding: 5px;
-  border: 2px solid #313231;
-  border-radius: 5px;
-
-}
-.phase-res
-{
-  max-width: 380px;
-}
-.market-place
-{
-width: 80% !important;
-}
+  }
+  .market-place {
+    max-width: 380px;
+  }
+  .phasediv {
+    max-width: 380px;
+  }
+  .refer-res,
+  .refer {
+    max-width: 380px !important;
+  }
+  .phase {
+    max-width: 380px;
+    padding: 5px;
+    border: 2px solid #313231;
+    border-radius: 5px;
+  }
+  .phase-res {
+    max-width: 380px;
+  }
+  .market-place {
+    width: 80% !important;
+  }
 }
 .tvContainer {
   background-position: center;
@@ -93,7 +82,7 @@ width: 80% !important;
 }
 
 .level-div {
-  margin: 55px 35px 0px 35px ;
+  margin: 55px 35px 0px 35px;
   font-family: myFirstFont;
 }
 .level-h2 {
@@ -149,7 +138,7 @@ width: 80% !important;
 
 .streak-border {
   /* padding: 10px 0px !important ; */
-  z-index: 1;
+  /* z-index: 1 */
   border: 2px solid;
   border-image-slice: 1;
   border-width: 1px;
@@ -359,6 +348,7 @@ width: 80% !important;
   left: 49.5%;
   width: 2px;
   height: 7rem;
+  z-index: -1;
 }
 .wallet-image {
   width: 34px;

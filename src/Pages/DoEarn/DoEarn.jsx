@@ -131,151 +131,153 @@ const DoEarn = () => {
           pointerEvents: "all",
         }}
       >
-        <div className="row">
-          <div className="col-12">
-            <div className="doearn-img">
-              <img className="stuff-gif" src={dobottom} />
-              <div className="earn-img">
-                <img src={earn} />
+        <div>
+          <div className="row">
+            <div className="col-12">
+              <div className="doearn-img">
+                <img className="stuff-gif" src={dobottom} />
+                <div className="earn-img">
+                  <img src={earn} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="row mt20 cheap-stuff" style={{ width: "100%" }}>
-          <div className="col-2">
-            <img src={twitter} style={{ width: "100%" }} />
+          <div className="row mt20 cheap-stuff" style={{ width: "100%" }}>
+            <div className="col-2">
+              <img src={twitter} style={{ width: "100%" }} />
+            </div>
+            <div className="col-7 stuff-text">
+              <h4>Join our x Channel</h4>
+              <p className="stuff-p">
+                <img src={logo} /> +5,000{" "}
+              </p>
+            </div>
+            <div className="col-3">
+              {!xchannel ? (
+                <button
+                  onClick={() => {
+                    if (!xchannel) joinXChannel();
+                  }}
+                  className="stuff-go"
+                  type="button"
+                >
+                  GO
+                </button>
+              ) : null}
+              {xchannel && xchannelvalid && xchannelvalid !== "claimed" && (
+                <button
+                  onClick={() => {
+                    claimRewards("twitter");
+                  }}
+                  className="stuff-claim"
+                  type="button"
+                >
+                  CLAIM
+                </button>
+              )}
+              {xchannel && xchannelvalid && xchannelvalid === "claimed" && (
+                <button className="validate" type="button">
+                  CLAIMED
+                </button>
+              )}
+              {xchannel && !xchannelvalid && (
+                <button className="validate" type="button">
+                  Validating
+                </button>
+              )}
+            </div>
           </div>
-          <div className="col-7 stuff-text">
-            <h4>Join our x Channel</h4>
-            <p className="stuff-p">
-              <img src={logo} /> +5,000{" "}
-            </p>
-          </div>
-          <div className="col-3">
-            {!xchannel ? (
-              <button
-                onClick={() => {
-                  if (!xchannel) joinXChannel();
-                }}
-                className="stuff-go"
-                type="button"
-              >
-                GO
-              </button>
-            ) : null}
-            {xchannel && xchannelvalid && xchannelvalid !== "claimed" && (
-              <button
-                onClick={() => {
-                  claimRewards("twitter");
-                }}
-                className="stuff-claim"
-                type="button"
-              >
-                CLAIM
-              </button>
-            )}
-            {xchannel && xchannelvalid && xchannelvalid === "claimed" && (
-              <button className="validate" type="button">
-                CLAIMED
-              </button>
-            )}
-            {xchannel && !xchannelvalid && (
-              <button className="validate" type="button">
-                Validating
-              </button>
-            )}
-          </div>
-        </div>
 
-        <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
-          <div className="col-2">
-            <img src={youtube} style={{ width: "100%" }} />
+          <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
+            <div className="col-2">
+              <img src={youtube} style={{ width: "100%" }} />
+            </div>
+            <div className="col-7 stuff-text">
+              <h4>Join our x Channel</h4>
+              <p className="stuff-p">
+                <img src={logo} /> +5,000{" "}
+              </p>
+            </div>
+            <div className="col-3">
+              {!ychannel ? (
+                <button
+                  onClick={() => {
+                    if (!ychannel) joinYChannel();
+                  }}
+                  className="stuff-go"
+                  type="button"
+                >
+                  GO
+                </button>
+              ) : null}
+              {ychannel && ychannelvalid && ychannelvalid !== "claimed" && (
+                <button
+                  onClick={() => {
+                    claimRewards("youtube");
+                  }}
+                  className="stuff-claim"
+                  type="button"
+                >
+                  CLAIM
+                </button>
+              )}
+              {ychannel && ychannelvalid && ychannelvalid === "claimed" && (
+                <button className="validate" type="button">
+                  CLAIMED
+                </button>
+              )}
+              {ychannel && !ychannelvalid && (
+                <button className="validate" type="button">
+                  Validating
+                </button>
+              )}
+            </div>
           </div>
-          <div className="col-7 stuff-text">
-            <h4>Join our x Channel</h4>
-            <p className="stuff-p">
-              <img src={logo} /> +5,000{" "}
-            </p>
-          </div>
-          <div className="col-3">
-            {!ychannel ? (
-              <button
-                onClick={() => {
-                  if (!ychannel) joinYChannel();
-                }}
-                className="stuff-go"
-                type="button"
-              >
-                GO
-              </button>
-            ) : null}
-            {ychannel && ychannelvalid && ychannelvalid !== "claimed" && (
-              <button
-                onClick={() => {
-                  claimRewards("youtube");
-                }}
-                className="stuff-claim"
-                type="button"
-              >
-                CLAIM
-              </button>
-            )}
-            {ychannel && ychannelvalid && ychannelvalid === "claimed" && (
-              <button className="validate" type="button">
-                CLAIMED
-              </button>
-            )}
-            {ychannel && !ychannelvalid && (
-              <button className="validate" type="button">
-                Validating
-              </button>
-            )}
-          </div>
-        </div>
 
-        <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
-          <div className="col-2">
-            <img src={telegram} style={{ width: "100%" }} />
-          </div>
-          <div className="col-7 stuff-text">
-            <h4>Join our x Channel</h4>
-            <p className="stuff-p">
-              <img src={logo} /> +5,000{" "}
-            </p>
-          </div>
-          <div className="col-3">
-            {!tchannel ? (
-              <button
-                onClick={() => {
-                  if (!tchannel) joinTChannel();
-                }}
-                className="stuff-go"
-                type="button"
-              >
-                GO
-              </button>
-            ) : null}
-            {tchannel && tchannelvalid && tchannelvalid !== "claimed" && (
-              <button
-                onClick={() => {
-                  claimRewards("telegram");
-                }}
-                className="stuff-claim"
-                type="button"
-              >
-                CLAIM
-              </button>
-            )}
-            {tchannel && tchannelvalid && tchannelvalid === "claimed" && (
-              <button className="validate" type="button">
-                CLAIMED
-              </button>
-            )}
-            {tchannel && !tchannelvalid && (
-              <button className="validate" type="button">
-                Validating
-              </button>
-            )}
+          <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
+            <div className="col-2">
+              <img src={telegram} style={{ width: "100%" }} />
+            </div>
+            <div className="col-7 stuff-text">
+              <h4>Join our x Channel</h4>
+              <p className="stuff-p">
+                <img src={logo} /> +5,000{" "}
+              </p>
+            </div>
+            <div className="col-3">
+              {!tchannel ? (
+                <button
+                  onClick={() => {
+                    if (!tchannel) joinTChannel();
+                  }}
+                  className="stuff-go"
+                  type="button"
+                >
+                  GO
+                </button>
+              ) : null}
+              {tchannel && tchannelvalid && tchannelvalid !== "claimed" && (
+                <button
+                  onClick={() => {
+                    claimRewards("telegram");
+                  }}
+                  className="stuff-claim"
+                  type="button"
+                >
+                  CLAIM
+                </button>
+              )}
+              {tchannel && tchannelvalid && tchannelvalid === "claimed" && (
+                <button className="validate" type="button">
+                  CLAIMED
+                </button>
+              )}
+              {tchannel && !tchannelvalid && (
+                <button className="validate" type="button">
+                  Validating
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

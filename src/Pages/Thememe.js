@@ -26,6 +26,7 @@ import {
   calculateStreakOfStreak,
 } from "../apis/user";
 import { addWatchSeconds, getUserDetails1 } from "../apis/user";
+import Spinner from "../Pages/Streak/Spinner"; // Import the spinner component
 
 const Thememe = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -505,6 +506,8 @@ const Thememe = () => {
         overflow: "hidden",
       }}
     >
+      {/* {userDetails?.userDetails?.isLoading && <Spinner />} */}
+
       <audio ref={audioRef}>
         <source src={porotta} type="audio/mpeg" />
         Your browser does not support the audio element.
@@ -830,6 +833,7 @@ const Thememe = () => {
         style={{
           height: userDetails.isHeader ? "77%" : "86%",
           width: "100%",
+          zIndex: "-999",
           backgroundColor: "black",
           position: "relative",
           pointerEvents: "none",
