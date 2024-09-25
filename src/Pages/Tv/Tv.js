@@ -696,7 +696,8 @@ const Tv = () => {
           }}
         >
           <div className="floor"></div>
-          <img  src={karathe}
+          <img
+            src={karathe}
             className="woot-dance"
             width="328"
             height="272"
