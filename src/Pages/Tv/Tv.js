@@ -26,6 +26,7 @@ import inviteFriends from "../../assets/images/invitetv.svg";
 import ReferPage from "../ReferPage/ReferPage";
 import ConnectWalletImg from "../../assets/images/ConnectWalletImg.png";
 import ConnectWallet from "../ConnectWallet/ConnectWallet";
+import animepic from "../../assets/images/animepic.svg";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -50,6 +51,9 @@ const Tv = () => {
 
   const audioRef = useRef(new Audio(beatAudio));
   const [isLoading, setIsLoading] = useState(false);
+  const [isTutorial, setIsTutorial] = useState(false);
+  const [instruction, setInstruction] = useState("");
+
   useEffect(() => {
     // Set the volume low
     audioRef.current.loop = true;
@@ -455,6 +459,345 @@ const Tv = () => {
       className="tvContainer menupointer"
       style={{ height: "100%", width: "100%" }}
     >
+      {isTutorial ? (
+        <div
+          className="tutorial"
+          style={{
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            zIndex: 0,
+            backgroundColor: "transparent",
+          }}
+        >
+          {isLoading && (
+            <div className="loaderstyle">
+              <div className="spinner"></div>
+            </div>
+          )}
+          <div className="line arrow"></div>
+          <div
+            className="row level-div text-center"
+            style={{
+              margin: "55px 35px",
+            }}
+          >
+            <div className="col-6">
+              <div className="level-h2" style={{ position: "relative" }}>
+                <h2 className="level" style={{ visibility: "hidden" }}>
+                  Level {currentLevel} &nbsp;
+                  {formatNumber(
+                    Number(watchScreen.totalReward) +
+                      Number(secs) +
+                      Number(tapPoints) +
+                      Number(boosterPoints)
+                  )}
+                  /{formatNumber(level[currentLevel + 1])}
+                </h2>
+                <h2
+                  className="level"
+                  style={{
+                    position: "absolute",
+                    top: -30,
+                    left: 0,
+                    opacity: 1,
+                    zIndex: 1000000,
+                  }}
+                >
+                  <div
+                    className="loader"
+                    onClick={() => {
+                      setInstruction("Click function one");
+                    }}
+                  >
+                    <div className="dot"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                  </div>
+                </h2>
+                <div
+                  style={{
+                    height: "10px",
+                    marginBottom: "10px",
+                    visibility: "hidden",
+                  }}
+                >
+                  <ProgressBar style={{ height: "10px" }}>
+                    <ProgressBar
+                      variant="warning"
+                      now={Number(
+                        ((watchScreen.totalReward +
+                          secs +
+                          tapPoints +
+                          Number(boosterPoints)) /
+                          level[currentLevel + 1]) *
+                          100
+                      ).toFixed()}
+                      key={1}
+                    />
+                  </ProgressBar>
+                </div>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="level-h2">
+                <h2
+                  className="level"
+                  style={{
+                    position: "absolute",
+                    top: 30,
+                    opacity: 1,
+                    zIndex: 1000000,
+                  }}
+                >
+                  <div
+                    className="loader"
+                    onClick={() => {
+                      setInstruction("Click function one");
+                    }}
+                  >
+                    <div className="dot"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                  </div>
+                </h2>
+                <h2 className="energy" style={{ visibility: "hidden" }}>
+                  <img src={engimg} style={{ paddingRight: "3px" }} />
+                  Energy {energy.current}/5000
+                </h2>
+                <div
+                  style={{
+                    height: "10px",
+                    marginBottom: "10px",
+                    visibility: "hidden",
+                  }}
+                >
+                  <ProgressBar style={{ height: "10px" }}>
+                    <ProgressBar now={(energy.current / 5000) * 100} key={1} />
+                  </ProgressBar>
+                </div>
+              </div>
+            </div>
+            <div className="row streak-center">
+              <div
+                onClick={() => {
+                  if (!watchScreen.booster) {
+                    goToThePage(Info, "Info");
+                  }
+                }}
+                className="col-2 text-center"
+                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+              >
+                <img src={help} alt="Help" />
+              </div>
+              <div className="col-8 streak-border">
+                <div className="row text-center phase1">
+                  <div className="col-5">
+                    <h2
+                      onClick={() => {
+                        if (!watchScreen.booster) {
+                          goToThePage(Streak, "Streak");
+                        }
+                      }}
+                      className="streak"
+                      style={
+                        watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }
+                      }
+                    >
+                      {" "}
+                      STREAK <FaChevronRight style={{ fontSize: "12px" }} />
+                    </h2>
+                  </div>
+                  <div className="col-2 phase-p">
+                    P{userDetails?.userDetails?.currentPhase}
+                  </div>
+                  <div
+                    className="col-5"
+                    onClick={() => {
+                      if (!watchScreen.booster) {
+                        var data = {
+                          telegramId: userDetails.userDetails.telegramId,
+                          userWatchSeconds: secsRef.current,
+                          boosterPoints: String(
+                            tapPointsRef.current + boosterPointsRef.current
+                          ),
+                        };
+                        addWatchSecapiStake(data);
+                      }
+                    }}
+                  >
+                    <h2
+                      className="streak"
+                      style={
+                        watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }
+                      }
+                    >
+                      {" "}
+                      STAKE <FaChevronRight style={{ fontSize: "12px" }} />{" "}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                onClick={() => {
+                  if (!watchScreen.booster) {
+                    goToThePage(ConnectWallet, "ConnectWallet");
+                  }
+                }}
+                className="col-2 text-center"
+                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+              >
+                <img
+                  src={ConnectWalletImg}
+                  alt="ConnectWallet"
+                  className="wallet-image"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-2">
+                <div className="token-div">
+                  <p className="token-mint">Token Mint</p>
+                  <p className="earn-p">
+                    {watchScreen?.boosterDetails?.name === "levelUp"
+                      ? currentLevel + 1
+                      : watchScreen?.boosterDetails?.name === "2x"
+                      ? currentLevel * 2
+                      : watchScreen?.boosterDetails?.name === "3x"
+                      ? currentLevel * 3
+                      : watchScreen?.boosterDetails?.name === "5x"
+                      ? currentLevel * 5
+                      : currentLevel}
+                    /Sec
+                  </p>
+                </div>
+              </div>
+              <div
+                className="col-8 points"
+                onClick={() => {
+                  if (!watchScreen.booster) {
+                    var data = {
+                      telegramId: userDetails.userDetails.telegramId,
+                      userWatchSeconds: secsRef.current,
+                      boosterPoints: String(
+                        tapPointsRef.current + boosterPointsRef.current
+                      ),
+                    };
+                    addWatchSecapiTotal(data);
+                  }
+                }}
+              >
+                <h2>
+                  <img src={memetv} alt="Meme TV" />
+                  <span className="txt-color ml-10">
+                    {watchScreen.totalReward +
+                      secsRef.current +
+                      tapPoints +
+                      boosterPoints}
+                  </span>
+                </h2>
+              </div>
+              <div className="col-2">
+                <div className="token-div">
+                  <p className="token-mint1">Earn / tap</p>
+                  <p className="earn-p">
+                    {watchScreen.boosterDetails.name === "tap" ? 10 : 5}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="row streak-center" style={{ marginTop: "5px" }}>
+              <div
+                className="col-2 text-center"
+                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+                onClick={() => {
+                  if (!watchScreen.booster) {
+                    goToTheRefererPage(ReferPage, "ReferPage");
+                  }
+                }}
+              >
+                <img src={inviteFriends} alt="Settings" />
+              </div>
+
+              <div className="col-8 text-c">
+                <div className="">
+                  <div className="col-9">
+                    {watchScreen.booster ? (
+                      <>
+                        <h2
+                          className="streak booster"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            visibility: "hidden",
+                          }}
+                        >
+                          <img
+                            src={clock}
+                            style={{ paddingRight: "5px", width: "20px" }}
+                          />
+                          {watchScreen.boosterSec}
+                        </h2>
+                      </>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="col-2 text-center"
+                onClick={() => {
+                  if (!watchScreen.booster) {
+                    goToThePage(DoandEarn, "DoandEarn");
+                  }
+                }}
+                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+              >
+                <img src={leaderBoarder} alt="Help" />
+              </div>
+            </div>
+            <p style={{ color: "white" }}>{instruction ? instruction : null}</p>
+          </div>
+          {/* <div
+            className="row"
+            style={{ height: "500px" }}
+            onTouchStart={handleTap}
+            onMouseDown={handleTap}
+          >
+            <div
+              className="col-12"
+              style={{
+                zIndex: "-1",
+              }}
+            >
+              <div className="floor"></div>
+              <img
+                src={karathe}
+                className="woot-dance"
+                width="328"
+                height="272"
+                alt="8-bit dancing Karateka guy"
+              />
+              {tapAnimations.map((animation) => (
+                <div
+                  key={animation.id}
+                  className="tap-points txt-color"
+                  style={{
+                    left: animation.x,
+                    top: animation.y,
+                    visibility: "none",
+                  }}
+                >
+                  +{watchScreen.boosterDetails.name === "tap" ? 10 : 5}
+                </div>
+              ))}
+            </div>
+          </div> */}
+        </div>
+      ) : null}
       {isLoading && (
         <div className="loaderstyle">
           <div className="spinner"></div>
@@ -471,7 +814,9 @@ const Tv = () => {
           <div className="level-h2">
             <h2
               onClick={() => {
-                goToThePage(LeaderBoard, "LeaderBoard");
+                if (!watchScreen.booster) {
+                  goToThePage(LeaderBoard, "LeaderBoard");
+                }
               }}
               className="level"
             >
@@ -524,6 +869,7 @@ const Tv = () => {
               }
             }}
             className="col-2 text-center"
+            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
           >
             <img src={help} alt="Help" />
           </div>
@@ -537,6 +883,9 @@ const Tv = () => {
                     }
                   }}
                   className="streak"
+                  style={
+                    watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }
+                  }
                 >
                   {" "}
                   STREAK <FaChevronRight style={{ fontSize: "12px" }} />
@@ -560,7 +909,12 @@ const Tv = () => {
                   }
                 }}
               >
-                <h2 className="streak">
+                <h2
+                  className="streak"
+                  style={
+                    watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }
+                  }
+                >
                   {" "}
                   STAKE <FaChevronRight style={{ fontSize: "12px" }} />{" "}
                 </h2>
@@ -575,6 +929,7 @@ const Tv = () => {
               }
             }}
             className="col-2 text-center"
+            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
           >
             <img
               src={ConnectWalletImg}
@@ -638,6 +993,7 @@ const Tv = () => {
         <div className="row streak-center" style={{ marginTop: "5px" }}>
           <div
             className="col-2 text-center"
+            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
             onClick={() => {
               if (!watchScreen.booster) {
                 goToTheRefererPage(ReferPage, "ReferPage");
@@ -678,6 +1034,7 @@ const Tv = () => {
                 goToThePage(DoandEarn, "DoandEarn");
               }
             }}
+            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
           >
             <img src={leaderBoarder} alt="Help" />
           </div>
@@ -695,10 +1052,10 @@ const Tv = () => {
             zIndex: "-1",
           }}
         >
-          <div className="floor"></div>
+          {/* <div className="floor"></div> */}
           <img
-            src={karathe}
-            className="woot-dance"
+            src={animepic}
+            // className="woot-dance"
             width="328"
             height="272"
             alt="8-bit dancing Karateka guy"
@@ -707,7 +1064,10 @@ const Tv = () => {
             <div
               key={animation.id}
               className="tap-points txt-color"
-              style={{ left: animation.x, top: animation.y }}
+              style={{
+                left: animation.x,
+                top: animation.y,
+              }}
             >
               +{watchScreen.boosterDetails.name === "tap" ? 10 : 5}
             </div>

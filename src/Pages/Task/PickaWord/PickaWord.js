@@ -308,7 +308,7 @@ const PickaWord = () => {
                   </div>
                 </div>
                 <button className="btn-reward" onClick={handleFreePick}>
-                  Free Pick
+                  Pick Next
                 </button>
               </>
             ) : (

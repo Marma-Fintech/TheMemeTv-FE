@@ -69,24 +69,24 @@ const Thememe = () => {
         telegramDetails: userData,
       }));
     }
-    // const data1 = {
-    //   name: "Karthikeyan",
-    //   telegramId: "62655jln9lugkyu18",
-    // };
-    // getUserDetails(data1);
+    const data1 = {
+      name: "Karthikeyan",
+      telegramId: "62655jln9lugkyu18",
+    };
+    getUserDetails(data1);
 
     const storedData1 = localStorage.getItem("watchStreak");
     const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
 
     if (parsedData1 && parsedData1 !== 0 && parsedData1.watchSec > 180) {
-      postWatchStreak(String(userData?.id));
-      // postWatchStreak(data1.telegramId);
+      // postWatchStreak(String(userData?.id));
+      postWatchStreak(data1.telegramId);
     }
 
     const calculateReward = async () => {
       const data24 = {
-        telegramId: String(userData?.id),
-        // telegramId: data1.telegramId,
+        // telegramId: String(userData?.id),
+        telegramId: data1.telegramId,
         userWatchSeconds: 0,
       };
       // Calculate streak data and update the state
@@ -548,17 +548,31 @@ const Thememe = () => {
             }}
           >
             <div
-              style={{
-                height: "80%",
-                width: "20%",
-                position: "relative",
-                marginBottom: "10px",
-              }}
+              style={
+                userDetails.currentComponentText === "IntroImg" ||
+                watchScreen.booster
+                  ? {
+                      height: "80%",
+                      width: "20%",
+                      position: "relative",
+                      marginBottom: "10px",
+                      opacity: 0.5,
+                    }
+                  : {
+                      height: "80%",
+                      width: "20%",
+                      position: "relative",
+                      marginBottom: "10px",
+                    }
+              }
             >
               <div
                 style={{ position: "absolute", height: "100%", width: "100%" }}
                 onClick={() => {
-                  if (!watchScreen.booster) {
+                  if (
+                    !watchScreen.booster &&
+                    userDetails.currentComponentText !== "IntroImg"
+                  ) {
                     toogleMenu();
                   }
                 }}
@@ -572,7 +586,10 @@ const Thememe = () => {
               </div>
               <div
                 onClick={() => {
-                  if (!watchScreen.booster) {
+                  if (
+                    !watchScreen.booster &&
+                    userDetails.currentComponentText !== "IntroImg"
+                  ) {
                     toogleMenu();
                   }
                 }}
@@ -769,20 +786,34 @@ const Thememe = () => {
                       justifyContent: "center",
                     }}
                   >
-                    <img src={ContinueText} style={{ width: "75%" }} />
+                    <img src={ContinueText} style={{ width: "90%" }} />
                   </div>
                 </div>
               ) : null}
             </div>
             <div
-              style={{
-                height: "80%",
-                width: "20%",
-                position: "relative",
-                marginBottom: "10px",
-              }}
+              style={
+                userDetails.currentComponentText === "IntroImg" ||
+                watchScreen.booster
+                  ? {
+                      height: "80%",
+                      width: "20%",
+                      position: "relative",
+                      marginBottom: "10px",
+                      opacity: 0.5,
+                    }
+                  : {
+                      height: "80%",
+                      width: "20%",
+                      position: "relative",
+                      marginBottom: "10px",
+                    }
+              }
               onClick={() => {
-                if (!watchScreen?.booster) {
+                if (
+                  !watchScreen?.booster &&
+                  userDetails.currentComponentText !== "IntroImg"
+                ) {
                   const values = JSON.parse(
                     localStorage.getItem("pointDetails")
                   );
