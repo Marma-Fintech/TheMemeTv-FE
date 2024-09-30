@@ -27,6 +27,7 @@ import ReferPage from "../ReferPage/ReferPage";
 import ConnectWalletImg from "../../assets/images/ConnectWalletImg.png";
 import ConnectWallet from "../ConnectWallet/ConnectWallet";
 import animepic from "../../assets/images/animepic.svg";
+import cancelIcon from "../../assets/Task/cancelicon.png";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -51,7 +52,7 @@ const Tv = () => {
 
   const audioRef = useRef(new Audio(beatAudio));
   const [isLoading, setIsLoading] = useState(false);
-  const [isTutorial, setIsTutorial] = useState(false);
+  const [isTutorial, setIsTutorial] = useState(true);
   const [instruction, setInstruction] = useState("");
 
   useEffect(() => {
@@ -143,6 +144,7 @@ const Tv = () => {
             parsedData1 && parsedData1 !== 0
               ? parsedData1?.watchSec + secsOnlyRef.current
               : secsOnlyRef.current,
+          date: new Date(userDetails?.userDetails?.lastLogin),
         })
       );
 
@@ -470,12 +472,6 @@ const Tv = () => {
             backgroundColor: "transparent",
           }}
         >
-          {isLoading && (
-            <div className="loaderstyle">
-              <div className="spinner"></div>
-            </div>
-          )}
-          <div className="line arrow"></div>
           <div
             className="row level-div text-center"
             style={{
@@ -507,7 +503,7 @@ const Tv = () => {
                   <div
                     className="loader"
                     onClick={() => {
-                      setInstruction("Click function one");
+                      setInstruction("Click function level");
                     }}
                   >
                     <div className="dot"></div>
@@ -554,7 +550,7 @@ const Tv = () => {
                   <div
                     className="loader"
                     onClick={() => {
-                      setInstruction("Click function one");
+                      setInstruction("Click function energy");
                     }}
                   >
                     <div className="dot"></div>
@@ -580,86 +576,123 @@ const Tv = () => {
                 </div>
               </div>
             </div>
+
             <div className="row streak-center">
               <div
-                onClick={() => {
-                  if (!watchScreen.booster) {
-                    goToThePage(Info, "Info");
-                  }
-                }}
+                onClick={() => {}}
                 className="col-2 text-center"
-                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+                style={{ position: "relative" }}
               >
-                <img src={help} alt="Help" />
+                <img src={help} alt="Help" style={{ visibility: "hidden" }} />
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function help");
+                  }}
+                  style={{ position: "absolute", top: -25, left: -10 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
               </div>
-              <div className="col-8 streak-border">
+
+              <div className="col-8 ">
                 <div className="row text-center phase1">
-                  <div className="col-5">
-                    <h2
-                      onClick={() => {
-                        if (!watchScreen.booster) {
-                          goToThePage(Streak, "Streak");
-                        }
-                      }}
-                      className="streak"
-                      style={
-                        watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }
-                      }
-                    >
-                      {" "}
+                  <div className="col-5" style={{ position: "relative" }}>
+                    <h2 className="streak" style={{ visibility: "hidden" }}>
                       STREAK <FaChevronRight style={{ fontSize: "12px" }} />
                     </h2>
-                  </div>
-                  <div className="col-2 phase-p">
-                    P{userDetails?.userDetails?.currentPhase}
+                    <div
+                      className="loader"
+                      onClick={() => {
+                        setInstruction("Click function streak");
+                      }}
+                      style={{ position: "absolute", top: -30 }}
+                    >
+                      <div className="dot"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                    </div>
                   </div>
                   <div
-                    className="col-5"
-                    onClick={() => {
-                      if (!watchScreen.booster) {
-                        var data = {
-                          telegramId: userDetails.userDetails.telegramId,
-                          userWatchSeconds: secsRef.current,
-                          boosterPoints: String(
-                            tapPointsRef.current + boosterPointsRef.current
-                          ),
-                        };
-                        addWatchSecapiStake(data);
-                      }
-                    }}
+                    className="col-2 phase-p"
+                    style={{ position: "relative", visibility: "hidden" }}
                   >
-                    <h2
-                      className="streak"
-                      style={
-                        watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }
-                      }
+                    <h6>p</h6>
+                    <div
+                      className="loader"
+                      onClick={() => {
+                        setInstruction("Click function phase");
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: -25,
+                        left: -20,
+                        visibility: "visible",
+                      }}
                     >
+                      <div className="dot"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                    </div>
+                  </div>
+
+                  <div className="col-5" style={{ position: "relative" }}>
+                    <h2 className="streak" style={{ visibility: "hidden" }}>
                       {" "}
                       STAKE <FaChevronRight style={{ fontSize: "12px" }} />{" "}
                     </h2>
+                    <div
+                      className="loader"
+                      onClick={() => {
+                        setInstruction("Click function stake");
+                      }}
+                      style={{
+                        position: "absolute",
+                        top: -30,
+                        visibility: "visible",
+                      }}
+                    >
+                      <div className="dot"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div
-                onClick={() => {
-                  if (!watchScreen.booster) {
-                    goToThePage(ConnectWallet, "ConnectWallet");
-                  }
-                }}
                 className="col-2 text-center"
-                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+                style={{ position: "relative" }}
               >
                 <img
                   src={ConnectWalletImg}
                   alt="ConnectWallet"
                   className="wallet-image"
+                  style={{ visibility: "hidden" }}
                 />
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function wallet");
+                  }}
+                  style={{ position: "absolute", top: -30, left: -10 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-2">
-                <div className="token-div">
+              <div className="col-2" style={{ position: "relative" }}>
+                <div className="token-div" style={{ visibility: "hidden" }}>
                   <p className="token-mint">Token Mint</p>
                   <p className="earn-p">
                     {watchScreen?.boosterDetails?.name === "levelUp"
@@ -674,23 +707,21 @@ const Tv = () => {
                     /Sec
                   </p>
                 </div>
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function tokerpersec");
+                  }}
+                  style={{ position: "absolute", top: -10, left: -10 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
               </div>
-              <div
-                className="col-8 points"
-                onClick={() => {
-                  if (!watchScreen.booster) {
-                    var data = {
-                      telegramId: userDetails.userDetails.telegramId,
-                      userWatchSeconds: secsRef.current,
-                      boosterPoints: String(
-                        tapPointsRef.current + boosterPointsRef.current
-                      ),
-                    };
-                    addWatchSecapiTotal(data);
-                  }
-                }}
-              >
-                <h2>
+              <div className="col-8 " style={{ position: "relative" }}>
+                <h2 style={{ visibility: "hidden" }}>
                   <img src={memetv} alt="Meme TV" />
                   <span className="txt-color ml-10">
                     {watchScreen.totalReward +
@@ -699,27 +730,63 @@ const Tv = () => {
                       boosterPoints}
                   </span>
                 </h2>
+
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function total reward");
+                  }}
+                  style={{ position: "absolute", top: -10, left: 65 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
               </div>
-              <div className="col-2">
-                <div className="token-div">
+              <div className="col-2" style={{ position: "relative" }}>
+                <div className="token-div" style={{ visibility: "hidden" }}>
                   <p className="token-mint1">Earn / tap</p>
                   <p className="earn-p">
                     {watchScreen.boosterDetails.name === "tap" ? 10 : 5}
                   </p>
+                </div>
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function earnpertap");
+                  }}
+                  style={{ position: "absolute", top: -20, left: -10 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
                 </div>
               </div>
             </div>
             <div className="row streak-center" style={{ marginTop: "5px" }}>
               <div
                 className="col-2 text-center"
-                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
-                onClick={() => {
-                  if (!watchScreen.booster) {
-                    goToTheRefererPage(ReferPage, "ReferPage");
-                  }
-                }}
+                style={{ position: "relative" }}
               >
-                <img src={inviteFriends} alt="Settings" />
+                <img
+                  src={inviteFriends}
+                  alt="Settings"
+                  style={{ visibility: "hidden" }}
+                />
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function invite");
+                  }}
+                  style={{ position: "absolute", top: -20, left: -10 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
               </div>
 
               <div className="col-8 text-c">
@@ -749,18 +816,44 @@ const Tv = () => {
 
               <div
                 className="col-2 text-center"
-                onClick={() => {
-                  if (!watchScreen.booster) {
-                    goToThePage(DoandEarn, "DoandEarn");
-                  }
-                }}
-                style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+                style={{ position: "relative" }}
               >
-                <img src={leaderBoarder} alt="Help" />
+                <img
+                  src={leaderBoarder}
+                  alt="Help"
+                  style={{ visibility: "hidden" }}
+                />
+                <div
+                  className="loader"
+                  onClick={() => {
+                    setInstruction("Click function cheap");
+                  }}
+                  style={{ position: "absolute", top: -20, left: -10 }}
+                >
+                  <div className="dot"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
               </div>
             </div>
             <p style={{ color: "white" }}>{instruction ? instruction : null}</p>
           </div>
+
+          <img
+            src={cancelIcon}
+            // className="cancel-img"
+            onClick={() => {
+              // closePopUp();
+              setIsTutorial(false);
+            }}
+            style={{
+              position: "absolute",
+              width: "10%",
+              left: "50%",
+              top: "80%",
+            }}
+          />
           {/* <div
             className="row"
             style={{ height: "500px" }}
@@ -1052,10 +1145,10 @@ const Tv = () => {
             zIndex: "-1",
           }}
         >
-          {/* <div className="floor"></div> */}
+          <div className="floor"></div>
           <img
             src={karathe}
-            // className="woot-dance"
+            className="woot-dance"
             width="328"
             height="272"
             alt="8-bit dancing Karateka guy"
