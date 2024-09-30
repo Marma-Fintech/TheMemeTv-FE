@@ -1054,7 +1054,7 @@ const Tv = () => {
         >
           {/* <div className="floor"></div> */}
           <img
-            src={animepic}
+            src={karathe}
             // className="woot-dance"
             width="328"
             height="272"
