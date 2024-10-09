@@ -28,6 +28,7 @@ import ConnectWalletImg from "../../assets/images/ConnectWalletImg.png";
 import ConnectWallet from "../ConnectWallet/ConnectWallet";
 import animepic from "../../assets/images/animepic.svg";
 import cancelIcon from "../../assets/Task/cancelicon.png";
+// import weekRewards from "../../apis/user/weekRewards";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -72,6 +73,13 @@ const Tv = () => {
     // Event listeners for tab changes and window close
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("beforeunload", () => audioRef.current.pause());
+
+    const storedData = localStorage.getItem("tutorial");
+    const data = JSON.parse(storedData);
+    if (data && data.watched) {
+      setIsTutorial(false);
+    }
+
     return () => {
       // Cleanup listeners and pause audio when the component unmounts
       document.removeEventListener("visibilitychange", handleVisibilityChange);
@@ -100,7 +108,7 @@ const Tv = () => {
   useEffect(() => {
     const storedData = localStorage.getItem("energyDetails");
     const storedData1 = localStorage.getItem("watchStreak");
-    const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
+    const parsedData1 = JSON.parse(storedData1);
 
     if (storedData) {
       try {
@@ -135,16 +143,18 @@ const Tv = () => {
           booster: [watchScreenRef.current.boosterDetails.name],
         })
       );
-
+      // console.log(new Date(userDetails?.userDetails?.lastLogin).getDate());
       localStorage.setItem(
         "watchStreak",
         JSON.stringify({
           // totalReward: totalRewardPoints,
           watchSec:
-            parsedData1 && parsedData1 !== 0
+            parsedData1 &&
+            parsedData1.date ===
+              new Date(userDetails?.userDetails?.lastLogin).getDate()
               ? parsedData1?.watchSec + secsOnlyRef.current
               : secsOnlyRef.current,
-          date: new Date(userDetails?.userDetails?.lastLogin),
+          date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
         })
       );
 
@@ -311,6 +321,7 @@ const Tv = () => {
   const addWatchSecapiStake = async (data) => {
     setIsLoading(true);
     const res = await addWatchSeconds(data);
+    // const res1 = await weekRewards(data);
 
     localStorage.setItem(
       "pointDetails",
@@ -331,6 +342,7 @@ const Tv = () => {
       boosterDetails: {},
       watchSec: 0,
       updatedWatchPoints: res?.watchRewards ? res?.watchRewards : 0,
+      // stakeDetails: res1,
     }));
     if (res) {
       goToThePage(Phase, "Phase");
@@ -693,7 +705,7 @@ const Tv = () => {
             <div className="row">
               <div className="col-2" style={{ position: "relative" }}>
                 <div className="token-div" style={{ visibility: "hidden" }}>
-                  <p className="token-mint">Token Mint</p>
+                  <p className="token-mint">POINT MINTING</p>
                   <p className="earn-p">
                     {watchScreen?.boosterDetails?.name === "levelUp"
                       ? currentLevel + 1
@@ -846,6 +858,12 @@ const Tv = () => {
             onClick={() => {
               // closePopUp();
               setIsTutorial(false);
+              localStorage.setItem(
+                "tutorial",
+                JSON.stringify({
+                  watched: true,
+                })
+              );
             }}
             style={{
               position: "absolute",
@@ -913,7 +931,7 @@ const Tv = () => {
               }}
               className="level"
             >
-              Level {currentLevel} &nbsp;
+              LEVEL {currentLevel} &nbsp;
               {formatNumber(
                 Number(watchScreen.totalReward) +
                   Number(secs) +
@@ -945,7 +963,7 @@ const Tv = () => {
           <div className="level-h2">
             <h2 className="energy">
               <img src={engimg} style={{ paddingRight: "3px" }} />
-              Energy {energy.current}/5000
+              ENERGY {energy.current}/5000
             </h2>
             <div style={{ height: "10px", marginBottom: "10px" }}>
               <ProgressBar style={{ height: "10px" }}>
@@ -985,7 +1003,7 @@ const Tv = () => {
                 </h2>
               </div>
               <div className="col-2 phase-p">
-                P{userDetails?.userDetails?.currentPhase}
+                P{userDetails?.userDetails?.level}
               </div>
               <div
                 className="col-5"
@@ -1034,7 +1052,7 @@ const Tv = () => {
         <div className="row">
           <div className="col-2">
             <div className="token-div">
-              <p className="token-mint">Token Mint</p>
+              <p className="token-mint">POINT MINT</p>
               <p className="earn-p">
                 {watchScreen?.boosterDetails?.name === "levelUp"
                   ? currentLevel + 1
@@ -1076,7 +1094,7 @@ const Tv = () => {
           </div>
           <div className="col-2">
             <div className="token-div">
-              <p className="token-mint1">Earn / tap</p>
+              <p className="token-mint1">EARN / TAP</p>
               <p className="earn-p">
                 {watchScreen.boosterDetails.name === "tap" ? 10 : 5}
               </p>

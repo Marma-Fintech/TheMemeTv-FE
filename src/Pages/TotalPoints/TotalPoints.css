@@ -95,6 +95,9 @@
   user-select: none;
   border: none;
   font-family: myFirstFont;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .logo-points {
   width: 20px;
@@ -104,4 +107,8 @@
   background-color: #000;
   border: 0.95px solid rgba(58, 56, 56, 1);
   border-radius: 5px;
+}
+.totalpoints-scrtoll {
+  max-height: 450px;
+  overflow: scroll;
 }

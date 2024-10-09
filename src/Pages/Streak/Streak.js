@@ -808,7 +808,7 @@ const Streak = () => {
               />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Login Streak</h4>
+              <h4>LOGGED IN</h4>
               <p className="stuff-p">
                 <img src={logo} />{" "}
                 {memoizedLoginStreakReward === undefined
@@ -859,7 +859,7 @@ const Streak = () => {
               />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Watch Streak</h4>
+              <h4>WATCHED</h4>
               <p className="stuff-p">
                 <img src={logo} />{" "}
                 {memoizedWatchStreakReward === undefined
@@ -922,7 +922,7 @@ const Streak = () => {
               />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Refer streak</h4>
+              <h4>REFERRED</h4>
               <p className="stuff-p">
                 <img src={logo} />{" "}
                 {memoizedReferStreakReward === undefined
@@ -986,7 +986,7 @@ const Streak = () => {
               />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Game Streak</h4>
+              <h4>PLAYED</h4>
               <p className="stuff-p">
                 <img src={logo} />{" "}
                 {memoizedTaskStreakReward === undefined
@@ -1047,7 +1047,7 @@ const Streak = () => {
               />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Multi Streak</h4>
+              <h4>STREAKED THE STREAK</h4>
               <p className="stuff-p">
                 <img src={logo} />{" "}
                 {memoizedMultiStreakReward === undefined

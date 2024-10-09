@@ -75,7 +75,7 @@ const StreakBreakPoints = () => {
             className="cancelIcon"
           />
         </div>
-        <span className="pointsText">BREAKDOWN</span>
+        <span className="pointsText">EXPLAINED</span>
         <div className="scrollableContainer">
           <h3 className="additionalText">
             Login daily to unlock the <b>STREAK OF STREAK</b> bonus and keep

@@ -76,9 +76,11 @@
   object-fit: contain;
 }
 .progress {
-  height: 0.4rem !important;
-  margin: 8px;
+  height: 0.6rem !important;
+  margin: 7px;
+  padding: 2px;
   border-radius: 0px !important;
+  background: #034807 !important;
 }
 
 .level-div {

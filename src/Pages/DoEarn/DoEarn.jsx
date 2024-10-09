@@ -28,13 +28,13 @@ const DoEarn = () => {
   const joinYChannel = () => {
     localStorage.setItem("ychannel", new Date());
     setYchannel(new Date());
-    window.open("https://x.com/CoinDiaryApp", "_blank");
+    window.open("https://www.instagram.com/thememe.tv_/", "_blank");
   };
 
   const joinTChannel = () => {
     localStorage.setItem("tchannel", new Date());
     setTchannel(new Date());
-    window.open("https://x.com/CoinDiaryApp", "_blank");
+    window.open("https://t.me/thememetvcommunity", "_blank");
   };
 
   const claimRewards = async (channel) => {
@@ -147,7 +147,7 @@ const DoEarn = () => {
               <img src={twitter} style={{ width: "100%" }} />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Join our x Channel</h4>
+              <h4>FOLLOW US ON X</h4>
               <p className="stuff-p">
                 <img src={logo} /> +5,000{" "}
               </p>
@@ -193,7 +193,7 @@ const DoEarn = () => {
               <img src={youtube} style={{ width: "100%" }} />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Join our x Channel</h4>
+              <h4>FOLLOW US ON INSTAGRAM</h4>
               <p className="stuff-p">
                 <img src={logo} /> +5,000{" "}
               </p>
@@ -239,7 +239,7 @@ const DoEarn = () => {
               <img src={telegram} style={{ width: "100%" }} />
             </div>
             <div className="col-7 stuff-text">
-              <h4>Join our x Channel</h4>
+              <h4>JOIN OUR TELEGRAM CHANNEL</h4>
               <p className="stuff-p">
                 <img src={logo} /> +5,000{" "}
               </p>

@@ -27,6 +27,7 @@ import {
 } from "../apis/user";
 import { addWatchSeconds, getUserDetails1 } from "../apis/user";
 import Spinner from "../Pages/Streak/Spinner"; // Import the spinner component
+import Battle from "./Battle/Battle";
 
 const Thememe = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -211,7 +212,6 @@ const Thememe = () => {
 
     try {
       userDetails1 = await getUserDetails1(userDetails.userDetails?.telegramId);
-      console.log(JSON.stringify(userDetails) + "ppp");
     } catch (error) {
       console.error("Error in updating or fetching user details:", error);
     }
@@ -465,6 +465,7 @@ const Thememe = () => {
     if (!watchScreen.booster) {
       const data = getUserDetailsOnly().then(() => {
         goToThePage(Tv, "TVPage");
+        // goToThePage(Battle, "BattlePage");
       });
     }
   };
@@ -775,7 +776,8 @@ const Thememe = () => {
                       userDetails?.userDetails?.telegramId &&
                       !watchScreen.booster
                     ) {
-                      goToThePage(Tv, "TVPage");
+                      // goToThePage(Tv, "TVPage");
+                      goToThePage(Battle, "BattlePage");
                     }
                   }}
                 >

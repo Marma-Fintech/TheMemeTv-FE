@@ -27,7 +27,9 @@ const TotalPoints = () => {
   useEffect(() => {
     const getUserDetails = async (data) => {
       const userDetails = await UserDeatils(data);
-
+      console.log(
+        JSON.stringify(userDetails.spendingRewards) + "userDetailsuserDetails"
+      );
       updateUserInfo((prev) => ({
         ...prev,
         userDetails,
@@ -61,9 +63,9 @@ const TotalPoints = () => {
             pointerEvents: "all",
           }}
         >
-          <div>
-          <div className="streakContainer">
-            {/* <img
+          <div className="totalpoints-scrtoll">
+            <div className="streakContainer">
+              {/* <img
               onClick={() => {
                 goToThePage(Tv, "Tv");
               }}
@@ -71,95 +73,107 @@ const TotalPoints = () => {
               className="cancel-imgpoints"
               style={{ cursor: "pointer" }}
             /> */}
-            <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
-              <h4 className="totalPointsText">Total Rewards</h4>
-              <div>
-                <p className="rewardstext pb0">
-                  <img src={logo} /> {watchScreen.allrewards}
-                </p>
+              <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
+                <h4 className="totalPointsText">TOTAL POINTS</h4>
+                <div>
+                  <p className="rewardstext pb0">
+                    <img src={logo} /> {watchScreen.allrewards}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">WATCH POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.watchRewards}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">REFERRAL POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.referRewards}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">STREAK POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.streakRewards}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">GAMING POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.gameRewards?.gamePoints}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">STAKING POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.stakingRewards}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">TASK POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.taskRewards?.taskPoints}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">SPENDING POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.spendingRewards}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-          <div className="row mt10 cheap-stuff display-flex">
-            <div className="col-7">
-              <h4 className="textcolor">WATCH POINTS</h4>
-            </div>
-            <div className="col-5">
-              <div className="btn-bg">
-                <button className="button-points">
-                  <img className="logo-points" src={logo} />
-                  {userDetails?.userDetails?.watchRewards}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="row mt10 cheap-stuff display-flex">
-            <div className="col-7">
-              <h4 className="textcolor">REFERRAL POINTS</h4>
-            </div>
-            <div className="col-5">
-              <div className="btn-bg">
-                <button className="button-points">
-                  <img className="logo-points" src={logo} />
-                  {userDetails?.userDetails?.referRewards}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="row mt10 cheap-stuff display-flex">
-            <div className="col-7">
-              <h4 className="textcolor">STREAK POINTS</h4>
-            </div>
-            <div className="col-5">
-              <div className="btn-bg">
-                <button className="button-points">
-                  <img className="logo-points" src={logo} />
-                  {userDetails?.userDetails?.streakRewards}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="row mt10 cheap-stuff display-flex">
-            <div className="col-7">
-              <h4 className="textcolor">GAMING POINTS</h4>
-            </div>
-            <div className="col-5">
-              <div className="btn-bg">
-                <button className="button-points">
-                  <img className="logo-points" src={logo} />
-                  {userDetails?.userDetails?.gameRewards?.gamePoints}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="row mt10 cheap-stuff display-flex">
-            <div className="col-7">
-              <h4 className="textcolor">STAKING POINTS</h4>
-            </div>
-            <div className="col-5">
-              <div className="btn-bg">
-                <button className="button-points">
-                  <img className="logo-points" src={logo} />
-                  {userDetails?.userDetails?.stakingRewards}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="row mt10 cheap-stuff display-flex">
-            <div className="col-7">
-              <h4 className="textcolor">TASK POINTS</h4>
-            </div>
-            <div className="col-5">
-              <div className="btn-bg">
-                <button className="button-points">
-                  <img className="logo-points" src={logo} />
-                  {userDetails?.userDetails?.taskRewards?.taskPoints}
-                </button>
-              </div>
-            </div>
-          </div>
-          </div>
-          
         </div>
       </div>
     </>

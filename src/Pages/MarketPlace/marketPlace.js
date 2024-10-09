@@ -33,7 +33,7 @@ const MarketPlace = () => {
 
   useEffect(() => {
     if (!isFirst && watchScreen?.updatedWatchPoints > 0) {
-      setTotalReward(watchScreen?.updatedWatchPoints);
+      setTotalReward(watchScreen.totalReward);
       setIsFirst(true);
     }
   }, [watchScreen, isFirst]);

@@ -319,7 +319,7 @@ const QuizPlayTask = () => {
     return simulatedDay > 0 ? simulatedDay : 1; // Ensure that Day 1 is correctly set
   };
   const simulatedDay = calculateSimulatedDay();
-  const currentPhase = userDetails?.userDetails?.currentPhase;
+  const currentPhase = userDetails?.userDetails?.level;
 
   useEffect(() => {
     if (simulatedDay > totalDays) {

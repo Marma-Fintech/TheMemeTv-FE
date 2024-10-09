@@ -11,9 +11,10 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 const PhasePage = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
   const [currentLevel, setCurrentLevel] = useState(
-    userDetails?.userDetails?.currentPhase
+    userDetails?.userDetails?.level
   );
   const [TotalRewards, setTotalRewards] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const formatNumber = (num) => {
     if (num >= 1000000) return Math.floor(num / 100000) / 10 + "M";
@@ -46,6 +47,7 @@ const PhasePage = () => {
 
   useEffect(() => {
     getWeeklyRewardsData();
+    // setStakeDetails(userDetails?.watchSec?.stakeDetails);
     localStorage.setItem(
       "pointDetails",
       JSON.stringify({
@@ -62,6 +64,9 @@ const PhasePage = () => {
       const currWeek = week[currentLevel];
       const res = stakeDetails[currWeek];
       setCurrentStake(res);
+      if (res) {
+        setIsLoading(false);
+      }
     }
   }, [stakeDetails, currentLevel]);
 
@@ -95,110 +100,121 @@ const PhasePage = () => {
   };
   return (
     <>
-      <div className="info-img scroll">
-        <img
-          onClick={() => {
-            toogleMenu(Tv, "Tv");
-          }}
-          src={cancelIcon}
-          className="cancel-imgpoints"
-          style={{ cursor: "pointer", zIndex: 1000000, pointerEvents: "all" }}
-        />
-        <div
-          className="menupointer stuff-body1"
-          style={{
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            marginTop: "15%",
-            flexDirection: "column",
-            pointerEvents: "all",
-          }}
-        >
-          <div
+      {isLoading ? (
+        <div className="loaderstyle">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+        <div className="info-img scroll">
+          <img
             onClick={() => {
-              if (currentLevel > 1) {
-                setCurrentLevel(currentLevel - 1);
-              }
+              toogleMenu(Tv, "Tv");
             }}
-            class={currentLevel > 1 ? "arrows prevact" : "arrows prev"}
-          ></div>
+            src={cancelIcon}
+            className="cancel-imgpoints"
+            style={{ cursor: "pointer", zIndex: 1000000, pointerEvents: "all" }}
+          />
           <div
-            class="arrows next"
-            onClick={() => {
-              if (currentLevel < 10) {
-                setCurrentLevel(currentLevel + 1);
-              }
+            className="menupointer stuff-body1"
+            style={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              // marginTop: "15%",
+              justifyContent: "center",
+              flexDirection: "column",
+              pointerEvents: "all",
             }}
-          ></div>
-          <div className="phase">
-            <div className="row phaseContainer">
-              <div className="col-6">
-                <h1 className="phase-text">PHASE {currentLevel}</h1>
-              </div>
-              <div className="col-6">
-                <h3 className="phase-point">
-                  <img src={logo} />{" "}
-                  {formatNumber(currentStake?.totalWeeklyRewards)}
-                </h3>
-              </div>
-            </div>
-            <div className="row justify-content-center">
-              <div
-                className="col-11 p4 stake-display justify-content-center"
-                style={{ padding: "5px" }}
-              >
-                <div className="col-8">
-                  <h2>Total Staked</h2>
+          >
+            <div
+              onClick={() => {
+                if (currentLevel > 1) {
+                  setCurrentLevel(currentLevel - 1);
+                }
+              }}
+              class={currentLevel > 1 ? "arrows prevact" : "arrows prev"}
+            ></div>
+            <div
+              class="arrows next"
+              onClick={() => {
+                if (currentLevel < 10) {
+                  setCurrentLevel(currentLevel + 1);
+                }
+              }}
+            ></div>
+            <div className="phase">
+              <div className="row phaseContainer">
+                <div className="col-6">
+                  <h1 className="phase-text">PHASE {currentLevel}</h1>
                 </div>
-                <div className="col-4">
-                  <p className="phase-para">
-                    <img src={logo} /> {formatNumber(TotalRewards)}
-                  </p>
+                <div className="col-6">
+                  <h3 className="phase-point">
+                    <img src={logo} />{" "}
+                    {formatNumber(currentStake?.totalWeeklyRewards)}
+                  </h3>
                 </div>
               </div>
-            </div>
-            {currentStake?.rewardsForWeek?.map((item, index) => {
-              return (
-                <div className="row mt10 phase-stuff" style={{ width: "100%" }}>
-                  <div className="col-2">
-                    <div>
-                      <h2 className="stake-days">
-                        DAY
-                        <h3 className="stake-color">{index + 1}</h3>
-                      </h2>
-                    </div>
+              <div className="row justify-content-center">
+                <div
+                  className="col-11 p4 stake-display justify-content-center"
+                  style={{ padding: "5px" }}
+                >
+                  <div className="col-8">
+                    <h2>Total Staked</h2>
                   </div>
-                  <div className="col-7 stuff-text">
+                  <div className="col-4">
                     <p className="phase-para">
-                      <img src={stakelogo} /> {formatNumber(item?.totalRewards)}
+                      <img src={logo} /> {formatNumber(TotalRewards)}
                     </p>
                   </div>
-                  <div className="col-3">
-                    {item?.userStaking ? (
-                      <button className="stuff-unclaim">STAKED</button>
-                    ) : null}
-                    {item?.totalRewards === 0 ? (
-                      <button className="stuff-unclaim">STAKE</button>
-                    ) : null}
-                    {!item?.userStaking && item?.totalRewards > 0 ? (
-                      <button
-                        onClick={() => {
-                          updateStakeRewards(item._id);
-                        }}
-                        className="stuff-claim"
-                      >
-                        STAKE
-                      </button>
-                    ) : null}
-                  </div>
                 </div>
-              );
-            })}
+              </div>
+              {currentStake?.rewardsForWeek?.map((item, index) => {
+                return (
+                  <div
+                    className="row mt10 phase-stuff"
+                    style={{ width: "100%" }}
+                  >
+                    <div className="col-2">
+                      <div>
+                        <h2 className="stake-days">
+                          DAY
+                          <h3 className="stake-color">{index + 1}</h3>
+                        </h2>
+                      </div>
+                    </div>
+                    <div className="col-7 stuff-text">
+                      <p className="phase-para">
+                        <img src={stakelogo} />{" "}
+                        {formatNumber(item?.totalRewards)}
+                      </p>
+                    </div>
+                    <div className="col-3">
+                      {item?.userStaking ? (
+                        <button className="stuff-unclaim">STAKED</button>
+                      ) : null}
+                      {item?.totalRewards === 0 ? (
+                        <button className="stuff-unclaim">STAKE</button>
+                      ) : null}
+                      {!item?.userStaking && item?.totalRewards > 0 ? (
+                        <button
+                          onClick={() => {
+                            updateStakeRewards(item._id);
+                          }}
+                          className="stuff-claim"
+                        >
+                          STAKE
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
