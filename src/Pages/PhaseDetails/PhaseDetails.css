@@ -6,7 +6,6 @@
   font-family: mySecondFont;
   src: url("../../assets/FontFamily/PressStart.ttf");
 }
-
 .info-img {
   background-position: center;
   background-size: 100% 100%;
@@ -15,4 +14,223 @@
   background-image: url("../../assets/images/rise-bg.png");
   font-family: myFirstFont;
   object-fit: contain;
+}
+.custom-shape {
+  width: 100%;
+  height: 65px;
+  /* background: linear-gradient(to bottom, #0D9F0D, #006D00); */
+  background-image: url("../../assets/images/game-bg.svg");
+  border-radius: 5px;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.phase2 {
+  height: 30px;
+  /* background: linear-gradient(to bottom, #0D9F0D, #006D00); */
+  background-image: url("../../assets/images/phase1.svg");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  width: 100%;
+  text-transform: uppercase;
+  justify-content: center;
+}
+.header {
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: start;
+  justify-content: center;
+}
+.ml15 {
+  margin-left: -15px;
+}
+.levelsec {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+.level-name {
+  margin-top: 14px;
+  font-family: mySecondFont;
+  margin-left: 10px;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.info-new {
+  text-align: center;
+  margin-top: -5px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.level-energy {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7px;
+}
+.level-up {
+  margin-left: 10px;
+  margin-top: -15px;
+  font-size: 15px;
+  color: aliceblue;
+}
+.level-up1 h3 {
+  margin-top: -15px;
+  font-size: 13px;
+  margin-right: 5px;
+  color: #fff;
+  text-align: right;
+  font-family: mySecondFont;
+}
+.displayflex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.progress-bar.dashed {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(0, 0, 0, 0.25) 5px,
+    rgba(0, 0, 0, 0.25) 10px
+  );
+  background-color: #007bff; /* Set the background color */
+}
+.align {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+  margin-top: 10px !important;
+}
+.days-streak {
+  font-family: mySecondFont;
+  color: #fff;
+  font-size: 25px;
+  margin-bottom: 0px;
+}
+.streak-border {
+  border: 1px solid #141414;
+  background: #454545;
+  border-radius: 0px 0px 10px 0px;
+}
+.streak-days {
+  font-family: mySecondFont;
+  font-size: 13px;
+  margin-bottom: 0px;
+  background: #00ff29;
+  padding: 4px;
+  border: 2px solid #ffffff;
+  text-align: center;
+}
+.str-ul {
+  display: flex;
+  margin-bottom: 0;
+  padding: 4px;
+}
+.str-ul li {
+  list-style-type: none;
+  display: flex;
+  padding: 5px;
+}
+.contain {
+  display: flex;
+  justify-content: space-evenly;
+}
+.numbers {
+  width: 30px;
+  line-height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: rgb(0 0 0);
+  color: white;
+  border: 2px solid #414141;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-right: 3px;
+  font-size: 14px;
+}
+.align {
+  display: flex;
+  align-items: center;
+}
+.streak-2 {
+  position: absolute;
+  /* border: 1px solid #fff; */
+  /* transform: skew(-20deg); */
+  /* background-color: #000; */
+  z-index: 999;
+  margin-top: -10px;
+  margin-left: 10px;
+}
+.streak-2 p {
+  margin-bottom: 0;
+  color: #fff;
+  padding: 1px;
+  text-transform: uppercase;
+  /* transform: none; */
+  /* z-index: 1; */
+  font-size: 12px;
+}
+.battle-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.battle-head {
+  /* background: #232323;  */
+  padding: 45px;
+}
+.marquee-text {
+  bottom: 15px;
+  position: relative;
+}
+.marquee {
+  color: #fff;
+}
+.noise {
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      #aaa4,
+      #8881,
+      #6664,
+      #4445,
+      #2228,
+      #4443,
+      transparent
+    ),
+    repeating-linear-gradient(transparent 0 2px, #25242950 2px 4px);
+  -webkit-animation: moveBand 8s linear infinite;
+  animation: moveBand 8s linear infinite;
+  /* z-index: 1; */
+  pointer-events: none;
+  /* position: absolute; */
+}
+@-webkit-keyframes moveBand {
+  0% {
+    background-position-y: 0, 0;
+  }
+  100% {
+    background-position-y: -221px, -150px;
+  }
+}
+@keyframes moveBand {
+  0% {
+    background-position-y: 0, 0;
+  }
+  100% {
+    background-position-y: -221px, -150px;
+  }
 }

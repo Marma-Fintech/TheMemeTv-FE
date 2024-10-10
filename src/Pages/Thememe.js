@@ -9,7 +9,7 @@ import bottomShape from "../assets/images/bottomshapemain.png";
 import bottomLeft from "../assets/images/RectangleLeft.svg";
 import bottomRight from "../assets/images/RectangleRight.svg";
 import bottomcenter from "../assets/images/bottomcenter.png";
-import greenLineBottom from "../assets/images/greenLinebottom.png";
+import greenLineBottom from "../assets/images/greenLinebottom.svg";
 import boosterText from "../assets/images/boostText.png";
 import menuIcon from "../assets/images/gameIcon.svg";
 import referIcon from "../assets/images/marketp.svg";

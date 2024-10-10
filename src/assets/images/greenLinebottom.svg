@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="242" height="80" viewBox="0 0 242 80">
+  <defs>
+    <linearGradient id="shimmerGradient" x1="100%" y1="0%" x2="0%" y2="0%"> <!-- Reverse direction -->
+      <stop offset="0%" stop-color="#045309" stop-opacity="0">
+        <animate 
+          attributeName="offset" 
+          values="1; 0; -1" 
+          dur="3s" 
+          repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" stop-color="green" stop-opacity="1">
+        <animate 
+          attributeName="offset" 
+          values="2; 1; 0" 
+          dur="3s" 
+          repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="green" stop-opacity="1">
+        <animate 
+          attributeName="offset" 
+          values="3; 2; 1" 
+          dur="3s" 
+          repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+  </defs>
+
+  <path d="M1.34298 7.52598C0.699621 4.13762 3.29755 1 6.74644 1H235.149C238.774 1 241.408 4.4462 240.456 7.9443L222.222 74.9443C221.57 77.3385 219.396 79 216.915 79H19.468C16.826 79 14.5573 77.1215 14.0645 74.526L1.34298 7.52598Z" 
+        stroke="url(#shimmerGradient)" 
+        stroke-width="1.5" fill="none"/>
+</svg>

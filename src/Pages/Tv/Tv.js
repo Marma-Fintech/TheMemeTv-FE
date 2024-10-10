@@ -29,6 +29,9 @@ import ConnectWallet from "../ConnectWallet/ConnectWallet";
 import animepic from "../../assets/images/animepic.svg";
 import cancelIcon from "../../assets/Task/cancelicon.png";
 // import weekRewards from "../../apis/user/weekRewards";
+import shibapng from "../../assets/images/shiba.png";
+import doge from "../../assets/images/doge.png";
+import pepe from "../../assets/images/pepe.png";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -55,7 +58,10 @@ const Tv = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isTutorial, setIsTutorial] = useState(true);
   const [instruction, setInstruction] = useState("");
-
+  const [isClicked, setIsClicked] = useState(false);
+  const handleClick = () => {
+    setIsClicked(!isClicked); // Toggle the state
+  };
   useEffect(() => {
     // Set the volume low
     audioRef.current.loop = true;
@@ -914,14 +920,14 @@ const Tv = () => {
           <div className="spinner"></div>
         </div>
       )}
-      <div className="line arrow"></div>
+      {/* <div className="line arrow"></div> */}
       <div
         className="row level-div text-center"
         style={{
           margin: "55px 35px",
         }}
       >
-        <div className="col-6">
+        {/* <div className="col-6">
           <div className="level-h2">
             <h2
               onClick={() => {
@@ -958,8 +964,8 @@ const Tv = () => {
               </ProgressBar>
             </div>
           </div>
-        </div>
-        <div className="col-6">
+        </div> */}
+        {/* <div className="col-6">
           <div className="level-h2">
             <h2 className="energy">
               <img src={engimg} style={{ paddingRight: "3px" }} />
@@ -971,8 +977,8 @@ const Tv = () => {
               </ProgressBar>
             </div>
           </div>
-        </div>
-        <div className="row streak-center">
+        </div> */}
+        {/* <div className="row streak-center">
           <div
             onClick={() => {
               if (!watchScreen.booster) {
@@ -1048,6 +1054,103 @@ const Tv = () => {
               className="wallet-image"
             />
           </div>
+        </div> */}
+
+        {/* <div className="row streak-center" style={{ marginTop: "5px" }}>
+          <div
+            className="col-2 text-center"
+            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+            onClick={() => {
+              if (!watchScreen.booster) {
+                goToTheRefererPage(ReferPage, "ReferPage");
+              }
+            }}
+          >
+            <img src={inviteFriends} alt="Settings" />
+          </div>
+
+          <div className="col-8 text-c">
+            <div className="">
+              <div className="col-9">
+                {watchScreen.booster ? (
+                  <>
+                    <h2
+                      className="streak booster"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <img
+                        src={clock}
+                        style={{ paddingRight: "5px", width: "20px" }}
+                      />
+                      {watchScreen.boosterSec}
+                    </h2>
+                  </>
+                ) : null}
+              </div>
+            </div>
+          </div>
+
+          <div
+            className="col-2 text-center"
+            onClick={() => {
+              if (!watchScreen.booster) {
+                goToThePage(DoandEarn, "DoandEarn");
+              }
+            }}
+            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
+          >
+            <img src={leaderBoarder} alt="Help" />
+          </div>
+        </div> */}
+        <div className="row streak-center">
+          {/*   */}
+          <div className="col-12 streak-border1">
+            <div className="row text-center phase1">
+              <div className="col-3">
+                <img src={pepe} style={{ width: "50px" }} />
+              </div>
+              <div className="col-6 phase-p">
+                <p className="battle-time">BATTLE ENDS IN</p>
+                <h3 className="battle-end">24:00:24</h3>
+              </div>
+              <div className="col-3">
+                <img src={doge} style={{ width: "50px" }} />
+              </div>
+              <div className="col-12 points-b">
+                <div className="col-6 points-sub">
+                  <div className="row">
+                    <span className="col-6 ">
+                      {" "}
+                      <h3 className="battle-end battle1">251K</h3>
+                    </span>
+                    <span className="col-6">
+                      {" "}
+                      <h3 className="battle-end battle2">251K</h3>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-12 ">
+              <div>
+                <marquee className="marquee1">
+                  No Of player active in the Battle is 250K &nbsp;{" "}
+                  <span
+                    style={{
+                      width: "10px",
+                      height: "10px",
+                      borderRadius: "50%",
+                      background: "#fff",
+                    }}
+                  ></span>
+                  No Of player active in the Battle is 250K
+                </marquee>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="row">
           <div className="col-2">
@@ -1101,57 +1204,8 @@ const Tv = () => {
             </div>
           </div>
         </div>
-        <div className="row streak-center" style={{ marginTop: "5px" }}>
-          <div
-            className="col-2 text-center"
-            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
-            onClick={() => {
-              if (!watchScreen.booster) {
-                goToTheRefererPage(ReferPage, "ReferPage");
-              }
-            }}
-          >
-            <img src={inviteFriends} alt="Settings" />
-          </div>
-
-          <div className="col-8 text-c">
-            <div className="">
-              <div className="col-9">
-                {watchScreen.booster ? (
-                  <>
-                    <h2
-                      className="streak booster"
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <img
-                        src={clock}
-                        style={{ paddingRight: "5px", width: "20px" }}
-                      />
-                      {watchScreen.boosterSec}
-                    </h2>
-                  </>
-                ) : null}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="col-2 text-center"
-            onClick={() => {
-              if (!watchScreen.booster) {
-                goToThePage(DoandEarn, "DoandEarn");
-              }
-            }}
-            style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
-          >
-            <img src={leaderBoarder} alt="Help" />
-          </div>
-        </div>
       </div>
-      <div
+      {/* <div
         className="row"
         style={{ height: "500px" }}
         onTouchStart={handleTap}
@@ -1184,6 +1238,33 @@ const Tv = () => {
             </div>
           ))}
         </div>
+      </div> */}
+      <div className="row">
+        <div
+          className="col-12 displayflex"
+          onTouchStart={handleTap}
+          onMouseDown={handleTap}
+        >
+          <div className="floor"></div>
+          <div className="image-container"></div>
+          <img
+            src={shibapng} /* Use a placeholder image for testing */
+            alt="PNG Image"
+            className={`woot-dance png-image ${
+              isClicked ? "scale-shadow" : ""
+            }`} /* Apply class based on state */
+            onClick={handleClick} /* This is the click event handler */
+          />
+        </div>
+        {tapAnimations.map((animation) => (
+          <div
+            key={animation.id}
+            className="tap-points"
+            style={{ left: animation.x, top: animation.y }}
+          >
+            +{watchScreen.boosterDetails.name === "tap" ? 10 : 5}
+          </div>
+        ))}
       </div>
     </div>
   );
