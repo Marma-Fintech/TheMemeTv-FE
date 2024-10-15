@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: 7px;
 }
 .level-up {
   margin-left: 10px;
@@ -84,7 +84,7 @@
   color: aliceblue;
 }
 .level-up1 h3 {
-  margin-top: -14px;
+  margin-top: -15px;
   font-size: 13px;
   margin-right: 5px;
   color: #fff;
@@ -93,9 +93,8 @@
 }
 .displayflex {
   display: flex;
-  /* align-items: baseline; */
-  justify-content: right;
-  margin-top: -15px;
+  align-items: center;
+  justify-content: center;
 }
 .progress-bar.dashed {
   background-image: repeating-linear-gradient(
@@ -110,7 +109,7 @@
 .align {
   padding-left: 25px !important;
   padding-right: 25px !important;
-  margin-top: 3px;
+  margin-top: 10px !important;
 }
 .days-streak {
   font-family: mySecondFont;
@@ -180,4 +179,58 @@
   /* transform: none; */
   /* z-index: 1; */
   font-size: 12px;
+}
+.battle-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.battle-head {
+  /* background: #232323;  */
+  padding: 45px;
+}
+.marquee-text {
+  bottom: 15px;
+  position: relative;
+}
+.marquee {
+  color: #fff;
+}
+.noise {
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      #aaa4,
+      #8881,
+      #6664,
+      #4445,
+      #2228,
+      #4443,
+      transparent
+    ),
+    repeating-linear-gradient(transparent 0 2px, #25242950 2px 4px);
+  -webkit-animation: moveBand 8s linear infinite;
+  animation: moveBand 8s linear infinite;
+  /* z-index: 1; */
+  pointer-events: none;
+  /* position: absolute; */
+}
+@-webkit-keyframes moveBand {
+  0% {
+    background-position-y: 0, 0;
+  }
+  100% {
+    background-position-y: -221px, -150px;
+  }
+}
+@keyframes moveBand {
+  0% {
+    background-position-y: 0, 0;
+  }
+  100% {
+    background-position-y: -221px, -150px;
+  }
 }

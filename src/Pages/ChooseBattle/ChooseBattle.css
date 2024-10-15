@@ -10,55 +10,31 @@
 }
 
 body {
-  width: 393px;
-  /* height       : 738px; */
   background-color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0;
 }
 
 .match-header {
-  position: relative;
-  width: 50%;
-  border: 4px solid #363636;
-  text-align: center;
-  padding: 4px;
-  top: 25px;
-  left: 90px;
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
   color: #4cf038;
-  background-color: #0a0a0a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  text-align: center;
+  padding: 8px 17px;
+  background-color: rgb(0, 0, 0);
+  border: rgb(37, 37, 37) 2.5px solid;
 }
 
 .match-header-text {
-  filter: drop-shadow(0px 2px 0px#d457ff);
-  font-family: "Press Start 2p";
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24.8px;
+  filter: drop-shadow(0px 2px 0px #d457ff) !important;
+  font-size: 16.4px;
+  padding-top: 2px;
 }
 
-.battle-content {
-  padding: 14px;
-  border-color: rgba(78, 78, 78, 0.603);
-  background-color: #0e0e0e;
-  width: 370px;
-  border-style: solid;
-  border-width: 8px;
-}
-
-.vs-text {
-  display: flex;
-  height: 40px;
-  width: auto;
-  justify-content: center;
-  position: absolute;
-  top: 32%;
-}
-
-.choose-text-div {
-  background: linear-gradient(
+.outline {
+  /* background: linear-gradient(
     180deg,
     #fd8d23 -1.34%,
     #fae61c 10.31%,
@@ -67,61 +43,86 @@ body {
     #33c6f6 65.04%,
     #7475ff 80.74%,
     #d457ff 100%
-  );
-  border: 0.5px solid;
-  padding: 5px;
+  ); */
+  padding: 1px;
   border-radius: 5px;
-  padding: 0px;
+  border-top-width: 20px;
   background-clip: padding-box;
   position: relative;
-  /* z-index: 1; */
-  bottom: 2px;
-  width: 360px;
+  z-index: 1;
+}
+
+.content {
+  border-radius: 4px;
+  background-color: black;
+  padding-top: 2px;
+}
+
+.choose-text-div {
+  font-family: "Press Start 2P", cursive;
+  background: linear-gradient(to bottom, #ffff00, #00ff00, #0000ff);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0px 3px rgba(255, 105, 180, 0.7));
+  font-size: 8px;
 }
 
 .choose-text {
-  background-color: black;
-  padding: 10px;
-  margin-left: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px;
   text-align: center;
-  color: #ffffff;
-  border-radius: 5px;
-  margin: 1px;
-  font-size: 16px;
-  font-family: "vcr-ocd-mono";
-  padding-top: 20px;
-  padding-bottom: 20px;
-  filter: drop-shadow(0px 2px#D457FF);
+  padding: 10px 0px;
+  color: #ffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  filter: drop-shadow(0px 1px#D457FF);
 }
 
-.meme-fight-text {
-  filter: drop-shadow(0px 2.5px 0px #d457ff);
-  font-family: "vcr-ocd-mono";
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 25.2px;
-  text-align: center;
-  word-spacing: 2px;
+.battle-content {
+  background-color: #0e0e0e;
+  width: 85vw;
+  max-width: 320px;
+  margin: 0 auto;
+  border: rgba(61, 60, 60, 0.733) solid 5px;
+  padding: 20px 10px 12px 10px;
+  position: relative;
 }
 
 .characters-container {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 5px;
   margin-top: 1px;
 }
 
-.red-character {
-  width: 170px;
-  margin: 1px !important;
+.character {
+  text-align: center;
+  flex: 1;
 }
 
-.pepe-img {
-  height: 200px;
-  width: 130px;
-  margin-left: 20px;
-  margin-top: 40px;
-  margin-bottom: 20px;
+.character {
+  text-align: center;
+}
+
+.character-image {
+  width: auto;
+  height: 185px;
+  padding: 15px;
+}
+
+.shiba-text,
+.pepe-text {
+  color: #ffffff;
+  font-size: 14px;
+  padding: 5px;
+  background-color: rgb(102, 8, 8);
+}
+
+.pepe-text {
+  background-color: rgb(8, 155, 20);
 }
 
 .team-1 {
@@ -132,8 +133,7 @@ body {
     hsla(0, 93%, 50%, 0.692) 15%,
     transparent 15%
   );
-
-  background-size: 100% 12px;
+  background-size: 7px 7px;
   background-color: rgba(133, 37, 23, 0.4);
   opacity: 1;
 }
@@ -147,57 +147,55 @@ body {
     transparent 15%
   );
 
-  background-size: 100% 12px;
-  background-color: rgb(43, 73, 3);
+  background-size: 7px 7px;
+  background-color: rgb(29, 102, 26);
   opacity: 1;
-  padding: 0px;
-}
-
-.team-1 img {
-  height: 266px;
-  width: 170px;
-  padding: 0px;
-}
-
-.shiba-text {
-  background-color: rgb(133, 37, 23, 0.4);
-  margin-top: 0px;
-  width: 170px;
-  color: #ffffff;
-  padding-top: 7px;
-  padding-bottom: 10px;
-  text-align: center;
-  font-family: "Press Start 2p";
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 21.6px;
-}
-
-.pepe-text {
-  background-color: #004a07c9;
-  margin-top: 0px;
-  width: 170px;
-  color: #ffffff;
-  padding-top: 14px;
-  padding-bottom: 10px;
-  text-align: center;
-  font-family: "Press Start 2p";
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21.6px;
-}
-
-.team-stats {
-  color: #ffffff;
+  /* padding: 0px; */
 }
 
 .team-stats {
   list-style: none;
   padding: 0;
-  margin: 5px;
+  margin: 10px 0;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.shiba-text {
+  background-color: rgba(133, 37, 23, 0.4);
+}
+
+.pepe-text {
+  background-color: rgb(29, 102, 26);
+}
+
+.team-shiba-btn,
+.team-pepe-btn {
+  width: 100%;
+  height: 20px;
+  background-color: #a82b18;
+  border: none;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-pepe-btn {
+  background-color: rgb(8, 148, 8);
+}
+
+.team-stats {
+  list-style: none;
+  padding: 0;
+  /* margin: 5px; */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .team-stats li {
@@ -207,8 +205,8 @@ body {
   font-weight: 400;
   font-family: "vsr-ocd-mono";
   color: #9b9b9b;
-  font-size: 12px;
-  padding: 5px;
+  font-size: 10px;
+  padding: 2px;
 }
 
 .team-stats.red li {
@@ -237,19 +235,29 @@ body {
   color: #ffffff;
 }
 
+.vs-text {
+  display: flex;
+  height: 40px;
+  width: auto;
+  justify-content: center;
+  position: absolute;
+  top: 32%;
+}
+
 .team-shiba-btn {
   color: white;
   font-family: "vcr-ocd-mono";
   background-color: #a82b18;
   border-color: #a82b18;
-  width: 170px;
+  /* width           : 170px; */
   text-align: center;
-  border-radius: 6px;
+  border-radius: 2px;
   margin-top: 2px;
+  padding: 15px;
 }
 
 .team-shiba-btn p {
-  font-size: 16px;
+  font-size: 10px;
   letter-spacing: 2px;
   margin-top: 7px;
   margin-bottom: 7px;
@@ -260,19 +268,24 @@ body {
   font-family: "vcr-ocd-mono";
   background-color: #09bd1b;
   border-color: #09bd1b;
-  width: 170px;
   text-align: center;
-  border-radius: 6px;
+  padding: 15px;
+  border-radius: 2px;
 }
 
 .team-pepe-btn p {
-  font-size: 16px;
+  font-size: 10px;
   letter-spacing: 2px;
   margin-top: 7px;
   margin-bottom: 7px;
 }
 
 .close-btn {
+  position: absolute;
+  bottom: 8%;
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  /* margin-top: 20px; */
   padding: 0;
   border: none;
   background-color: transparent;
@@ -280,8 +293,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 185px;
-  margin-top: 20px;
 }
 
 .close-icon {
@@ -292,99 +303,3 @@ body {
 .close-btn:hover {
   opacity: 0.8;
 }
-
-.character-details {
-  text-align: center;
-}
-
-.character-name {
-  font-weight: bold;
-}
-
-.choose-button {
-  margin-top: 8px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  color: white;
-}
-
-.red-button {
-  background-color: #b30000;
-}
-
-.red-button:hover {
-  background-color: #cc0000;
-}
-
-.green-button {
-  background-color: #004d00;
-}
-
-.green-button:hover {
-  background-color: #005c00;
-}
-
-/* @media (max-width:320px) {
-
-
-  .meme-battle-container {
-    margin-top: 60%;
-  }
-
-  .battle-content {
-    width        : 100vw;
-    padding      : 0px;
-    padding-left : 5px;    padding-top  : 10px;
-    padding-right: 50px;
-  }
-
-  .vs-text {
-    position   : relative;
-    font-family: 'Sedgwick Ave Display';
-    font-weight: 400;
-    font-size  : 24px;
-    color      : black;
-    z-index    : 1;
-    display    : inline-block;
-  }
-
-  .vs-text::before {
-    content : 'VS';
-    position: absolute;
-    top     : 0;
-    left    : 0;
-    right   : 0;
-    bottom  : 0;
-    z-index : -1;
-
-    background             : linear-gradient(to bottom, #FD8D23, #FAE61C, #EEF73B, #4CF038, #33C6F6, #7475FF, #D457FF);
-    -webkit-background-clip: unset;
-    background-clip        : text;
-    color                  : transparent;
-    transform              : scale(1.1);
-    padding                : 1px;
-  }
-
-
-  .characters-container {
-    display          : flex;
-    align-items      : center;
-    justify-content  : center;
-    padding-left     : 40px;
-    padding-bottom: 2px;
-    gap              : 10px;
-  }
-
-  
-  .shibu-text {
-    padding-bottom:24px;
-    padding-top: 22px;
-    font-size  : 14px;
-  }
-
-  .pepe-text {
-    width    : 175px;
-    font-size: 14px;
-  }
-
-} */

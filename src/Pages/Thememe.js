@@ -19,15 +19,17 @@ import Boosters from "../Pages/Boosters/Boosters";
 import ContinueText from "../assets/images/continue.svg";
 import switchOnTv from "../assets/images/switch-on.svg";
 import marketPlace from "./MarketPlace/marketPlace";
-
+import StartBattle from "../../src/assets/images/StartBattle.svg";
 import {
   UserDeatils,
   calculateStreak,
   calculateStreakOfStreak,
+  getBattlebyDate,
 } from "../apis/user";
 import { addWatchSeconds, getUserDetails1 } from "../apis/user";
-import Spinner from "../Pages/Streak/Spinner"; // Import the spinner component
 import Battle from "./Battle/Battle";
+import ChooseBattle from "../Pages/ChooseBattle/ChooseBattle";
+import cancleCoin from "../../src/assets/Task/cancelicon.png";
 
 const Thememe = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -39,6 +41,7 @@ const Thememe = () => {
   useEffect(() => {
     latestUserDetails.current = userDetails;
     latestWatchScreen.current = watchScreen;
+    console.log(JSON.stringify(userDetails) + "kjhgfdsdfkjhg");
   }, [userDetails, watchScreen]);
 
   useEffect(() => {
@@ -64,11 +67,6 @@ const Thememe = () => {
       }
 
       getUserDetails(data);
-
-      updateUserInfo((prev) => ({
-        ...prev,
-        telegramDetails: userData,
-      }));
     }
     const data1 = {
       name: "Karthikeyan",
@@ -113,11 +111,18 @@ const Thememe = () => {
   }, []);
 
   const postWatchStreak = async (id) => {
-    console.log("jhgfdsdfghj");
     const calculatedStreakData = await calculateStreak({
       telegramId: id,
       userWatchSeconds: 180,
     });
+  };
+
+  const getBattleDetails = async (date) => {
+    const battleData = await getBattlebyDate(date);
+    updateUserInfo((prev) => ({
+      ...prev,
+      battleDetails: battleData,
+    }));
   };
 
   const getUserDetails = async (data) => {
@@ -157,7 +162,6 @@ const Thememe = () => {
         ]);
 
         userDetails = await UserDeatils(data);
-        console.log(JSON.stringify(userDetails) + "kjhgfds");
       } catch (error) {
         console.error("Error in updating or fetching user details:", error);
       }
@@ -167,6 +171,7 @@ const Thememe = () => {
         updateUserInfo((prev) => ({
           ...prev,
           userDetails: userDetails,
+          voteStatus: userDetails?.voteDetails?.voteStatus,
         }));
 
         updatewatchScreenInfo((prev) => ({
@@ -194,6 +199,7 @@ const Thememe = () => {
         updateUserInfo((prev) => ({
           ...prev,
           userDetails: userDetails,
+          voteStatus: userDetails?.voteDetails?.voteStatus,
         }));
 
         updatewatchScreenInfo((prev) => ({
@@ -306,16 +312,16 @@ const Thememe = () => {
   //   return userDetails;
   // };
 
-  const goToTheRefererPage = (component, name) => {
-    updateUserInfo((prev) => ({
-      ...prev,
-      currentComponent: component,
-      currentComponentText: name,
-      lastComponent: latestUserDetails.current.currentComponent,
-      lastComponentText: latestUserDetails.current.currentComponentText,
-      refererCount: latestUserDetails.current.refererCount + 1,
-    }));
-  };
+  // const goToTheRefererPage = (component, name) => {
+  //   updateUserInfo((prev) => ({
+  //     ...prev,
+  //     currentComponent: component,
+  //     currentComponentText: name,
+  //     lastComponent: latestUserDetails.current.currentComponent,
+  //     lastComponentText: latestUserDetails.current.currentComponentText,
+  //     refererCount: latestUserDetails.current.refererCount + 1,
+  //   }));
+  // };
 
   const toogleMenu = async () => {
     await addWatchSecMenu().then(() => {
@@ -346,12 +352,19 @@ const Thememe = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
+    console.log(
+      userDetails?.userDetails?.telegramId,
+      userDetails?.userDetails?.lastLogin,
+      !userDetails?.voteStatus,
+      !userDetails?.battleDetails
+    );
     if (
-      latestUserDetails.current.centerCount === 3 &&
-      latestUserDetails.current.menuCount === 2 &&
-      latestUserDetails.current.refererCount === 5
+      userDetails?.userDetails?.telegramId &&
+      userDetails?.userDetails?.lastLogin &&
+      !userDetails?.voteStatus &&
+      !userDetails?.battleDetails
     ) {
-      audioRef.current.play();
+      const data = getBattleDetails(userDetails?.userDetails?.lastLogin);
     }
   }, [userDetails]);
 
@@ -498,393 +511,502 @@ const Thememe = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100%",
-        backgroundColor: "black",
-        position: "fixed",
-        overflow: "hidden",
-      }}
-    >
-      {/* {userDetails?.userDetails?.isLoading && <Spinner />} */}
-
-      <audio ref={audioRef}>
-        <source src={porotta} type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-      {latestUserDetails.current.isHeader && (
-        <div className="box" style={{ height: "7%", width: "100%" }}>
-          <Header />
-        </div>
-      )}
-      <div
-        style={{
-          position: "fixed",
-          zIndex: 1,
-          height: "17%",
-          width: "100%",
-          bottom: 0,
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ position: "relative", height: "100%" }}>
-          <div style={{ position: "absolute", height: "100%", width: "100%" }}>
-            <img
-              src={bottomShape}
-              alt="border"
-              style={{ height: "100%", width: "100%" }}
-              className="bottomImg"
-            />
-          </div>
+    <div style={{ position: "relative" }}>
+      {userDetails?.isBattleScreen ? (
+        <div
+          style={{
+            position: "absolute",
+            height: "100vh",
+            width: "100%",
+            zIndex: 2,
+          }}
+        >
           <div
-            className="bottomtab"
             style={{
-              display: "flex",
-              flexDirection: "row",
-              height: "100%",
+              position: "relative",
               width: "100%",
-              position: "absolute",
-              alignItems: "flex-end",
+              height: "100vh",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div
-              style={
-                userDetails.currentComponentText === "IntroImg" ||
-                watchScreen.booster
-                  ? {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                      opacity: 0.5,
-                    }
-                  : {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                    }
-              }
-            >
-              <div
-                style={{ position: "absolute", height: "100%", width: "100%" }}
-                onClick={() => {
-                  if (
-                    !watchScreen.booster &&
-                    userDetails.currentComponentText !== "IntroImg"
-                  ) {
-                    toogleMenu();
-                  }
-                }}
-              >
-                <img
-                  src={bottomLeft}
-                  alt="border"
-                  style={{ height: "100%", width: "100%" }}
-                  className="bottomImg"
-                />
-              </div>
-              <div
-                onClick={() => {
-                  if (
-                    !watchScreen.booster &&
-                    userDetails.currentComponentText !== "IntroImg"
-                  ) {
-                    toogleMenu();
-                  }
-                }}
-                style={{
-                  width: "100%",
-                  position: "absolute",
-                  display: "flex",
-                  top: "35%",
-                  left: "-3%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src={menuIcon}
-                  alt="border"
-                  style={{
-                    width: "50%",
-                    // marginLeft: "10px",
-                    // marginTop: "-10px",
-                  }}
-                  className="bottomImg"
-                />
-              </div>
-            </div>
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100vh",
+                backdropFilter: "blur(2px)",
+                filter: "blur(2px)",
+                zIndex: 1,
+              }}
+            ></div>{" "}
             <div
               style={{
-                height: "100%",
-                width: "60%",
-                marginBottom: "10px",
                 position: "relative",
+                zIndex: 2,
+                color: "white",
+                padding: "20px",
+                height: "100%",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <ChooseBattle />
+              <button
+                className="close-btn"
+                onClick={() => {
+                  updateUserInfo((prev) => ({
+                    ...prev,
+                    isBattleScreen: false,
+                  }));
+                }}
+              >
+                <img className="close-icon" src={cancleCoin} alt="close-icon" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      <div
+        style={{
+          height: "100vh",
+          width: "100%",
+          backgroundColor: "black",
+          position: "fixed",
+          overflow: "hidden",
+        }}
+      >
+        {/* {userDetails?.userDetails?.isLoading && <Spinner />} */}
+
+        <audio ref={audioRef}>
+          <source src={porotta} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        {latestUserDetails.current.isHeader && (
+          <div className="box" style={{ height: "7%", width: "100%" }}>
+            <Header />
+          </div>
+        )}
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 1,
+            height: "17%",
+            width: "100%",
+            bottom: 0,
+            overflow: "hidden",
+          }}
+        >
+          <div style={{ position: "relative", height: "100%" }}>
+            <div
+              style={{ position: "absolute", height: "100%", width: "100%" }}
+            >
+              <img
+                src={bottomShape}
+                alt="border"
+                style={{ height: "100%", width: "100%" }}
+                className="bottomImg"
+              />
+            </div>
+            <div
+              className="bottomtab"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                height: "100%",
+                width: "100%",
+                position: "absolute",
+                alignItems: "flex-end",
               }}
             >
               <div
-                style={{
-                  position: "absolute",
-                  left: -9,
-                  height: "100%",
-                  width: "175%",
-                  display: "flex",
-                  alignItems: "end",
-                }}
+                style={
+                  userDetails.currentComponentText === "IntroImg" ||
+                  watchScreen.booster
+                    ? {
+                        height: "80%",
+                        width: "20%",
+                        position: "relative",
+                        marginBottom: "10px",
+                        opacity: 0.5,
+                      }
+                    : {
+                        height: "80%",
+                        width: "20%",
+                        position: "relative",
+                        marginBottom: "10px",
+                      }
+                }
               >
-                <img
-                  src={bottomcenter}
-                  alt="border"
-                  style={{ height: "85%", width: "63%" }}
-                  className="bottomImg"
-                />
+                <div
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                  onClick={() => {
+                    if (
+                      !watchScreen.booster &&
+                      userDetails.currentComponentText !== "IntroImg"
+                    ) {
+                      toogleMenu();
+                    }
+                  }}
+                >
+                  <img
+                    src={bottomLeft}
+                    alt="border"
+                    style={{ height: "100%", width: "100%" }}
+                    className="bottomImg"
+                  />
+                </div>
+                <div
+                  onClick={() => {
+                    if (
+                      !watchScreen.booster &&
+                      userDetails.currentComponentText !== "IntroImg"
+                    ) {
+                      toogleMenu();
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                    position: "absolute",
+                    display: "flex",
+                    top: "35%",
+                    left: "-3%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={menuIcon}
+                    alt="border"
+                    style={{
+                      width: "50%",
+                      // marginLeft: "10px",
+                      // marginTop: "-10px",
+                    }}
+                    className="bottomImg"
+                  />
+                </div>
               </div>
               <div
                 style={{
-                  position: "absolute",
-                  left: -9,
                   height: "100%",
-                  width: "175%",
-                  display: "flex",
-                  alignItems: "end",
+                  width: "60%",
+                  marginBottom: "10px",
+                  position: "relative",
                 }}
               >
-                {userDetails.currentComponentText === "TVPage" ? (
-                  <div
-                    style={{
-                      position: "relative",
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  >
+                <div
+                  style={{
+                    position: "absolute",
+                    left: -9,
+                    height: "100%",
+                    width: "175%",
+                    display: "flex",
+                    alignItems: "end",
+                  }}
+                >
+                  <img
+                    src={bottomcenter}
+                    alt="border"
+                    style={{ height: "85%", width: "63%" }}
+                    className="bottomImg"
+                  />
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    left: -9,
+                    height: "100%",
+                    width: "175%",
+                    display: "flex",
+                    alignItems: "end",
+                  }}
+                >
+                  {userDetails.currentComponentText === "TVPage" ? (
                     <div
                       style={{
-                        position: "absolute",
-                        left: 29,
+                        position: "relative",
                         height: "100%",
-                        width: "45%",
-                        display: "flex",
-                        justifyContent: "center",
+                        width: "100%",
                       }}
                     >
                       <div
                         style={{
                           position: "absolute",
-                          top: 11,
-                          color: "rgba(0, 255, 41, 1)",
-                          fontSize: "12px",
+                          left: 29,
+                          height: "100%",
+                          width: "45%",
                           display: "flex",
-                          alignItems: "end",
                           justifyContent: "center",
                         }}
                       >
-                        BOOSTERS
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 11,
+                            color: "rgba(0, 255, 41, 1)",
+                            fontSize: "12px",
+                            display: "flex",
+                            alignItems: "end",
+                            justifyContent: "center",
+                          }}
+                        >
+                          BOOSTERS
+                        </div>
+                        <img
+                          src={boosterText}
+                          alt="border"
+                          style={{
+                            height: "32%",
+                            width: "70%",
+                            padding: "10px",
+                          }}
+                          className="bottomImg"
+                        />
                       </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  <img
+                    src={greenLineBottom}
+                    alt="border"
+                    style={{
+                      height: "85%",
+                      width: "63%",
+                      padding: "10px",
+                      position: "absolute",
+                    }}
+                    className="bottomImg"
+                  />
+                </div>
+                {userDetails.currentComponentText === "TVPage" ? (
+                  <div
+                    style={{
+                      position: "relative",
+                      left: 0,
+                      top: 10,
+                      height: "100%",
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Boosters />
+                  </div>
+                ) : null}
+
+                {userDetails.currentComponentText !== "TVPage" &&
+                userDetails.currentComponentText !== "IntroImg" &&
+                userDetails.voteStatus ? (
+                  <div
+                    style={{
+                      position: "relative",
+                      left: 0,
+                      top: 10,
+                      height: "100%",
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      className="pulse-image"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
                       <img
-                        src={boosterText}
-                        alt="border"
-                        style={{
-                          height: "32%",
-                          width: "70%",
-                          padding: "10px",
+                        onClick={() => {
+                          reclaimUserDetails();
                         }}
-                        className="bottomImg"
+                        src={switchOnTv}
+                        style={{ width: "80%" }}
                       />
                     </div>
                   </div>
-                ) : (
-                  ""
-                )}
+                ) : null}
 
-                <img
-                  src={greenLineBottom}
-                  alt="border"
-                  style={{
-                    height: "85%",
-                    width: "63%",
-                    padding: "10px",
-                    position: "absolute",
-                  }}
-                  className="bottomImg"
-                />
-              </div>
-              {userDetails.currentComponentText === "TVPage" ? (
-                <div
-                  style={{
-                    position: "relative",
-                    left: 0,
-                    top: 10,
-                    height: "100%",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Boosters />
-                </div>
-              ) : null}
-
-              {userDetails.currentComponentText !== "TVPage" &&
-              userDetails.currentComponentText !== "IntroImg" ? (
-                <div
-                  style={{
-                    position: "relative",
-                    left: 0,
-                    top: 10,
-                    height: "100%",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                {userDetails.currentComponentText === "BattlePage" &&
+                !userDetails.voteStatus ? (
                   <div
                     style={{
+                      position: "relative",
+                      left: 0,
+                      top: 10,
+                      height: "100%",
+                      width: "100%",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <img
-                      onClick={() => {
-                        reclaimUserDetails();
+                    <div
+                      className="pulse-image"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                      src={switchOnTv}
-                      style={{ width: "80%" }}
-                    />
+                      onClick={() => {
+                        updateUserInfo((prev) => ({
+                          ...prev,
+                          isBattleScreen: true,
+                        }));
+                        // reclaimUserDetails();
+                      }}
+                    >
+                      <img src={StartBattle} style={{ width: "90%" }} />
+                    </div>
                   </div>
-                </div>
-              ) : null}
+                ) : null}
 
-              {userDetails.currentComponentText === "IntroImg" ? (
-                <div
-                  style={{
-                    position: "relative",
-                    left: 0,
-                    top: 10,
-                    height: "100%",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onClick={() => {
-                    if (
-                      userDetails?.userDetails?.telegramId &&
-                      !watchScreen.booster
-                    ) {
-                      // goToThePage(Tv, "TVPage");
-                      goToThePage(Battle, "BattlePage");
-                    }
-                  }}
-                >
+                {userDetails.currentComponentText === "IntroImg" ? (
                   <div
                     style={{
+                      position: "relative",
+                      left: 0,
+                      top: 10,
+                      height: "100%",
+                      width: "100%",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
+                    onClick={() => {
+                      if (
+                        userDetails?.userDetails?.telegramId &&
+                        !watchScreen.booster
+                      ) {
+                        goToThePage(Battle, "BattlePage");
+                      }
+                    }}
                   >
-                    <img src={ContinueText} style={{ width: "90%" }} />
+                    <div
+                      className="pulse-image"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <img src={ContinueText} style={{ width: "90%" }} />
+                    </div>
                   </div>
-                </div>
-              ) : null}
-            </div>
-            <div
-              style={
-                userDetails.currentComponentText === "IntroImg" ||
-                watchScreen.booster
-                  ? {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                      opacity: 0.5,
-                    }
-                  : {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                    }
-              }
-              onClick={() => {
-                if (
-                  !watchScreen?.booster &&
-                  userDetails.currentComponentText !== "IntroImg"
-                ) {
-                  const values = JSON.parse(
-                    localStorage.getItem("pointDetails")
-                  );
-                  var data = {
-                    telegramId: userDetails.userDetails.telegramId,
-                    userWatchSeconds: values.watchSec + 1,
-                    boosterPoints: String(values.tapPoints),
-                  };
-                  addWatchSecapiMarket(data);
-                  // goToTheRefererPage(ReferPage, "ReferPage");
-                }
-              }}
-            >
-              <div
-                style={{ position: "absolute", height: "100%", width: "100%" }}
-                onClick={() => {}}
-              >
-                <img
-                  src={bottomRight}
-                  alt="border"
-                  style={{ height: "100%", width: "100%" }}
-                  className="bottomImg"
-                />
+                ) : null}
               </div>
-
               <div
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                style={
+                  userDetails.currentComponentText === "IntroImg" ||
+                  watchScreen.booster
+                    ? {
+                        height: "80%",
+                        width: "20%",
+                        position: "relative",
+                        marginBottom: "10px",
+                        opacity: 0.5,
+                      }
+                    : {
+                        height: "80%",
+                        width: "20%",
+                        position: "relative",
+                        marginBottom: "10px",
+                      }
+                }
+                onClick={() => {
+                  if (
+                    !watchScreen?.booster &&
+                    userDetails.currentComponentText !== "IntroImg"
+                  ) {
+                    const values = JSON.parse(
+                      localStorage.getItem("pointDetails")
+                    );
+                    var data = {
+                      telegramId: userDetails.userDetails.telegramId,
+                      userWatchSeconds: values.watchSec + 1,
+                      boosterPoints: String(values.tapPoints),
+                    };
+                    addWatchSecapiMarket(data);
+                  }
                 }}
               >
-                <img
-                  src={referIcon}
-                  alt="border"
-                  style={{ width: "30%", objectFit: "contain" }}
-                  className="bottomImg"
-                />
+                <div
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                  onClick={() => {}}
+                >
+                  <img
+                    src={bottomRight}
+                    alt="border"
+                    style={{ height: "100%", width: "100%" }}
+                    className="bottomImg"
+                  />
+                </div>
+
+                <div
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    position: "absolute",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={referIcon}
+                    alt="border"
+                    style={{ width: "30%", objectFit: "contain" }}
+                    className="bottomImg"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        style={{
-          height: userDetails.isHeader ? "77%" : "86%",
-          width: "100%",
-          zIndex: "-999",
-          backgroundColor: "black",
-          position: "relative",
-          pointerEvents: "none",
-        }}
-      >
         <div
           style={{
-            position: "absolute",
-            height: "100%",
+            height: userDetails.isHeader ? "77%" : "86%",
             width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            zIndex: "-999",
+            backgroundColor: "black",
+            position: "relative",
+            pointerEvents: "none",
           }}
         >
-          {userDetails.currentComponent && <userDetails.currentComponent />}
+          <div
+            style={{
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {userDetails.currentComponent && <userDetails.currentComponent />}
+          </div>
+          <Tvborder />
         </div>
-        <Tvborder />
       </div>
     </div>
   );

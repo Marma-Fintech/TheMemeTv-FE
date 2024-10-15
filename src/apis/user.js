@@ -284,6 +284,29 @@ export const userWalletAddress = async (telegramId, data) => {
   }
 };
 
+export const getBattlebyDate = async (date) => {
+  try {
+    const response = await axios.get(
+      `${Base_Url.base_url}/getBattlebyDate?date=${date}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const chooseTeam = async (data) => {
+  try {
+    const response = await axios.post(
+      `${Base_Url.base_url}/userChooseTeam`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default {
   UserDeatils,
   addWatchSeconds,
@@ -306,4 +329,5 @@ export default {
   cheapStuff,
   getUserDetails1,
   userWalletAddress,
+  chooseTeam,
 };

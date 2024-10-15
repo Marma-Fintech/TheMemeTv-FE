@@ -38,11 +38,12 @@ import {
   streakOfStreakRewardClaim,
 } from "../../apis/user";
 import ChooseBattle from "../ChooseBattle/ChooseBattle";
+import Battleimg from "../../assets/images/battle1.png";
 
 const Battle = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
     useUserInfo();
-
+  const [currentLevel, setCurrentLevel] = useState();
   const streakData = async () => {
     const getStreakData = await getUserStreaks(
       userDetails?.userDetails?.telegramId
@@ -81,6 +82,14 @@ const Battle = () => {
     10: 80000000,
   };
 
+  useEffect(() => {
+    Object.keys(level).forEach((lvl) => {
+      if (Number(watchScreen?.totalReward) >= Number(level[lvl])) {
+        setCurrentLevel(Number(lvl));
+      }
+    });
+  }, []);
+
   const goToThePage = (component, name) => {
     updateUserInfo((prev) => ({
       ...prev,
@@ -97,132 +106,152 @@ const Battle = () => {
     if (num >= 1000) return Math.floor(num / 100) / 10 + "k";
     return num;
   };
-  console.log(
-    images[userDetails?.userDetails?.level] +
-      "images[userDetails?.userDetails?.level - 1]"
-  );
+
   return (
-    // <div className="info-img">
-    //   <div
-    //     className="menupointer"
-    //     style={{
-    //       height: "100%",
-    //       width: "100%",
-    //       display: "flex",
-    //       alignItems: "center",
-    //       marginTop: "50px",
-    //       justifyContent: "start",
-    //       flexDirection: "column",
-    //       pointerEvents: "all",
-    //     }}
-    //   >
-    //     <div style={{ maxWidth: "390px" }}>
-    //       <div className="row header">
-    //         <div className="col-7">
-    //           <div className="custom-shape" style={{ position: "relative" }}>
-    //             <div className="row">
-    //               <div className="cat col-2">
-    //                 <img
-    //                   className="levelsec"
-    //                   src={images[userDetails?.userDetails?.level - 1].src}
-    //                   style={{ width: "100%" }}
-    //                 />
-    //               </div>
-    //               <div className="col-3">
-    //                 <h3 className="level-name">Cat</h3>
-    //               </div>
-    //               <div className="col-7">
-    //                 {/* <h5 className="level-energy"><img src={engimg} />5000/5000</h5> */}
-    //                 <h5
-    //                   className="level-energy"
-    //                   onClick={() => {
-    //                     goToThePage(LeaderBoard, "LeaderBoardPage");
-    //                   }}
-    //                 >
-    //                   PHASE 1
-    //                 </h5>
-    //               </div>
-    //             </div>
-    //             <div className="row displayflex">
-    //               <div className="col-6 offset-2">
-    //                 <h5 className="level-up">
-    //                   {formatNumber(Number(watchScreen.totalReward))}/
-    //                   {formatNumber(level[userDetails?.userDetails?.level + 1])}
-    //                 </h5>
-    //               </div>
-    //               <div className="col-4">
-    //                 <div className="level-up1">
-    //                   <h3>LV1</h3>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //             <div
-    //               className="row"
-    //               style={{ marginTop: "-11px", marginLeft: "5px" }}
-    //             >
-    //               <div className="col-12">
-    //                 <DashedProgressBar
-    //                   progress={Number(
-    //                     (watchScreen.totalReward /
-    //                       level[userDetails?.userDetails?.level + 1]) *
-    //                       100
-    //                   ).toFixed()}
-    //                 />{" "}
-    //                 {/* 50% progress */}
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //         <div className="col-4 ml15">
-    //           <h4
-    //             className="phase2"
-    //             onClick={() => {
-    //               goToThePage(Stake, "StakePage");
-    //             }}
-    //           >
-    //             Stake
-    //           </h4>
-    //           <div className="info-new">
-    //             <img
-    //               onClick={() => {
-    //                 goToThePage(Info, "InfoPage");
-    //               }}
-    //               src={help}
-    //             />
-    //             <img src={settings} />
-    //           </div>
-    //         </div>
-    //         <div className="align row">
-    //           <div className="col-2">
-    //             <h4 className="days-streak">84</h4>
-    //           </div>
-    //           <div className="col-3">
-    //             <div>
-    //               <h4 className="streak-days">DAYS</h4>
-    //             </div>
-    //             <div className="streak-2">
-    //               <img src={streak} />
-    //             </div>
-    //           </div>
-    //           <div className="col-7">
-    //             <div className=" streak-border">
-    //               <div class="contain">
-    //                 <p class="numbers">1</p>
-    //                 <p class="numbers">2</p>
-    //                 <p class="numbers">3</p>
-    //                 <p class="numbers">4</p>
-    //                 <p class="numbers">5</p>
-    //                 <p class="numbers">6</p>
-    //                 <p class="numbers">7</p>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-    <ChooseBattle />
+    <div className="info-img">
+      <div
+        className="menupointer"
+        style={{
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          marginTop: "50px",
+          justifyContent: "start",
+          flexDirection: "column",
+          pointerEvents: "all",
+        }}
+      >
+        <div style={{ maxWidth: "390px" }}>
+          <div className="row header">
+            <div className="col-7">
+              <div className="custom-shape" style={{ position: "relative" }}>
+                <div className="row">
+                  <div className="cat col-2">
+                    <img
+                      className="levelsec"
+                      src={images[userDetails?.userDetails?.level - 1].src}
+                      style={{ width: "100%" }}
+                    />
+                  </div>
+                  <div className="col-3">
+                    <h3 className="level-name">Cat</h3>
+                  </div>
+                  <div className="col-7">
+                    {/* <h5 className="level-energy"><img src={engimg} />5000/5000</h5> */}
+                    <h5
+                      className="level-energy"
+                      onClick={() => {
+                        goToThePage(LeaderBoard, "LeaderBoardPage");
+                      }}
+                    >
+                      PHASE {}
+                    </h5>
+                  </div>
+                </div>
+                <div className="row displayflex">
+                  <div className="col-6 offset-2">
+                    <h5 className="level-up">
+                      {formatNumber(Number(watchScreen.totalReward))}/
+                      {formatNumber(level[userDetails?.userDetails?.level + 1])}
+                    </h5>
+                  </div>
+                  <div className="col-4">
+                    <div className="level-up1">
+                      <h3>LV{currentLevel}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                  style={{ marginTop: "-11px", marginLeft: "5px" }}
+                >
+                  <div className="col-12">
+                    <DashedProgressBar
+                      progress={Number(
+                        (watchScreen.totalReward /
+                          level[userDetails?.userDetails?.level + 1]) *
+                          100
+                      ).toFixed()}
+                    />{" "}
+                    {/* 50% progress */}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-4 ml15">
+              <h4
+                className="phase2"
+                onClick={() => {
+                  goToThePage(Stake, "StakePage");
+                }}
+              >
+                Stake
+              </h4>
+              <div className="info-new">
+                <img
+                  onClick={() => {
+                    goToThePage(Info, "InfoPage");
+                  }}
+                  src={help}
+                />
+                <img src={settings} />
+              </div>
+            </div>
+            <div className="align row">
+              <div className="col-2">
+                <h4 className="days-streak">84</h4>
+              </div>
+              <div className="col-3">
+                <div>
+                  <h4 className="streak-days">DAYS</h4>
+                </div>
+                <div className="streak-2">
+                  <img src={streak} />
+                </div>
+              </div>
+              <div className="col-7">
+                <div className=" streak-border">
+                  <div class="contain">
+                    <p class="numbers">1</p>
+                    <p class="numbers">2</p>
+                    <p class="numbers">3</p>
+                    <p class="numbers">4</p>
+                    <p class="numbers">5</p>
+                    <p class="numbers">6</p>
+                    <p class="numbers">7</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row align">
+              <div className="col-12 battle-head ">
+                <div className="battle-flex">
+                  <img src={Battleimg} />
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="marquee-text">
+                  <marquee className="marquee">
+                    No Of player active in the Battle is 250K &nbsp;{" "}
+                    <span
+                      style={{
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        background: "#fff",
+                      }}
+                    ></span>
+                    No Of player active in the Battle is 250K
+                  </marquee>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    // <ChooseBattle />
   );
 };
 export default Battle;

@@ -59,8 +59,14 @@ const Tv = () => {
   const [isTutorial, setIsTutorial] = useState(true);
   const [instruction, setInstruction] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(getTimeUntilNext24Hours());
+
   const handleClick = () => {
-    setIsClicked(!isClicked); // Toggle the state
+    setIsClicked(true);
+    // Reset timeout when image is clicked again
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 1000); // Scale down after 3 seconds of no interaction
   };
   useEffect(() => {
     // Set the volume low
@@ -474,12 +480,56 @@ const Tv = () => {
     }
   };
 
+  // Function to toggle the 'isClicked' state on image click
+
+  useEffect(() => {
+    if (isClicked) {
+      const timeoutId = setTimeout(() => {
+        setIsClicked(false);
+      }, 3000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isClicked]);
+
+  useEffect(() => {
+    // Set up the interval to update every second
+    const intervalId = setInterval(() => {
+      setTimeLeft(getTimeUntilNext24Hours());
+    }, 1000); // Update every second
+    return () => clearInterval(intervalId); // Clean up the interval when the component unmounts
+  }, []);
+  // Function to calculate time left until next 24-hour period (e.g., until midnight)
+  function getTimeUntilNext24Hours() {
+    const now = new Date();
+    const next24Hour = new Date();
+
+    // Set the next 24-hour period to tomorrow at 00:00 (midnight)
+    next24Hour.setHours(24, 0, 0, 0); // Midnight of the next day
+
+    if (now.getHours() >= 0 && now.getHours() < 24) {
+      next24Hour.setDate(now.getDate() + 1); // Move to the next day if after midnight
+    }
+    // Calculate the difference in milliseconds and convert to seconds
+    const timeLeftInSeconds = Math.floor((next24Hour - now) / 1000);
+
+    return timeLeftInSeconds;
+  }
+  // Function to format time as HH:MM:SS
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
+
   return (
     <div
       className="tvContainer menupointer"
       style={{ height: "100%", width: "100%" }}
     >
-      {isTutorial ? (
+      {/* {isTutorial ? (
         <div
           className="tutorial"
           style={{
@@ -860,9 +910,7 @@ const Tv = () => {
 
           <img
             src={cancelIcon}
-            // className="cancel-img"
             onClick={() => {
-              // closePopUp();
               setIsTutorial(false);
               localStorage.setItem(
                 "tutorial",
@@ -878,49 +926,14 @@ const Tv = () => {
               top: "80%",
             }}
           />
-          {/* <div
-            className="row"
-            style={{ height: "500px" }}
-            onTouchStart={handleTap}
-            onMouseDown={handleTap}
-          >
-            <div
-              className="col-12"
-              style={{
-                zIndex: "-1",
-              }}
-            >
-              <div className="floor"></div>
-              <img
-                src={karathe}
-                className="woot-dance"
-                width="328"
-                height="272"
-                alt="8-bit dancing Karateka guy"
-              />
-              {tapAnimations.map((animation) => (
-                <div
-                  key={animation.id}
-                  className="tap-points txt-color"
-                  style={{
-                    left: animation.x,
-                    top: animation.y,
-                    visibility: "none",
-                  }}
-                >
-                  +{watchScreen.boosterDetails.name === "tap" ? 10 : 5}
-                </div>
-              ))}
-            </div>
-          </div> */}
+          
         </div>
-      ) : null}
+      ) : null} */}
       {isLoading && (
         <div className="loaderstyle">
           <div className="spinner"></div>
         </div>
       )}
-      {/* <div className="line arrow"></div> */}
       <div
         className="row level-div text-center"
         style={{
@@ -1114,7 +1127,7 @@ const Tv = () => {
               </div>
               <div className="col-6 phase-p">
                 <p className="battle-time">BATTLE ENDS IN</p>
-                <h3 className="battle-end">24:00:24</h3>
+                <h3 className="battle-end">{formatTime(timeLeft)}</h3>{" "}
               </div>
               <div className="col-3">
                 <img src={doge} style={{ width: "50px" }} />

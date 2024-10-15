@@ -22,6 +22,9 @@ const INITIAL_USER_STATE = {
     streakData: {},
     streakOfStreakData: {},
     isLoading: true,
+    isBattleScreen: false,
+    battleDetails: false,
+    voteStatus: false,
   },
 };
 
