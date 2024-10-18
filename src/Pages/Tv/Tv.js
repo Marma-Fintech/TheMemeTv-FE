@@ -29,6 +29,7 @@ import ConnectWallet from "../ConnectWallet/ConnectWallet";
 import animepic from "../../assets/images/animepic.svg";
 import cancelIcon from "../../assets/Task/cancelicon.png";
 // import weekRewards from "../../apis/user/weekRewards";
+import { debounce } from "lodash";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -467,6 +468,65 @@ const Tv = () => {
       }, 1000);
     }
   };
+
+  // const handleTap = debounce((e) => {
+  //   if (energy.current > 5) {
+  //     if (navigator.vibrate) {
+  //       navigator.vibrate(100);
+  //     }
+
+  //     const isTouchEvent = e.type === "touchstart";
+  //     if (isTouchEvent) {
+  //       setLastInputWasTouch(true);
+  //     } else if (lastInputWasTouch && !isTouchEvent) {
+  //       return; // Ignore mouse event if the last input was touch
+  //     }
+
+  //     tapSound.play();
+
+  //     const touches = e.touches
+  //       ? Array.from(e.touches)
+  //       : [{ clientX: e.clientX, clientY: e.clientY }];
+  //     // let num = 5;
+
+  //     // if (watchScreen?.boosterDetails?.name === "tap" && watchScreen?.booster) {
+  //     //   num = 10;
+  //     //   setBoosterPoints((prevBoosterPoints) => {
+  //     //     const newBoosterPoints = prevBoosterPoints + num * touches.length;
+  //     //     boosterPointsRef.current = newBoosterPoints;
+  //     //     return newBoosterPoints;
+  //     //   });
+  //     // } else {
+  //     //   if (energyy > 0) {
+  //     //     const totalPoints = Math.min(energyy, num * touches.length);
+  //     //     setTapPoints((prevTapPoints) => {
+  //     //       const newTapPoints = prevTapPoints + totalPoints;
+  //     //       tapPointsRef.current = newTapPoints;
+  //     //       return newTapPoints;
+  //     //     });
+  //     //     SetEnergy((prev) => {
+  //     //       const newEnergy = prev - totalPoints;
+  //     //       energy.current = newEnergy;
+  //     //       return newEnergy;
+  //     //     });
+  //     //   }
+  //     // }
+
+  //     const newAnimations = touches.map((touch) => ({
+  //       id: Date.now() + Math.random(),
+  //       x: touch.clientX,
+  //       y: touch.clientY,
+  //     }));
+
+  //     setTapAnimations((prev) => [...prev, ...newAnimations]);
+
+  //     setTimeout(() => {
+  //       setTapAnimations((prev) =>
+  //         prev.filter((animation) => !newAnimations.includes(animation))
+  //       );
+  //     }, 1000);
+  //   }
+  // });
 
   return (
     <div
