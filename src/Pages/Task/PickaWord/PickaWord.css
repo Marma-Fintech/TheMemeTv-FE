@@ -1,9 +1,9 @@
-.task-page {
+task-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 50%; */
-  justify-content: center;
+  margin-top: 50%;
+  justify-content: flex-start;
   height: calc(100vh - 50px);
   text-align: center;
   pointer-events: fill;
@@ -73,7 +73,6 @@ button {
   background-color: rgb(243, 95, 95);
   font: bolder;
 }
-
 .task-message {
   margin-top: 20px;
   color: red;
@@ -115,7 +114,6 @@ button {
   margin-top: 8px;
   color: #938484;
 }
-
 .popup {
   background-position: center;
   background-size: 100% 100%;
@@ -150,6 +148,13 @@ button {
   margin-top: -53px;
   margin-bottom: 30px;
 }
+.popup-card-image-popup {
+  width: 33%;
+  margin-top: -53px;
+  margin-bottom: 35px;
+  padding: 5px;
+  padding-bottom: 20px;
+}
 .rw-popup {
   font-size: 18px;
   color: aliceblue;
@@ -160,6 +165,10 @@ button {
   border-radius: 5px;
   color: #fff;
   border: 2px solid #079b16;
+}
+.btn-reward .spinner-loader {
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
 }
 .cancel-img {
   width: 5%;

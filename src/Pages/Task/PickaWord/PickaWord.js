@@ -10,6 +10,8 @@ import tapBoosterImg from "../../../assets/Task/TapBoost.png";
 import thousandPointsImg from "../../../assets/Task/1000points.png";
 import fiveThousandPointsImg from "../../../assets/Task/5000points.png";
 import betterLuckNextTimeImg from "../../../assets/Task/nexttime.png";
+import Spinner from "../../Streak/Spinner";
+
 import {
   getUserDetails,
   purchaseGameCards,
@@ -41,6 +43,7 @@ const cardImages = {
   "5000 points": fiveThousandPointsImg,
   "Better luck next time": betterLuckNextTimeImg,
 };
+
 const shuffleArray = (array) => {
   let currentIndex = array.length,
     randomIndex;
@@ -54,6 +57,7 @@ const shuffleArray = (array) => {
   }
   return array;
 };
+
 const loadResults = () => {
   const results = localStorage.getItem("gameResults");
   return results ? JSON.parse(results) : { points: 0, boosts: [] };
@@ -61,6 +65,31 @@ const loadResults = () => {
 const saveResults = async (results) => {
   localStorage.setItem("gameResults", JSON.stringify(results));
 };
+
+const loadSelectedCards = () => {
+  const selectedCards = localStorage.getItem("selectedCards");
+  const lastCardDate = localStorage.getItem("lastCardDate");
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in 'YYYY-MM-DD' format
+
+  // If the cards exist and it's the same day, return the saved cards
+  if (lastCardDate === today) {
+    return selectedCards ? JSON.parse(selectedCards) : Array(9).fill(null);
+  } else {
+    return Array(9).fill(null);
+  }
+};
+
+const saveSelectedCards = (cards) => {
+  const today = new Date().toISOString().split("T")[0]; // Get today's date
+  const selectedCardsInLocal = localStorage.getItem("selectedCards");
+  localStorage.setItem("lastCardDate", today); // Save today's date as lastCardDate
+  if (selectedCardsInLocal) {
+    localStorage.setItem("selectedCards", JSON.stringify(cards));
+  } else {
+    localStorage.setItem("selectedCards", JSON.stringify(Array(9).fill(null)));
+  }
+};
+
 const loadPlaysRemaining = (date) => {
   const savedPlays = localStorage.getItem("playsRemaining");
   const lastPlayDate = localStorage.getItem("lastPlayDate");
@@ -68,35 +97,38 @@ const loadPlaysRemaining = (date) => {
   if (lastPlayDate !== today) {
     return 5; // Reset to 5 if a new day
   }
-
   return savedPlays ? JSON.parse(savedPlays) : 5;
 };
+
 const savePlaysRemaining = (remaining, date) => {
   const today = new Date(date).toISOString().split("T")[0];
   localStorage.setItem("playsRemaining", JSON.stringify(remaining));
   localStorage.setItem("lastPlayDate", today);
 };
+
 const loadPurchasesRemaining = (date) => {
   const savedPurchases = localStorage.getItem("purchasesRemaining");
   const lastPurchaseDate = localStorage.getItem("lastPurchaseDate");
   const today = new Date(date).toISOString().split("T")[0];
   if (lastPurchaseDate !== today) {
-    return 5; // Reset to 5 if a new day
+    return 4; // Reset to 5 if a new day
   }
 
   return savedPurchases ? JSON.parse(savedPurchases) : 5;
 };
+
 const savePurchasesRemaining = (remaining, date) => {
   const today = new Date(date).toISOString().split("T")[0];
   localStorage.setItem("purchasesRemaining", JSON.stringify(remaining));
   localStorage.setItem("lastPurchaseDate", today);
 };
+
 const generateCardContents = () => shuffleArray([...cardContents]);
 
 const PickaWord = () => {
-  const [cards, setCards] = useState(Array(9).fill(null));
+  const [cards, setCards] = useState(loadSelectedCards());
   const { userDetails, updateUserInfo } = useUserInfo();
-  const [selected, setSelected] = useState(false);
+  // const [selected, setSelected] = useState(false);
   const [points, setPoints] = useState(0);
   const [message, setMessage] = useState("");
   const [playsRemaining, setPlaysRemaining] = useState(
@@ -106,9 +138,16 @@ const PickaWord = () => {
     loadPurchasesRemaining(userDetails?.userDetails?.lastLogin)
   );
   const [results, setResults] = useState(loadResults());
-  const [showPopup, setShowPopup] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [randomContents, setRandomContents] = useState(generateCardContents());
+  const [selectedCards, setSelectedCards] = useState(loadSelectedCards()); // New state for selected cards
+  const [claimButtonLoading, setClaimButtonLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  // Save selected cards to local storage whenever they change
+  useEffect(() => {
+    saveSelectedCards(selectedCards);
+  }, [selectedCards]);
 
   useEffect(() => {
     savePurchasesRemaining(
@@ -116,18 +155,24 @@ const PickaWord = () => {
       userDetails?.userDetails?.lastLogin
     ); // Save purchasesRemaining whenever it changes
   }, [purchasesRemaining]);
+
   const handleCardClick = async (index) => {
+    console.log("Set Plays Remaining" + playsRemaining);
     if (playsRemaining <= 0) {
       setShowPopup(true);
       return;
     }
-    if (!selected && cards[index] === null) {
+    if (cards[index] === null) {
+      handleFreePick();
       const newCards = [...cards];
       const cardContent = randomContents[index];
       newCards[index] = cardContent;
       setCards(newCards);
-      setSelected(true);
       setSelectedCard(cardContent);
+      let selectedCardsArray = selectedCards;
+      selectedCardsArray[index] = cardContent;
+      setSelectedCards(selectedCardsArray); // Update the selected cards state and save to local storage
+      saveSelectedCards(selectedCards);
       let newPoints = points;
       let newMessage = "";
       if (cardContent === "1000 points") {
@@ -160,9 +205,11 @@ const PickaWord = () => {
       };
       await saveResults(updatedResults);
       setResults(updatedResults);
-      setTimeout(() => {
-        setShowPopup(true);
-      }, 1000);
+      if (playsRemaining === 1) {
+        setTimeout(() => {
+          setShowPopup(true);
+        }, 1000);
+      }
       const apiData = {
         telegramId: String(userDetails.userDetails?.telegramId),
         gamePoints: String(currentResult.points),
@@ -176,13 +223,14 @@ const PickaWord = () => {
     }
   };
   const handleFreePick = () => {
-    setCards(Array(9).fill(null));
-    setSelected(false);
+    // setCards(Array(9).fill(null));
     setPoints(0);
     setMessage("");
     setRandomContents(generateCardContents());
     setPlaysRemaining((prev) => (prev > 0 ? prev - 1 : 0));
-    setShowPopup(false);
+    if (playsRemaining === 0) {
+      setShowPopup(false);
+    }
     setSelectedCard(null);
   };
 
@@ -191,7 +239,7 @@ const PickaWord = () => {
       setMessage("Come back tomorrow for more plays!");
       return;
     }
-
+    setClaimButtonLoading(true);
     const res = await purchaseGameCards({
       telegramId: String(userDetails.userDetails.telegramId),
       gamePoints: String(500),
@@ -212,13 +260,14 @@ const PickaWord = () => {
     // Fetch user details and make the purchase
 
     // Reset the game state
-    setCards(Array(9).fill(null));
-    setSelected(false);
-    setPoints(0);
+    // setCards(Array(9).fill(null));
+    // setSelected(false);
+    // setPoints(0);
     setMessage("");
-    setRandomContents(generateCardContents());
     setShowPopup(false);
-    setSelectedCard(null);
+    setRandomContents(generateCardContents());
+    setClaimButtonLoading(false);
+    // setSelectedCard(null);
   };
 
   const toogleMenu = () => {
@@ -272,21 +321,28 @@ const PickaWord = () => {
         ))}
       </div>
       {purchasesRemaining === 0 && playsRemaining === 0 ? (
-        <h5 className="chancesleft">Come back tomorrow</h5>
+        <h5 className="chancesleft">COME BACK TOMORROW</h5>
       ) : message === "Not enough points available" ? (
-        <h5 className="chancesleft">Not enough Game points available</h5>
+        <h5 className="chancesleft">INSUFFICIENT POINTS</h5>
+      ) : playsRemaining != 0 && purchasesRemaining == 4 ? (
+        <h5 className="chancesleft">
+          YOU HAVE {playsRemaining}/5 CHANCES LEFT TODAY
+        </h5>
       ) : (
         <h5 className="chancesleft">
-          YOU HAVE {playsRemaining}/5 CHANCES LEFT NOW
+          YOU HAVE {playsRemaining}/{purchasesRemaining} CHANCES LEFT NOW
         </h5>
       )}
+
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
-            {playsRemaining > 1 ? (
+            {purchasesRemaining !== 4 ? (
               <>
                 <h2 className="epic">
-                  {selectedCard !== "Better luck next time" && "Epic Win!"}
+                  {selectedCard &&
+                    selectedCard !== "Better luck next time" &&
+                    "Epic Win!"}
                 </h2>
                 <img
                   src={cancelIcon}
@@ -299,17 +355,32 @@ const PickaWord = () => {
                       {selectedCard && (
                         <img
                           src={cardImages[selectedCard]}
-                          alt={selectedCard}
+                          alt={cardImages[selectedCard]}
                           className="popup-card-image"
                         />
                       )}
-                      <h3 className="rw-popup">You got {selectedCard}!</h3>
+                      {selectedCard ? (
+                        <h3 className="rw-popup">you got {selectedCard}!</h3>
+                      ) : (
+                        <h3 className="rw-popup">FOR AN EXTRA PICK</h3>
+                      )}
                     </div>
                   </div>
                 </div>
-                <button className="btn-reward" onClick={handleFreePick}>
-                  Pick Next
-                </button>
+                {playsRemaining > 0 ? (
+                  <button className="btn-reward" onClick={handleFreePick}>
+                    Pick Next
+                  </button>
+                ) : (
+                  <button
+                    className="btn-reward"
+                    onClick={() => {
+                      handlePlayAgain();
+                    }}
+                  >
+                    {claimButtonLoading ? <Spinner /> : "PAY 500"}
+                  </button>
+                )}
               </>
             ) : (
               <>
@@ -323,16 +394,26 @@ const PickaWord = () => {
                   <div className="col-12">
                     <div className="epic-div">
                       {selectedCard && (
-                        <img
-                          src={cardImages[selectedCard]}
-                          alt={selectedCard}
-                          className="popup-card-image"
-                        />
+                        <>
+                          {selectedCards.map((card, index) =>
+                            card ? (
+                              <img
+                                key={index}
+                                src={card ? cardImages[card] : questionmark}
+                                alt={card || "Question Mark"}
+                                className="popup-card-image-popup"
+                              />
+                            ) : null
+                          )}
+                        </>
                       )}
                       {selectedCard ? (
-                        <h3 className="rw-popup">You got {selectedCard}!</h3>
+                        <h3 className="rw-popup">
+                          You won {results.points} points and{" "}
+                          {results.boosts.join(", ")} boosters!
+                        </h3>
                       ) : (
-                        <h3 className="rw-popup">Pay 500 for one Pick</h3>
+                        <h3 className="rw-popup">FOR AN EXTRA PICK</h3>
                       )}
                     </div>
                   </div>
@@ -344,7 +425,7 @@ const PickaWord = () => {
                       handlePlayAgain();
                     }}
                   >
-                    500 Coins
+                    {claimButtonLoading ? <Spinner /> : "PAY 500"}
                   </button>
                 ) : null}
               </>
@@ -355,4 +436,5 @@ const PickaWord = () => {
     </div>
   );
 };
+
 export default PickaWord;
