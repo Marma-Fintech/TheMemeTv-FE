@@ -32,6 +32,7 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 import shibapng from "../../assets/images/shiba.png";
 import doge from "../../assets/images/doge.png";
 import pepe from "../../assets/images/pepe.png";
+import pepeFull from "../../assets/images/pepeStanding.png";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -1261,7 +1262,9 @@ const Tv = () => {
           <div className="floor"></div>
           <div className="image-container"></div>
           <img
-            src={shibapng} /* Use a placeholder image for testing */
+            src={
+              localStorage.getItem("team") === "shiba" ? shibapng : pepeFull
+            } /* Use a placeholder image for testing */
             alt="PNG Image"
             className={`woot-dance png-image ${
               isClicked ? "scale-shadow" : ""

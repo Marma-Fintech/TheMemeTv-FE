@@ -7,6 +7,7 @@ import cancleCoin from "../../assets/Task/cancelicon.png";
 import vs from "../../assets/images/vs.png";
 import useUserInfo from "../../Hooks/useUserInfo";
 import { chooseTeam } from "../../apis/user";
+import Tv from "../Tv/Tv";
 
 const Battle = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
@@ -14,6 +15,18 @@ const Battle = () => {
   const TeamA = userDetails?.battleDetails[0]?.teams[0];
   const TeamB = userDetails?.battleDetails[0]?.teams[1];
   console.log(TeamA);
+
+  const goToThePage = (component, name) => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      currentComponent: component,
+      currentComponentText: name,
+      lastComponent: userDetails.currentComponent,
+      lastComponentText: userDetails.currentComponentText,
+      centerCount: userDetails.centerCount + 1,
+    }));
+  };
+
   const selectTeam = (data) => {
     const res = chooseTeam(data);
     if (res) {
@@ -22,6 +35,7 @@ const Battle = () => {
         isBattleScreen: false,
         voteStatus: true,
       }));
+      goToThePage(Tv, "TVPage");
     }
   };
   return (
@@ -69,6 +83,7 @@ const Battle = () => {
             <button
               className="team-shiba-btn"
               onClick={() => {
+                localStorage.setItem("team", "pepe");
                 selectTeam({
                   telegramId: userDetails?.userDetails?.telegramId,
                   teamId: TeamA.teamId,
@@ -101,6 +116,7 @@ const Battle = () => {
             <button
               className="team-pepe-btn"
               onClick={() => {
+                localStorage.setItem("team", "shiba");
                 selectTeam({
                   telegramId: userDetails?.userDetails?.telegramId,
                   teamId: TeamB.teamId,
