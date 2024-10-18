@@ -10,7 +10,7 @@ import cancelIcon from "../../../assets/Task/cancelicon.png";
 const QuizTask = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
   const [quizProgress, setQuizProgress] = useState([]);
-  const startDate = new Date("2024-09-01");
+  const startDate = new Date("2024-10-18");
   const totalDays = 84; // Total days from startDate to endDate
   const daysInPhase = 7; // Number of days per phase
   const totalQuizzesPerDay = 5;

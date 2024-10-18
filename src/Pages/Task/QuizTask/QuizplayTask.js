@@ -303,9 +303,9 @@ const QuizPlayTask = () => {
   const today = useRef(
     startOfDay(new Date(userDetails?.userDetails?.lastLogin))
   );
-  const baseDate = useRef(startOfDay(new Date("2024-09-01")));
+  const baseDate = useRef(startOfDay(new Date("2024-10-18")));
 
-  const startDate = new Date("2024-09-01");
+  const startDate = new Date("2024-10-18");
   const totalDays = 84; // Total days from startDate to endDate
   const daysInPhase = 7; // Number of days per phase
   const totalQuizzesPerDay = 5;
