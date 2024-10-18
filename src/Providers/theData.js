@@ -21,7 +21,7 @@ const INITIAL_USER_STATE = {
     selectedDay: 1,
     streakData: {},
     streakOfStreakData: {},
-    isLoading: true,
+    isLoading: false,
   },
 };
 

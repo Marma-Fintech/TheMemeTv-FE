@@ -9,7 +9,7 @@ import bottomShape from "../assets/images/bottomshapemain.png";
 import bottomLeft from "../assets/images/RectangleLeft.svg";
 import bottomRight from "../assets/images/RectangleRight.svg";
 import bottomcenter from "../assets/images/bottomcenter.png";
-import greenLineBottom from "../assets/images/greenLinebottom.png";
+import greenLineBottom from "../assets/images/greenLinebottom.svg";
 import boosterText from "../assets/images/boostText.png";
 import menuIcon from "../assets/images/gameIcon.svg";
 import referIcon from "../assets/images/marketp.svg";
@@ -318,6 +318,10 @@ const Thememe = () => {
   };
 
   const toogleMenu = async () => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
     await addWatchSecMenu().then(() => {
       updateUserInfo((prev) => ({
         ...prev,
@@ -471,6 +475,10 @@ const Thememe = () => {
   };
 
   const addWatchSecapiMarket = async (data) => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
     const res = await addWatchSeconds(data);
     localStorage.setItem(
       "pointDetails",
@@ -730,6 +738,7 @@ const Thememe = () => {
               {userDetails.currentComponentText !== "TVPage" &&
               userDetails.currentComponentText !== "IntroImg" ? (
                 <div
+                  className="pulse-image"
                   style={{
                     position: "relative",
                     left: 0,
@@ -761,6 +770,7 @@ const Thememe = () => {
 
               {userDetails.currentComponentText === "IntroImg" ? (
                 <div
+                  className="pulse-image"
                   style={{
                     position: "relative",
                     left: 0,
@@ -776,8 +786,8 @@ const Thememe = () => {
                       userDetails?.userDetails?.telegramId &&
                       !watchScreen.booster
                     ) {
-                      // goToThePage(Tv, "TVPage");
-                      goToThePage(Battle, "BattlePage");
+                      goToThePage(Tv, "TVPage");
+                      // goToThePage(Battle, "BattlePage");
                     }
                   }}
                 >
@@ -794,6 +804,7 @@ const Thememe = () => {
               ) : null}
             </div>
             <div
+              className="pulse-image"
               style={
                 userDetails.currentComponentText === "IntroImg" ||
                 watchScreen.booster
@@ -831,7 +842,6 @@ const Thememe = () => {
             >
               <div
                 style={{ position: "absolute", height: "100%", width: "100%" }}
-                onClick={() => {}}
               >
                 <img
                   src={bottomRight}
@@ -882,6 +892,11 @@ const Thememe = () => {
             justifyContent: "center",
           }}
         >
+          {userDetails?.isLoading && (
+            <div className="loaderstyle">
+              <div className="spinner"></div>
+            </div>
+          )}
           {userDetails.currentComponent && <userDetails.currentComponent />}
         </div>
         <Tvborder />

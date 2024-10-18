@@ -15,6 +15,7 @@
   height: calc(100vh - 50px);
   text-align: center;
   pointer-events: fill;
+  z-index: -1;
   font-family: myFirstFont;
 }
 .mb15 {
@@ -114,7 +115,7 @@ h1 {
 .outline {
   --offset: 3px;
   padding: 1px;
-  border-radius: 17px;
+  border-radius: 5px;
   background-clip: padding-box;
   position: relative;
   /* z-index: 1; */

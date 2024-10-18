@@ -32,6 +32,11 @@ const MarketPlace = () => {
   };
 
   useEffect(() => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isLoading: false,
+    }));
+
     if (!isFirst && watchScreen?.updatedWatchPoints > 0) {
       setTotalReward(watchScreen.totalReward);
       setIsFirst(true);
