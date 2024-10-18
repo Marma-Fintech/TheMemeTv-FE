@@ -23,7 +23,7 @@ const ReferPage = () => {
 
   const shareToTelegram = () => {
     const url = encodeURIComponent(
-      `https://t.me/mytestgetDetailsbot?start=${userDetails?.userDetails?.refId}`
+      `https://t.me/the_meme_tv_bot?start=${userDetails?.userDetails?.refId}`
     );
     const text = encodeURIComponent("My referrel");
     const telegramUrl = `https://t.me/share/url?url=${url}&text=${text}`;
@@ -62,8 +62,7 @@ const ReferPage = () => {
             <img src={Invite} />
           </h3>
         </div>
-        <div className="row d-flex align-items-center justify-content-center"
-        >
+        <div className="row d-flex align-items-center justify-content-center">
           <div className="col-7 refer-head">
             <p className="refer-earn">
               Get a 10,000 MTV and 5 Booster for each referral
