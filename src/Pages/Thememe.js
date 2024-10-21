@@ -576,6 +576,7 @@ const Thememe = () => {
               }
             >
               <div
+                className="pulse-image"
                 style={{ position: "absolute", height: "100%", width: "100%" }}
                 onClick={() => {
                   if (
