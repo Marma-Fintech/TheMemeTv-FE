@@ -557,26 +557,20 @@ const Thememe = () => {
             }}
           >
             <div
-              style={
+              className={
                 userDetails.currentComponentText === "IntroImg" ||
                 watchScreen.booster
-                  ? {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                      opacity: 0.5,
-                    }
-                  : {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                    }
+                  ? "pulse-imagememu"
+                  : "pulse-imagememu-active"
               }
+              style={{
+                height: "80%",
+                width: "20%",
+                marginBottom: "10px",
+              }}
             >
               <div
-                className="pulse-image"
+                // className="pulse-image"
                 style={{ position: "absolute", height: "100%", width: "100%" }}
                 onClick={() => {
                   if (
@@ -805,24 +799,17 @@ const Thememe = () => {
               ) : null}
             </div>
             <div
-              className="pulse-image"
-              style={
+              className={
                 userDetails.currentComponentText === "IntroImg" ||
                 watchScreen.booster
-                  ? {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                      opacity: 0.5,
-                    }
-                  : {
-                      height: "80%",
-                      width: "20%",
-                      position: "relative",
-                      marginBottom: "10px",
-                    }
+                  ? "pulse-imagememu"
+                  : "pulse-imagememu-active"
               }
+              style={{
+                height: "80%",
+                width: "20%",
+                marginBottom: "10px",
+              }}
               onClick={() => {
                 if (
                   !watchScreen?.booster &&
