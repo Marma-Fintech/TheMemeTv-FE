@@ -49,12 +49,12 @@ const MarketPlace = () => {
 
       updateUserInfo((prev) => ({
         ...prev,
-        userDetails,
+        userDetails: userDetails?.user,
       }));
 
       updatewatchScreenInfo((prev) => ({
         ...prev,
-        boostersList: userDetails?.boosters,
+        boostersList: userDetails?.user?.boosters,
       }));
     };
     const data1 = {
@@ -73,16 +73,16 @@ const MarketPlace = () => {
 
   const getDetails = async (data) => {
     const userDetails = await UserDeatils(data);
-    setTotalReward(userDetails.watchRewards);
+    setTotalReward(userDetails?.user?.totalRewards);
     updateUserInfo((prev) => ({
       ...prev,
-      userDetails: userDetails,
+      userDetails: userDetails?.user,
     }));
 
     updatewatchScreenInfo((prev) => ({
       ...prev,
-      boostersList: userDetails?.boosters,
-      totalReward: userDetails?.totalRewards,
+      boostersList: userDetails?.user?.boosters,
+      totalReward: userDetails?.user?.totalRewards,
     }));
 
     return userDetails;
@@ -94,7 +94,7 @@ const MarketPlace = () => {
       telegramId: userDetails?.userDetails?.telegramId,
     };
 
-    getDetails(data);
+    const res = getDetails(data);
   };
 
   const purchaseCards = async () => {
@@ -150,11 +150,13 @@ const MarketPlace = () => {
               <div className="row mt5">
                 <div className="display-flex">
                   <div className="col-7">
-                    <p className="rewards mb0"> Watch Rewards</p>
+                    <p className="rewards mb0"> Total Rewards</p>
                   </div>
                   <div className="col-5 text-right market-color">
-                    <p className="mb0">
-                      <img src={memetv} /> {formatNumber(totalReward)}
+                    <p className="mb0" style={{ fontSize: ".7em" }}>
+                      <img style={{ width: "15%" }} src={memetv} />{" "}
+                      {formatNumber(totalReward)}
+                      {/* 13241543 */}
                     </p>
                   </div>
                 </div>

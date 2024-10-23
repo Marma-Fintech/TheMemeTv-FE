@@ -140,13 +140,13 @@ const Streak = () => {
 
         updateUserInfo((prev) => ({
           ...prev,
-          userDetails: userDetails,
+          userDetails: userDetails?.user,
         }));
 
         updatewatchScreenInfo((prev) => ({
           ...prev,
-          boostersList: userDetails?.boosters,
-          totalReward: userDetails?.totalRewards,
+          boostersList: userDetails?.user?.boosters,
+          totalReward: userDetails?.user?.totalRewards,
         }));
       });
     } else {
@@ -617,9 +617,18 @@ const Streak = () => {
     fetchStreakData();
   }, [userDetails.userDetails.telegramId]); // Dependency array to run the effect when telegramId changes
 
+  useEffect(() => {
+    setTimeout(() => {
+      updateUserInfo((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
+    }, 1000);
+  }, []);
+
   return (
     <>
-      <div className=" menupointer">
+      <div className=" menupointer zindex">
         <div className="streakContainer mt-15">
           <h1 className="streaktext">STREAK</h1>
           <img
@@ -632,8 +641,8 @@ const Streak = () => {
           />
         </div>
         <div
-          className="container-fluid"
-          style={{ maxWidth: "300px", marginBottom: "10px" }}
+          className="container-fluid zindex"
+          style={{ maxWidth: "300px", marginBottom: "10px", zIndex: "-1" }}
         >
           <div className="scrolling-wrapper row flex-row flex-nowrap">
             {Array.from({ length: 7 }).map((_, index) => (
@@ -1047,7 +1056,7 @@ const Streak = () => {
               />
             </div>
             <div className="col-7 stuff-text">
-              <h4>STREAKED THE STREAK</h4>
+              <h4>MULTI STREAK</h4>
               <p className="stuff-p">
                 <img src={logo} />{" "}
                 {memoizedMultiStreakReward === undefined

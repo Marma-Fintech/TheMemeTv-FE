@@ -126,9 +126,11 @@ const LeaderBoard = ({ telegramId }) => {
         </button>
         <div className="carousel-content">
           <div className="carousel-image">
-            <img src={images[currentIndex]?.src} alt="carousel" />
+            <img src={images[currentLevel - 1]?.src} alt="carousel" />
           </div>
-          <div className="carousel-captions">{images[currentIndex]?.name}</div>
+          <div className="carousel-captions">
+            {images[currentLevel - 1]?.name}
+          </div>
         </div>
         <button
           className="carousel-button next"

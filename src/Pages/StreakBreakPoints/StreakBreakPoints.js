@@ -9,13 +9,13 @@ import booster3 from "./booster3.png";
 import booster5 from "./booster5.png";
 
 const streakData = [
-  { type: "LOGIN STREAK", coins: [100, 200, 300, 400, 500, 600, 700] },
-  { type: "WATCH STREAK", coins: [100, 200, 300, 400, 500, 600, 700] },
+  { type: "LOGGED IN", coins: [100, 200, 400, 800, 1600, 3200, 6400] },
+  { type: "WATCHED", coins: [100, 200, 400, 800, 1600, 3200, 6400] },
   {
-    type: "REFER STREAK",
-    coins: [1000, 2000, 3000, 5000, 10000, 15000, 25000],
+    type: "REFERRED",
+    coins: [1000, 1500, 3000, 6000, 12000, 24000, 48000],
   },
-  { type: "TASK STREAK", coins: [100, 200, 300, 400, 500, 600, 700] },
+  { type: "PLAYED", coins: [100, 200, 400, 800, 1600, 3200, 6400] },
   {
     type: "MULTI STREAK",
     coins: [1300, 2100, 4200, 8400, 16800, 33600, 67200],
@@ -27,10 +27,10 @@ const streakData = [
 ];
 
 const boosters = {
-  login: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for login
-  watch: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for watch
-  refer: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for refer
-  task: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for tasks
+  logged: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for login
+  watched: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for watch
+  referred: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for refer
+  played: [1, 2, 3, 4, 5, 6, 7], // Number of 3x boosters for tasks
   multi: [1, 2, 3, 4, 5, 6, 7], // Number of 5x boosters for multi streak
 };
 
@@ -140,10 +140,10 @@ const StreakBreakPoints = () => {
                       ) : (
                         <>
                           {[
-                            "LOGIN STREAK",
-                            "WATCH STREAK",
-                            "REFER STREAK",
-                            "TASK STREAK",
+                            "LOGGED IN",
+                            "WATCHED",
+                            "REFERRED",
+                            "PLAYED",
                           ].includes(streak.type) && (
                             <div style={{ lineHeight: "10px" }}>
                               <span className="coinsText">

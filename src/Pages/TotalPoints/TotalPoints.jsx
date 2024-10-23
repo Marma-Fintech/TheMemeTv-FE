@@ -27,17 +27,15 @@ const TotalPoints = () => {
   useEffect(() => {
     const getUserDetails = async (data) => {
       const userDetails = await UserDeatils(data);
-      console.log(
-        JSON.stringify(userDetails.spendingRewards) + "userDetailsuserDetails"
-      );
+
       updateUserInfo((prev) => ({
         ...prev,
-        userDetails,
+        userDetails: userDetails?.user,
       }));
 
       updatewatchScreenInfo((prev) => ({
         ...prev,
-        boostersList: userDetails?.boosters,
+        boostersList: userDetails?.user?.boosters,
       }));
     };
     const data1 = {
@@ -156,6 +154,19 @@ const TotalPoints = () => {
                   <button className="button-points">
                     <img className="logo-points" src={logo} />
                     {userDetails?.userDetails?.taskRewards?.taskPoints}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="row mt10 cheap-stuff display-flex">
+              <div className="col-7">
+                <h4 className="textcolor">Levelup POINTS</h4>
+              </div>
+              <div className="col-5">
+                <div className="btn-bg">
+                  <button className="button-points">
+                    <img className="logo-points" src={logo} />
+                    {userDetails?.userDetails?.levelUpRewards}
                   </button>
                 </div>
               </div>

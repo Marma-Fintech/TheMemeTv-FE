@@ -143,6 +143,7 @@ const PickaWord = () => {
   const [selectedCards, setSelectedCards] = useState(loadSelectedCards()); // New state for selected cards
   const [claimButtonLoading, setClaimButtonLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showComeBackTomorrow, setShowComeBackTomorrow] = useState(false);
 
   // Save selected cards to local storage whenever they change
   useEffect(() => {
@@ -155,6 +156,22 @@ const PickaWord = () => {
       userDetails?.userDetails?.lastLogin
     ); // Save purchasesRemaining whenever it changes
   }, [purchasesRemaining]);
+
+  useEffect(() => {
+    // Check if both purchases and plays are zero
+    if (purchasesRemaining === 0 && playsRemaining === 0) {
+      // Set a delay of 1 second to show "COME BACK TOMORROW"
+      const timer = setTimeout(() => {
+        setShowComeBackTomorrow(true);
+      }, 1000);
+
+      // Cleanup function to clear the timeout if component unmounts or dependencies change
+      return () => clearTimeout(timer);
+    } else {
+      // Reset the message state if the conditions change
+      setShowComeBackTomorrow(false);
+    }
+  }, [purchasesRemaining, playsRemaining]);
 
   const handleCardClick = async (index) => {
     console.log("Set Plays Remaining" + playsRemaining);
@@ -236,7 +253,9 @@ const PickaWord = () => {
 
   const handlePlayAgain = async () => {
     if (purchasesRemaining <= 0) {
-      setMessage("Come back tomorrow for more plays!");
+      setTimeout(() => {
+        setMessage("Come back tomorrow for more plays!");
+      }, 1000); // 1000 milliseconds = 1 second
       return;
     }
     setClaimButtonLoading(true);
@@ -320,7 +339,7 @@ const PickaWord = () => {
           </div>
         ))}
       </div>
-      {purchasesRemaining === 0 && playsRemaining === 0 ? (
+      {showComeBackTomorrow ? (
         <h5 className="chancesleft">COME BACK TOMORROW</h5>
       ) : message === "Not enough points available" ? (
         <h5 className="chancesleft">INSUFFICIENT POINTS</h5>
@@ -371,7 +390,7 @@ const PickaWord = () => {
                   <button className="btn-reward" onClick={handleFreePick}>
                     Pick Next
                   </button>
-                ) : (
+                ) : purchasesRemaining != 0 ? (
                   <button
                     className="btn-reward"
                     onClick={() => {
@@ -380,7 +399,7 @@ const PickaWord = () => {
                   >
                     {claimButtonLoading ? <Spinner /> : "PAY 500"}
                   </button>
-                )}
+                ) : null}
               </>
             ) : (
               <>
@@ -408,10 +427,28 @@ const PickaWord = () => {
                         </>
                       )}
                       {selectedCard ? (
-                        <h3 className="rw-popup">
-                          You won {results.points} points and{" "}
-                          {results.boosts.join(", ")} boosters!
-                        </h3>
+                        results.points > 0 && results.boosts.length > 0 ? (
+                          <h3 className="rw-popup">
+                            You won {results.points} points and{" "}
+                            {results.boosts.join(", ")} boosters!
+                          </h3>
+                        ) : results.points === 0 &&
+                          results.boosts.length === 0 ? (
+                          <h3 className="rw-popup">Better luck next time!</h3>
+                        ) : results.boosts.length === 0 ? (
+                          <h3 className="rw-popup">
+                            You won {results.points} points
+                          </h3>
+                        ) : results.points === 0 ? (
+                          <h3 className="rw-popup">
+                            You won {results.boosts.join(", ")} boosters!
+                          </h3>
+                        ) : (
+                          <h3 className="rw-popup">
+                            You won {results.points} points and{" "}
+                            {results.boosts.join(", ")} boosters!
+                          </h3>
+                        )
                       ) : (
                         <h3 className="rw-popup">FOR AN EXTRA PICK</h3>
                       )}

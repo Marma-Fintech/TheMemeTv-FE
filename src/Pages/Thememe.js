@@ -32,6 +32,7 @@ import Battle from "./Battle/Battle";
 const Thememe = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
     useUserInfo();
+  const [isTutorial, setIsTutorial] = useState(true);
 
   const latestUserDetails = useRef(userDetails);
   const latestWatchScreen = useRef(watchScreen);
@@ -79,9 +80,14 @@ const Thememe = () => {
     const storedData1 = localStorage.getItem("watchStreak");
     const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
 
-    if (parsedData1 && parsedData1 !== 0 && parsedData1.watchSec > 180) {
+    if (
+      parsedData1 &&
+      parsedData1 !== 0 &&
+      parsedData1.watchSec > 180 &&
+      !parsedData1?.updated
+    ) {
       // postWatchStreak(String(userData?.id));
-      postWatchStreak(data1.telegramId);
+      postWatchStreak(data1.telegramId, parsedData1);
     }
 
     const calculateReward = async () => {
@@ -112,12 +118,25 @@ const Thememe = () => {
     // localStorage.clear();
   }, []);
 
-  const postWatchStreak = async (id) => {
+  const postWatchStreak = async (id, parsedData1) => {
     console.log("jhgfdsdfghj");
     const calculatedStreakData = await calculateStreak({
       telegramId: id,
       userWatchSeconds: 180,
     });
+    if (calculatedStreakData) {
+      localStorage.setItem(
+        "watchStreak",
+        JSON.stringify({
+          // totalReward: totalRewardPoints,
+          watchSec: parsedData1?.watchSec,
+          // date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+          // date: new Date().getDate(),
+          date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+          updated: true,
+        })
+      );
+    }
   };
 
   const getUserDetails = async (data) => {
@@ -166,13 +185,14 @@ const Thememe = () => {
       if (userDetails) {
         updateUserInfo((prev) => ({
           ...prev,
-          userDetails: userDetails,
+          currentPhase: userDetails?.currentPhase,
+          userDetails: userDetails.user,
         }));
 
         updatewatchScreenInfo((prev) => ({
           ...prev,
-          boostersList: userDetails?.boosters,
-          totalReward: userDetails?.totalRewards,
+          boostersList: userDetails?.user?.boosters,
+          totalReward: userDetails?.user?.totalRewards,
           tapPoints: 0,
           booster: false,
           boosterSec: 0,
@@ -191,15 +211,17 @@ const Thememe = () => {
 
       // Update state after fetching user details
       if (userDetails) {
+        console.log(JSON.stringify(userDetails) + "kjhgfsdfghjk");
         updateUserInfo((prev) => ({
           ...prev,
-          userDetails: userDetails,
+          currentPhase: userDetails?.currentPhase,
+          userDetails: userDetails?.user,
         }));
 
         updatewatchScreenInfo((prev) => ({
           ...prev,
-          boostersList: userDetails?.boosters,
-          totalReward: userDetails?.totalRewards,
+          boostersList: userDetails?.user?.boosters,
+          totalReward: userDetails?.user?.totalRewards,
         }));
       }
     }
@@ -211,7 +233,9 @@ const Thememe = () => {
     let userDetails1;
 
     try {
-      userDetails1 = await getUserDetails1(userDetails.userDetails?.telegramId);
+      userDetails1 = await getUserDetails1(
+        userDetails?.userDetails?.telegramId
+      );
     } catch (error) {
       console.error("Error in updating or fetching user details:", error);
     }
@@ -526,6 +550,7 @@ const Thememe = () => {
           <Header />
         </div>
       )}
+
       <div
         style={{
           position: "fixed",
@@ -571,11 +596,22 @@ const Thememe = () => {
             >
               <div
                 // className="pulse-image"
-                style={{ position: "absolute", height: "100%", width: "100%" }}
+                style={
+                  userDetails?.isTutorial &&
+                  userDetails.currentComponentText === "TVPage"
+                    ? {
+                        position: "absolute",
+                        height: "100%",
+                        width: "100%",
+                        opacity: ".5",
+                      }
+                    : { position: "absolute", height: "100%", width: "100%" }
+                }
                 onClick={() => {
                   if (
                     !watchScreen.booster &&
-                    userDetails.currentComponentText !== "IntroImg"
+                    userDetails.currentComponentText !== "IntroImg" &&
+                    !userDetails?.isTutorial
                   ) {
                     toogleMenu();
                   }
@@ -584,15 +620,46 @@ const Thememe = () => {
                 <img
                   src={bottomLeft}
                   alt="border"
-                  style={{ height: "100%", width: "100%" }}
+                  style={
+                    userDetails?.isTutorial
+                      ? { height: "100%", width: "100%", opacity: 0.5 }
+                      : { height: "100%", width: "100%" }
+                  }
                   className="bottomImg"
                 />
               </div>
+              {userDetails?.isTutorial &&
+              userDetails.currentComponentText === "TVPage" ? (
+                <div
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                >
+                  <div
+                    className="loader"
+                    onClick={() => {
+                      updateUserInfo((prev) => ({
+                        ...prev,
+                        tutorialText: "Go to games",
+                      }));
+                    }}
+                    style={{ position: "absolute" }}
+                  >
+                    <div className="dot"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                  </div>
+                </div>
+              ) : null}
               <div
                 onClick={() => {
                   if (
                     !watchScreen.booster &&
-                    userDetails.currentComponentText !== "IntroImg"
+                    userDetails.currentComponentText !== "IntroImg" &&
+                    !userDetails?.isTutorial
                   ) {
                     toogleMenu();
                   }
@@ -644,6 +711,7 @@ const Thememe = () => {
                   className="bottomImg"
                 />
               </div>
+
               <div
                 style={{
                   position: "absolute",
@@ -726,6 +794,33 @@ const Thememe = () => {
                     justifyContent: "center",
                   }}
                 >
+                  {userDetails?.isTutorial ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        height: "100%",
+                        width: "100%",
+                        backgroundColor: "transparent",
+                        zIndex: 20,
+                      }}
+                    >
+                      <div
+                        className="loader"
+                        onClick={() => {
+                          updateUserInfo((prev) => ({
+                            ...prev,
+                            tutorialText: "Boosters",
+                          }));
+                        }}
+                        style={{ position: "absolute", left: "30%" }}
+                      >
+                        <div className="dot"></div>
+                        <div className="circle"></div>
+                        <div className="circle"></div>
+                        <div className="circle"></div>
+                      </div>
+                    </div>
+                  ) : null}
                   <Boosters />
                 </div>
               ) : null}
@@ -798,6 +893,7 @@ const Thememe = () => {
                 </div>
               ) : null}
             </div>
+
             <div
               className={
                 userDetails.currentComponentText === "IntroImg" ||
@@ -813,7 +909,8 @@ const Thememe = () => {
               onClick={() => {
                 if (
                   !watchScreen?.booster &&
-                  userDetails.currentComponentText !== "IntroImg"
+                  userDetails.currentComponentText !== "IntroImg" &&
+                  !userDetails?.isTutorial
                 ) {
                   const values = JSON.parse(
                     localStorage.getItem("pointDetails")
@@ -829,7 +926,17 @@ const Thememe = () => {
               }}
             >
               <div
-                style={{ position: "absolute", height: "100%", width: "100%" }}
+                style={
+                  userDetails?.isTutorial &&
+                  userDetails.currentComponentText === "TVPage"
+                    ? {
+                        position: "absolute",
+                        height: "100%",
+                        width: "100%",
+                        opacity: 0.5,
+                      }
+                    : { position: "absolute", height: "100%", width: "100%" }
+                }
               >
                 <img
                   src={bottomRight}
@@ -856,6 +963,33 @@ const Thememe = () => {
                   className="bottomImg"
                 />
               </div>
+
+              {userDetails?.isTutorial &&
+              userDetails.currentComponentText === "TVPage" ? (
+                <div
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                >
+                  <div
+                    className="loader"
+                    onClick={() => {
+                      updateUserInfo((prev) => ({
+                        ...prev,
+                        tutorialText: "Go to market",
+                      }));
+                    }}
+                    style={{ position: "absolute" }}
+                  >
+                    <div className="dot"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                    <div className="circle"></div>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

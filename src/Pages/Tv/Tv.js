@@ -54,7 +54,7 @@ const Tv = () => {
 
   const audioRef = useRef(new Audio(beatAudio));
   const [isLoading, setIsLoading] = useState(false);
-  const [isTutorial, setIsTutorial] = useState(true);
+  const [isTutorial, setIsTutorial] = useState(userDetails?.isTutorial);
   const [instruction, setInstruction] = useState("");
 
   useEffect(() => {
@@ -78,7 +78,10 @@ const Tv = () => {
     const storedData = localStorage.getItem("tutorial");
     const data = JSON.parse(storedData);
     if (data && data.watched) {
-      setIsTutorial(false);
+      updateUserInfo((prev) => ({
+        ...prev,
+        isTutorial: false,
+      }));
     }
 
     return () => {
@@ -90,6 +93,7 @@ const Tv = () => {
       audioRef.current.pause();
     };
   }, []);
+
   const level = {
     1: 500,
     2: 10000,
@@ -116,11 +120,13 @@ const Tv = () => {
         const parsedData = JSON.parse(storedData);
         const storedDate = new Date(parsedData.date);
         const currentDate = new Date();
+
         const timeDifferenceInSeconds = Math.floor(
           (currentDate - storedDate) / 1000
         );
         const energyIncrement = timeDifferenceInSeconds;
         const newEnergy = parsedData.energy + energyIncrement;
+
         if (newEnergy > 5000) {
           SetEnergy(5000);
           energy.current = 5000;
@@ -144,18 +150,23 @@ const Tv = () => {
           booster: [watchScreenRef.current.boosterDetails.name],
         })
       );
-      // console.log(new Date(userDetails?.userDetails?.lastLogin).getDate());
+
       localStorage.setItem(
         "watchStreak",
+
         JSON.stringify({
           // totalReward: totalRewardPoints,
+
           watchSec:
             parsedData1 &&
             parsedData1.date ===
               new Date(userDetails?.userDetails?.lastLogin).getDate()
               ? parsedData1?.watchSec + secsOnlyRef.current
               : secsOnlyRef.current,
+          // date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+          // date: new Date().getDate(),
           date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+          updated: parsedData1?.updated ? parsedData1?.updated : false,
         })
       );
 
@@ -209,6 +220,7 @@ const Tv = () => {
   }, []);
 
   const goToTheRefererPage = (component, name) => {
+    setIsLoading(true);
     updateUserInfo((prev) => ({
       ...prev,
       currentComponent: component,
@@ -533,7 +545,7 @@ const Tv = () => {
       className="tvContainer menupointer"
       style={{ height: "100%", width: "100%" }}
     >
-      {isTutorial ? (
+      {userDetails?.isTutorial ? (
         <div
           className="tutorial"
           style={{
@@ -575,7 +587,10 @@ const Tv = () => {
                   <div
                     className="loader"
                     onClick={() => {
-                      setInstruction("Click function level");
+                      updateUserInfo((prev) => ({
+                        ...prev,
+                        tutorialText: "View your level& progress here",
+                      }));
                     }}
                   >
                     <div className="dot"></div>
@@ -622,7 +637,10 @@ const Tv = () => {
                   <div
                     className="loader"
                     onClick={() => {
-                      setInstruction("Click function energy");
+                      updateUserInfo((prev) => ({
+                        ...prev,
+                        tutorialText: "See energy usage per tap here.",
+                      }));
                     }}
                   >
                     <div className="dot"></div>
@@ -659,7 +677,10 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function help");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText: "Click function help",
+                    }));
                   }}
                   style={{ position: "absolute", top: -25, left: -10 }}
                 >
@@ -679,7 +700,11 @@ const Tv = () => {
                     <div
                       className="loader"
                       onClick={() => {
-                        setInstruction("Click function streak");
+                        updateUserInfo((prev) => ({
+                          ...prev,
+                          tutorialText:
+                            "Track tasks that contribute to your streak",
+                        }));
                       }}
                       style={{ position: "absolute", top: -30 }}
                     >
@@ -697,7 +722,10 @@ const Tv = () => {
                     <div
                       className="loader"
                       onClick={() => {
-                        setInstruction("Click function phase");
+                        updateUserInfo((prev) => ({
+                          ...prev,
+                          tutorialText: "Check your current phase here.",
+                        }));
                       }}
                       style={{
                         position: "absolute",
@@ -721,7 +749,10 @@ const Tv = () => {
                     <div
                       className="loader"
                       onClick={() => {
-                        setInstruction("Click function stake");
+                        updateUserInfo((prev) => ({
+                          ...prev,
+                          tutorialText: "Click function stake",
+                        }));
                       }}
                       style={{
                         position: "absolute",
@@ -751,7 +782,10 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function wallet");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText: "Manage your wallet connections here.",
+                    }));
                   }}
                   style={{ position: "absolute", top: -30, left: -10 }}
                 >
@@ -782,7 +816,11 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function tokerpersec");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText:
+                        "Points earned per second for watching videos shown here.",
+                    }));
                   }}
                   style={{ position: "absolute", top: -10, left: -10 }}
                 >
@@ -806,7 +844,10 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function total reward");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText: "View your total points earned here.",
+                    }));
                   }}
                   style={{ position: "absolute", top: -10, left: 65 }}
                 >
@@ -826,7 +867,10 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function earnpertap");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText: "Points earned per tap displayed here.",
+                    }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
                 >
@@ -850,7 +894,10 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function invite");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText: "Get your invite link to earn rewards.",
+                    }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
                 >
@@ -898,7 +945,11 @@ const Tv = () => {
                 <div
                   className="loader"
                   onClick={() => {
-                    setInstruction("Click function cheap");
+                    updateUserInfo((prev) => ({
+                      ...prev,
+                      tutorialText:
+                        "Click here to earn rewards for completing tasks",
+                    }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
                 >
@@ -909,7 +960,9 @@ const Tv = () => {
                 </div>
               </div>
             </div>
-            <p style={{ color: "white" }}>{instruction ? instruction : null}</p>
+            <p style={{ color: "white" }}>
+              {userDetails?.tutorialText ? userDetails?.tutorialText : null}
+            </p>
           </div>
 
           <img
@@ -917,7 +970,10 @@ const Tv = () => {
             // className="cancel-img"
             onClick={() => {
               // closePopUp();
-              setIsTutorial(false);
+              updateUserInfo((prev) => ({
+                ...prev,
+                isTutorial: false,
+              }));
               localStorage.setItem(
                 "tutorial",
                 JSON.stringify({
@@ -928,7 +984,7 @@ const Tv = () => {
             style={{
               position: "absolute",
               width: "10%",
-              left: "50%",
+              left: "45%",
               top: "80%",
             }}
           />
@@ -1050,6 +1106,10 @@ const Tv = () => {
                 <h2
                   onClick={() => {
                     if (!watchScreen.booster) {
+                      updateUserInfo((prev) => ({
+                        ...prev,
+                        isLoading: true,
+                      }));
                       goToThePage(Streak, "Streak");
                     }
                   }}
@@ -1063,7 +1123,7 @@ const Tv = () => {
                 </h2>
               </div>
               <div className="col-2 phase-p">
-                P{userDetails?.userDetails?.level}
+                P{userDetails?.userDetails?.currentPhase}
               </div>
               <div
                 className="col-5"

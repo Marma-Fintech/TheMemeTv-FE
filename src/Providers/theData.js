@@ -22,6 +22,9 @@ const INITIAL_USER_STATE = {
     streakData: {},
     streakOfStreakData: {},
     isLoading: false,
+    currentPhase: 1,
+    isTutorial: true,
+    tutorialText: "",
   },
 };
 

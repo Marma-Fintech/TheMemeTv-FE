@@ -8,6 +8,7 @@ import rightArrow from "../../assets/images/rightarrow.png";
 import leftArrow from "../../assets/images/leftArrow.png";
 import useUserInfo from "../../Hooks/useUserInfo";
 import Card from "./Card";
+import { UserDeatils } from "../../apis/user";
 
 const Boosters = () => {
   const [currentSlide, setCurrentSlide] = useState(2);
@@ -72,13 +73,24 @@ const Boosters = () => {
   return (
     <div
       className="menupointer"
-      style={{
-        height: "50%",
-        width: "100%",
-        position: "relative",
-        display: "flex",
-        flexDirection: "row",
-      }}
+      style={
+        userDetails?.isTutorial
+          ? {
+              height: "50%",
+              width: "100%",
+              position: "relative",
+              display: "flex",
+              flexDirection: "row",
+              opacity: 0.5,
+            }
+          : {
+              height: "50%",
+              width: "100%",
+              position: "relative",
+              display: "flex",
+              flexDirection: "row",
+            }
+      }
     >
       <div
         style={{
@@ -103,7 +115,7 @@ const Boosters = () => {
         }}
       >
         <Carousel
-          style={{ width: "100%", opacity: "1" }}
+          style={{ width: "100%", opacity: 0 }}
           slides={boosterSlides}
           // offset={500}
           opacity={1}

@@ -13,7 +13,7 @@ const Milestone = () => {
     updateUserInfo((prev) => ({
       ...prev,
       currentComponent: component,
-      currentComponentText: "TVPage",
+      currentComponentText: name,
       lastComponent: userDetails.currentComponent,
       lastComponentText: userDetails.currentComponentText,
       centerCount: userDetails.centerCount + 1,

@@ -70,6 +70,7 @@
   font-family: myFirstFont;
   margin-left: 5px;
   font-size: 14px;
+  text-transform: uppercase;
 }
 .button-points {
   padding-left: 2px;

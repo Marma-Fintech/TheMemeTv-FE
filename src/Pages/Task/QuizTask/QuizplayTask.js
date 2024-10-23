@@ -319,8 +319,8 @@ const QuizPlayTask = () => {
     return simulatedDay > 0 ? simulatedDay : 1; // Ensure that Day 1 is correctly set
   };
   const simulatedDay = calculateSimulatedDay();
-  const currentPhase = userDetails?.userDetails?.level;
-
+  const currentPhase = userDetails?.currentPhase;
+  console.log(userDetails);
   useEffect(() => {
     if (simulatedDay > totalDays) {
       setQuizProgress([]);

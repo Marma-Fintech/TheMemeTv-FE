@@ -21,6 +21,15 @@ const ReferPage = () => {
     getMyReferralList();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      updateUserInfo((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
+    }, 1000);
+  }, []);
+
   const shareToTelegram = () => {
     const url = encodeURIComponent(
       `https://t.me/the_meme_tv_bot?start=${userDetails?.userDetails?.refId}`
