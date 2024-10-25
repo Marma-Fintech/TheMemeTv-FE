@@ -171,3 +171,10 @@ hr {
 .mb0 {
   margin-bottom: 0;
 }
+
+.market-points {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: end;
+}

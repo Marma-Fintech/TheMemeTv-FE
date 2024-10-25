@@ -153,7 +153,7 @@ const MarketPlace = () => {
                     <p className="rewards mb0"> Total Rewards</p>
                   </div>
                   <div className="col-5 text-right market-color">
-                    <p className="mb0" style={{ fontSize: ".7em" }}>
+                    <p className="mb0 market-points">
                       <img style={{ width: "15%" }} src={memetv} />{" "}
                       {formatNumber(totalReward)}
                       {/* 13241543 */}
