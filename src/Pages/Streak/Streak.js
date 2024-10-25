@@ -24,6 +24,7 @@ import {
   streakOfStreakRewardClaim,
 } from "../../apis/user";
 import { differenceInDays } from "date-fns";
+import fire from "../../assets/images/fire.svg";
 
 const Streak = () => {
   const [day, setDay] = useState(1);
@@ -1048,12 +1049,7 @@ const Streak = () => {
           </div>
           <div className="row mt10 cheap-stuff mb10">
             <div className="col-2">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/0eb953a6da27d088a419ecf530736727ca1f124475b9460d890398ef1438fc31?apiKey=da9eb044cac44bb1ab1471c98df94a03&&apiKey=da9eb044cac44bb1ab1471c98df94a03"
-                className="image"
-                alt=""
-              />
+              <img loading="lazy" src={fire} className="image" alt="" />
             </div>
             <div className="col-7 stuff-text">
               <h4>MULTI STREAK</h4>
