@@ -6,7 +6,6 @@
   font-family: mySecondFont;
   src: url("../../assets/FontFamily/PressStart.ttf");
 }
-
 .info-img {
   background-position: center;
   background-size: 100% 100%;
@@ -15,4 +14,11 @@
   background-image: url("../../assets/images/rise-bg.png");
   font-family: myFirstFont;
   object-fit: contain;
+}
+.fonth3 {
+  margin-top: 15px !important;
+  font-size: 15px;
+  text-align: center;
+  color: #bf15bc !important;
+  font-family: mySecondFont !important;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import PhaseDetails from "../PhaseDetails/PhaseDetails";
 import useUserInfo from "../../Hooks/useUserInfo";
+import "../PhaseDetails/PhaseDetails.css";
 const Info = () => {
   return (
     <div className="info-img">
@@ -21,28 +22,31 @@ const Info = () => {
             <h3>Here’s how it works</h3>
           </div>
           <div className="phase-para1">
-            <p className="font-2">Start Watching</p>
-            <p>
-              Simply click the "Watch" button to access a TV-like interface
-              filled with entertaining meme videos.
+            <p className="font-2">
+              doNothing, <br />
+              YOU GET POINTS
             </p>
-          </div>
-          <div className="phase-para1">
-            <p className="font-2">Earn While You Watch</p>
-            <p>
-              Sit back, relax, and enjoy the videos. Embrace the 'doNothing'
-              mantra to effortlessly earn $MEMETV tokens as rewards.
+            <p className="font-2">
+              TAP, <br />
+              YOU GET POINTS
             </p>
-            <p>
-              This seamless and fun viewing experience lets you enjoy daily
-              entertainment while earning $ MEMETV tokens,showcasing The Meme
-              TV's innovative approach to combining fun with rewards.
+            <p className="font-2">
+              PLAY GAMES, <br />
+              YOU GET POINTS
             </p>
+            <p className="font-2">
+              MAINTAIN STREAK, <br />
+              YOU GET POINTS
+            </p>
+            <p className="font-2">
+              STAKE, <br />
+              YOU GET POINTS
+            </p>
+            <h3 className="fonth3">ITS THAT SIMPLE !</h3>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default Info;

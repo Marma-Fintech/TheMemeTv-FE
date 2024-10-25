@@ -119,7 +119,7 @@ const Thememe = () => {
   }, []);
 
   const postWatchStreak = async (id, parsedData1) => {
-    console.log("jhgfdsdfghj");
+    // console.log("jhgfdsdfghj");
     const calculatedStreakData = await calculateStreak({
       telegramId: id,
       userWatchSeconds: 180,
@@ -176,7 +176,7 @@ const Thememe = () => {
         ]);
 
         userDetails = await UserDeatils(data);
-        console.log(JSON.stringify(userDetails) + "kjhgfds");
+        // console.log(JSON.stringify(userDetails) + "kjhgfds");
       } catch (error) {
         console.error("Error in updating or fetching user details:", error);
       }
@@ -211,7 +211,7 @@ const Thememe = () => {
 
       // Update state after fetching user details
       if (userDetails) {
-        console.log(JSON.stringify(userDetails) + "kjhgfsdfghjk");
+        // console.log(JSON.stringify(userDetails) + "kjhgfsdfghjk");
         updateUserInfo((prev) => ({
           ...prev,
           currentPhase: userDetails?.currentPhase,

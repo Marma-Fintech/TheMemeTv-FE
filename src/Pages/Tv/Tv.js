@@ -30,6 +30,7 @@ import animepic from "../../assets/images/animepic.svg";
 import cancelIcon from "../../assets/Task/cancelicon.png";
 // import weekRewards from "../../apis/user/weekRewards";
 import { debounce } from "lodash";
+import wallet from "../../assets/images/wallet.svg";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -52,28 +53,110 @@ const Tv = () => {
   const boosterPointsRef = useRef(boosterPoints);
   const tapSound = new Audio(tapAudio);
 
-  const audioRef = useRef(new Audio(beatAudio));
+  // const audioRef = useRef(new Audio(beatAudio));
   const [isLoading, setIsLoading] = useState(false);
   const [isTutorial, setIsTutorial] = useState(userDetails?.isTutorial);
-  const [instruction, setInstruction] = useState("");
+  const [showInstructions, setShowInstructions] = useState("");
+
+  const handleClick = () => {
+    if (watchScreen.booster) {
+      // Show instructions when booster is true
+      setShowInstructions(true);
+
+      // Automatically hide instructions after 3 seconds (3000 milliseconds)
+      setTimeout(() => {
+        setShowInstructions(false);
+      }, 3000);
+    }
+  };
+
+  useEffect(() => {
+    // Function to start the counter
+    // const startCounter = () => {
+    //   if (!intervalRef.current) {
+    //     console.log("App is in the foreground, starting counter...");
+    //     intervalRef.current = setInterval(() => {
+    //       setCount((prevCount) => prevCount + 1);
+    //     }, 1000); // Increment the counter every second
+    //   }
+    // };
+
+    // Function to pause the counter
+    // const pauseCounter = () => {
+    //   if (intervalRef.current) {
+    //     console.log("App went to the background, pausing counter...");
+    //     clearInterval(intervalRef.current); // Clear the interval to pause counting
+    //     intervalRef.current = null; // Reset the ref
+    //   }
+    // };
+
+    // Add event listeners for window focus and blur
+    // window.addEventListener("focus", startCounter);
+    // window.addEventListener("blur", pauseCounter);
+
+    // // Start the counter when the app first loads
+    // startCounter();
+
+    // Cleanup event listeners and stop the counter when the component unmounts
+    return () => {
+      // window.removeEventListener("focus", startCounter);
+      // window.removeEventListener("blur", pauseCounter);
+      // pauseCounter(); // Clear the interval when the component is unmounted
+    };
+  }, []);
+
+  useEffect(() => {
+    // Function to start the counter
+    const startCounter = () => {
+      // if (!intervalRef.current) {
+      console.log("App is in the foreground, starting counter...");
+      //   intervalRef.current = setInterval(() => {
+      //     setCount((prevCount) => prevCount + 1);
+      //   }, 1000); // Increment the counter every second
+      // }
+    };
+
+    // Function to pause the counter
+    const pauseCounter = () => {
+      // if (intervalRef.current) {
+      console.log("App went to the background, pausing counter...");
+      //   clearInterval(intervalRef.current); // Clear the interval to pause counting
+      //   intervalRef.current = null; // Reset the ref
+      // }
+    };
+
+    // Add event listeners for window focus and blur
+    window.addEventListener("focus", startCounter);
+    window.addEventListener("blur", pauseCounter);
+
+    // // Start the counter when the app first loads
+    startCounter();
+    window.addEventListener("beforeunload", () => console.log("Hiiii"));
+    // Cleanup event listeners and stop the counter when the component unmounts
+    return () => {
+      window.removeEventListener("focus", startCounter);
+      window.removeEventListener("blur", pauseCounter);
+      pauseCounter(); // Clear the interval when the component is unmounted
+    };
+  }, []);
 
   useEffect(() => {
     // Set the volume low
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.1;
+    // audioRef.current.loop = true;
+    // audioRef.current.volume = 0.1;
     // Function to control audio based on visibility
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-    };
+    // const handleVisibilityChange = () => {
+    //   if (document.visibilityState === "hidden") {
+    //     audioRef.current.pause();
+    //   } else {
+    //     audioRef.current.play();
+    //   }
+    // };
     // Play audio when the component mounts
-    audioRef.current.play();
+    // audioRef.current.play();
     // Event listeners for tab changes and window close
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("beforeunload", () => audioRef.current.pause());
+    // document.addEventListener("visibilitychange", handleVisibilityChange);
+    // window.addEventListener("beforeunload", () => audioRef.current.pause());
 
     const storedData = localStorage.getItem("tutorial");
     const data = JSON.parse(storedData);
@@ -86,11 +169,8 @@ const Tv = () => {
 
     return () => {
       // Cleanup listeners and pause audio when the component unmounts
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("beforeunload", () =>
-        audioRef.current.pause()
-      );
-      audioRef.current.pause();
+      // document.removeEventListener("visibilitychange", handleVisibilityChange);
+      // audioRef.current.pause();
     };
   }, []);
 
@@ -463,6 +543,13 @@ const Tv = () => {
           SetEnergy((prev) => {
             const newEnergy = prev - totalPoints;
             energy.current = newEnergy;
+            localStorage.setItem(
+              "energyDetails",
+              JSON.stringify({
+                energy: newEnergy,
+                date: new Date(),
+              })
+            );
             return newEnergy;
           });
         }
@@ -1043,6 +1130,8 @@ const Tv = () => {
               onClick={() => {
                 if (!watchScreen.booster) {
                   goToThePage(LeaderBoard, "LeaderBoard");
+                } else {
+                  handleClick();
                 }
               }}
               className="level"
@@ -1093,6 +1182,8 @@ const Tv = () => {
             onClick={() => {
               if (!watchScreen.booster) {
                 goToThePage(Info, "Info");
+              } else {
+                handleClick();
               }
             }}
             className="col-2 text-center"
@@ -1111,6 +1202,8 @@ const Tv = () => {
                         isLoading: true,
                       }));
                       goToThePage(Streak, "Streak");
+                    } else {
+                      handleClick();
                     }
                   }}
                   className="streak"
@@ -1137,6 +1230,8 @@ const Tv = () => {
                       ),
                     };
                     addWatchSecapiStake(data);
+                  } else {
+                    handleClick();
                   }
                 }}
               >
@@ -1157,16 +1252,14 @@ const Tv = () => {
             onClick={() => {
               if (!watchScreen.booster) {
                 goToThePage(ConnectWallet, "ConnectWallet");
+              } else {
+                handleClick();
               }
             }}
             className="col-2 text-center"
             style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
           >
-            <img
-              src={ConnectWalletImg}
-              alt="ConnectWallet"
-              className="wallet-image"
-            />
+            <img src={wallet} alt="ConnectWallet" className="wallet-image" />
           </div>
         </div>
         <div className="row">
@@ -1199,6 +1292,8 @@ const Tv = () => {
                   ),
                 };
                 addWatchSecapiTotal(data);
+              } else {
+                handleClick();
               }
             }}
           >
@@ -1228,6 +1323,8 @@ const Tv = () => {
             onClick={() => {
               if (!watchScreen.booster) {
                 goToTheRefererPage(ReferPage, "ReferPage");
+              } else {
+                handleClick();
               }
             }}
           >
@@ -1263,6 +1360,8 @@ const Tv = () => {
             onClick={() => {
               if (!watchScreen.booster) {
                 goToThePage(DoandEarn, "DoandEarn");
+              } else {
+                handleClick();
               }
             }}
             style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
@@ -1270,6 +1369,14 @@ const Tv = () => {
             <img src={leaderBoarder} alt="Help" />
           </div>
         </div>
+        {showInstructions && (
+          <div
+            className="instructions"
+            style={{ marginTop: "10px", color: "white" }}
+          >
+            Tap/doNothing <br></br>Booster activated!
+          </div>
+        )}
       </div>
       <div
         className="row"
@@ -1310,3 +1417,5 @@ const Tv = () => {
 };
 
 export default Tv;
+
+// 5x :  3,levelup : 1 -- 2x:3,3x:4,levelup:2,
