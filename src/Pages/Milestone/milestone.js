@@ -41,7 +41,7 @@ const Milestone = () => {
         </p>
       </div>
 
-      <div className="container" style={{ maxWidth: "320px" }}>
+      <div className="container scrollable" style={{ maxWidth: "320px" }}>
         <div className="row mt10 cheap-stuff">
           <div className="col-2">
             <img src={Cup} alt="milestone" className="image" />
@@ -84,6 +84,157 @@ const Milestone = () => {
             <h4>INVITE 10 FRIENDS</h4>
             <p className="stuff-p">
               <img src={logo} /> +33,333
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 20 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +66,667
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 30 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +1,00,000
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 40 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +1,33,333
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 50 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +1,66,667
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 60 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +2,00,000
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 70 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +2,33,333
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 80 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +2,66,667
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 90 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +3,00,000
+            </p>
+          </div>
+          <div className="col-3">
+            {/* <button className="stuff-claim" style={{ cursor: "pointer" }}>
+              CLAIM
+            </button> */}
+          </div>
+        </div>
+
+        <div className="row mt10 cheap-stuff">
+          <div className="col-2">
+            <img src={Cup} alt="milestone" className="image" />
+          </div>
+          <div className="col-7 stuff-text">
+            <h4>INVITE 100 FRIENDS</h4>
+            <p className="stuff-p">
+              <img src={logo} /> +3,33,333
             </p>
           </div>
           <div className="col-3">

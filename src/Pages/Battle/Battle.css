@@ -103,9 +103,9 @@
     transparent,
     transparent 5px,
     rgba(0, 0, 0, 0.25) 5px,
-    rgba(0, 0, 0, 0.25) 10px
+    rgba(164, 21, 21, 0.25) 10px
   );
-  background-color: #007bff; /* Set the background color */
+  background-color: #adb7c1; /* Set the background color */
 }
 .align {
   padding-left: 25px !important;

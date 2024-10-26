@@ -31,6 +31,7 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 // import weekRewards from "../../apis/user/weekRewards";
 import { debounce } from "lodash";
 import wallet from "../../assets/images/wallet.svg";
+import DashedProgressBar from "../../components/dashedprogress/Dashedprogress";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -411,6 +412,38 @@ const Tv = () => {
     }
   };
 
+  const addWatchSecapiStreak = async (data) => {
+    setIsLoading(true);
+    clearInterval(intervalRef.current);
+    const res = await addWatchSeconds(data);
+    localStorage.setItem(
+      "pointDetails",
+      JSON.stringify({
+        tapPoints: 0,
+        watchSec: 0,
+        boosterPoints: 0,
+        booster: [0],
+      })
+    );
+    updatewatchScreenInfo((prev) => ({
+      ...prev,
+      // totalReward: res.totalRewards,
+      tapPoints: 0,
+      booster: false,
+      boosterSec: 0,
+      boosterPoints: 0,
+      boosterDetails: {},
+      watchSec: 0,
+      updatedWatchPoints: res?.watchRewards,
+      allrewards: res.totalRewards,
+    }));
+    if (res) {
+      setTimeout(() => {
+        goToThePage(Streak, "Streak");
+      }, 500);
+    }
+  };
+
   const addWatchSecapiStake = async (data) => {
     setIsLoading(true);
     const res = await addWatchSeconds(data);
@@ -506,66 +539,131 @@ const Tv = () => {
   };
   const [lastInputWasTouch, setLastInputWasTouch] = useState(false);
 
+  // const handleTap = (e) => {
+  //   if (energy.current > 5) {
+  //     // if (navigator.vibrate) {
+  //     //   navigator.vibrate(100);
+  //     // }
+  //     // Determine if the event is from a touch or mouse
+  //     // const isTouchEvent = e.type === "touchstart";
+  //     // If it's a touch event, mark it as touch
+  //     // if (isTouchEvent) {
+  //     //   setLastInputWasTouch(true);
+  //     // } else if (lastInputWasTouch && !isTouchEvent) {
+  //     //   // If the last input was a touch and now it's a click, ignore it
+  //     //   return;
+  //     // }
+  //     tapSound.play();
+  //     const touches = e.touches
+  //       ? Array.from(e.touches)
+  //       : [{ clientX: e.clientX, clientY: e.clientY }];
+  //     let num = 5;
+  //     if (watchScreen?.boosterDetails?.name === "tap" && watchScreen?.booster) {
+  //       num = 10;
+  //       setBoosterPoints((prevBoosterPoints) => {
+  //         const newBoosterPoints = prevBoosterPoints + num * touches.length;
+  //         boosterPointsRef.current = newBoosterPoints;
+  //         return newBoosterPoints;
+  //       });
+  //     } else {
+  //       if (energyy > 0) {
+  //         const totalPoints = Math.min(energyy, num * touches.length);
+  //         setTapPoints((prevTapPoints) => {
+  //           const newTapPoints = prevTapPoints + totalPoints;
+  //           tapPointsRef.current = newTapPoints;
+  //           return newTapPoints;
+  //         });
+  //         SetEnergy((prev) => {
+  //           const newEnergy = prev - totalPoints;
+  //           energy.current = newEnergy;
+  //           localStorage.setItem(
+  //             "energyDetails",
+  //             JSON.stringify({
+  //               energy: newEnergy,
+  //               date: new Date(),
+  //             })
+  //           );
+  //           return newEnergy;
+  //         });
+  //       }
+  //     }
+  //     // const newAnimations = touches.map((touch) => ({
+  //     //   id: Date.now() + Math.random(),
+  //     //   x: touch.clientX,
+  //     //   y: touch.clientY,
+  //     // }));
+  //     // setTapAnimations((prev) => [...prev, ...newAnimations]);
+  //     // setTimeout(() => {
+  //     //   setTapAnimations((prev) =>
+  //     //     prev.filter((animation) => !newAnimations.includes(animation))
+  //     //   );
+  //     // }, 1000);
+  //   }
+  // };
+
   const handleTap = (e) => {
-    if (energy.current > 5) {
-      if (navigator.vibrate) {
-        navigator.vibrate(100);
-      }
-      // Determine if the event is from a touch or mouse
-      const isTouchEvent = e.type === "touchstart";
-      // If it's a touch event, mark it as touch
-      if (isTouchEvent) {
-        setLastInputWasTouch(true);
-      } else if (lastInputWasTouch && !isTouchEvent) {
-        // If the last input was a touch and now it's a click, ignore it
-        return;
-      }
-      tapSound.play();
-      const touches = e.touches
-        ? Array.from(e.touches)
-        : [{ clientX: e.clientX, clientY: e.clientY }];
-      let num = 5;
-      if (watchScreen?.boosterDetails?.name === "tap" && watchScreen?.booster) {
-        num = 10;
-        setBoosterPoints((prevBoosterPoints) => {
-          const newBoosterPoints = prevBoosterPoints + num * touches.length;
-          boosterPointsRef.current = newBoosterPoints;
-          return newBoosterPoints;
-        });
-      } else {
-        if (energyy > 0) {
-          const totalPoints = Math.min(energyy, num * touches.length);
-          setTapPoints((prevTapPoints) => {
-            const newTapPoints = prevTapPoints + totalPoints;
-            tapPointsRef.current = newTapPoints;
-            return newTapPoints;
-          });
-          SetEnergy((prev) => {
-            const newEnergy = prev - totalPoints;
-            energy.current = newEnergy;
-            localStorage.setItem(
-              "energyDetails",
-              JSON.stringify({
-                energy: newEnergy,
-                date: new Date(),
-              })
-            );
-            return newEnergy;
-          });
-        }
-      }
-      const newAnimations = touches.map((touch) => ({
-        id: Date.now() + Math.random(),
-        x: touch.clientX,
-        y: touch.clientY,
-      }));
-      setTapAnimations((prev) => [...prev, ...newAnimations]);
-      setTimeout(() => {
-        setTapAnimations((prev) =>
-          prev.filter((animation) => !newAnimations.includes(animation))
-        );
-      }, 1000);
+    if (energy.current <= 5) return;
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
     }
+    // tapSound.play();
+
+    // Extract touch points or use mouse event coordinates
+    const touches = e.touches
+      ? Array.from(e.touches)
+      : [{ clientX: e.clientX, clientY: e.clientY }];
+
+    // Define the base points per tap
+    const basePoints =
+      watchScreen?.boosterDetails?.name === "tap" && watchScreen?.booster
+        ? 10
+        : 5;
+
+    // Calculate tap points based on energy left
+    if (energyy > 0) {
+      const totalPoints = Math.min(energyy, basePoints * touches.length);
+
+      // Update tap points
+      setTapPoints((prevTapPoints) => {
+        const newTapPoints = prevTapPoints + totalPoints;
+        tapPointsRef.current = newTapPoints;
+        return newTapPoints;
+      });
+
+      // Update energy
+      SetEnergy((prevEnergy) => {
+        const newEnergy = prevEnergy - totalPoints;
+        energy.current = newEnergy;
+        localStorage.setItem(
+          "energyDetails",
+          JSON.stringify({ energy: newEnergy, date: new Date() })
+        );
+        return newEnergy;
+      });
+    }
+
+    // Apply booster points if booster is active
+    if (basePoints === 10) {
+      setBoosterPoints((prevBoosterPoints) => {
+        const newBoosterPoints =
+          prevBoosterPoints + basePoints * touches.length;
+        boosterPointsRef.current = newBoosterPoints;
+        return newBoosterPoints;
+      });
+    }
+
+    // Optional animation handling (uncomment if needed)
+    const newAnimations = touches.map((touch) => ({
+      id: Date.now() + Math.random(),
+      x: touch.clientX,
+      y: touch.clientY,
+    }));
+    setTapAnimations((prev) => [...prev, ...newAnimations]);
+    setTimeout(() => {
+      setTapAnimations((prev) =>
+        prev.filter((animation) => !newAnimations.includes(animation))
+      );
+    }, 1000);
   };
 
   // const handleTap = debounce((e) => {
@@ -676,7 +774,8 @@ const Tv = () => {
                     onClick={() => {
                       updateUserInfo((prev) => ({
                         ...prev,
-                        tutorialText: "View your level& progress here",
+                        tutorialText:
+                          "TRACK YOUR CURRENT LEVEL AND LEADERBOARD",
                       }));
                     }}
                   >
@@ -707,6 +806,17 @@ const Tv = () => {
                       key={1}
                     />
                   </ProgressBar>
+
+                  {/* <DashedProgressBar
+                    progress={Number(
+                      ((watchScreen.totalReward +
+                        secs +
+                        tapPoints +
+                        Number(boosterPoints)) /
+                        level[currentLevel + 1]) *
+                        100
+                    ).toFixed()}
+                  /> */}
                 </div>
               </div>
             </div>
@@ -726,7 +836,7 @@ const Tv = () => {
                     onClick={() => {
                       updateUserInfo((prev) => ({
                         ...prev,
-                        tutorialText: "See energy usage per tap here.",
+                        tutorialText: "TRACK ENERGY BAR DROP PER TAP",
                       }));
                     }}
                   >
@@ -766,7 +876,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "Click function help",
+                      tutorialText: "ABOUT THEMEMETV - HOW IT WORKS",
                     }));
                   }}
                   style={{ position: "absolute", top: -25, left: -10 }}
@@ -790,7 +900,7 @@ const Tv = () => {
                         updateUserInfo((prev) => ({
                           ...prev,
                           tutorialText:
-                            "Track tasks that contribute to your streak",
+                            "MONITOR TASKS CONTRIBUTING TO YOUR STREAK",
                         }));
                       }}
                       style={{ position: "absolute", top: -30 }}
@@ -811,7 +921,7 @@ const Tv = () => {
                       onClick={() => {
                         updateUserInfo((prev) => ({
                           ...prev,
-                          tutorialText: "Check your current phase here.",
+                          tutorialText: "YOUR CURRENT PHASE",
                         }));
                       }}
                       style={{
@@ -838,7 +948,8 @@ const Tv = () => {
                       onClick={() => {
                         updateUserInfo((prev) => ({
                           ...prev,
-                          tutorialText: "Click function stake",
+                          tutorialText:
+                            "STAKE YOUR POINTS TO DOUBLE YOUR REWARDS",
                         }));
                       }}
                       style={{
@@ -871,7 +982,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "Manage your wallet connections here.",
+                      tutorialText: "CONNECT WALLET AND AIRDROP TASKS",
                     }));
                   }}
                   style={{ position: "absolute", top: -30, left: -10 }}
@@ -905,8 +1016,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText:
-                        "Points earned per second for watching videos shown here.",
+                      tutorialText: "POINTS EARNED PER SECOND",
                     }));
                   }}
                   style={{ position: "absolute", top: -10, left: -10 }}
@@ -933,7 +1043,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "View your total points earned here.",
+                      tutorialText: "CHECK YOUR TOTAL EARNED POINTS",
                     }));
                   }}
                   style={{ position: "absolute", top: -10, left: 65 }}
@@ -956,7 +1066,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "Points earned per tap displayed here.",
+                      tutorialText: "POINTS EARNED PER TAP",
                     }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
@@ -983,7 +1093,8 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "Get your invite link to earn rewards.",
+                      tutorialText:
+                        "REFER AND EARN - VIEW YOUR REFERRALS AND REFERRAL MILESTONES",
                     }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
@@ -1034,8 +1145,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText:
-                        "Click here to earn rewards for completing tasks",
+                      tutorialText: "DO TASKS AND EARN POINTS",
                     }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
@@ -1147,7 +1257,7 @@ const Tv = () => {
             </h2>
 
             <div style={{ height: "10px", marginBottom: "10px" }}>
-              <ProgressBar style={{ height: "10px" }}>
+              {/* <ProgressBar style={{ height: "10px" }}>
                 <ProgressBar
                   variant="warning"
                   now={Number(
@@ -1160,7 +1270,20 @@ const Tv = () => {
                   ).toFixed()}
                   key={1}
                 />
-              </ProgressBar>
+              </ProgressBar> */}
+
+              <DashedProgressBar
+                dashcolor={"#E1CA00"}
+                lengthColor={"#E1CA00"}
+                progress={Number(
+                  ((watchScreen.totalReward +
+                    secs +
+                    tapPoints +
+                    Number(boosterPoints)) /
+                    level[currentLevel + 1]) *
+                    100
+                ).toFixed()}
+              />
             </div>
           </div>
         </div>
@@ -1171,9 +1294,15 @@ const Tv = () => {
               ENERGY {energy.current}/5000
             </h2>
             <div style={{ height: "10px", marginBottom: "10px" }}>
-              <ProgressBar style={{ height: "10px" }}>
+              {/* <ProgressBar style={{ height: "10px" }}>
                 <ProgressBar now={(energy.current / 5000) * 100} key={1} />
-              </ProgressBar>
+              </ProgressBar> */}
+
+              <DashedProgressBar
+                dashcolor={"#00AEEF"}
+                lengthColor={"#33c6f6"}
+                progress={(energy.current / 5000) * 100}
+              />
             </div>
           </div>
         </div>
@@ -1197,11 +1326,18 @@ const Tv = () => {
                 <h2
                   onClick={() => {
                     if (!watchScreen.booster) {
-                      updateUserInfo((prev) => ({
-                        ...prev,
-                        isLoading: true,
-                      }));
-                      goToThePage(Streak, "Streak");
+                      // updateUserInfo((prev) => ({
+                      //   ...prev,
+                      //   isLoading: true,
+                      // }));
+                      var data = {
+                        telegramId: userDetails.userDetails.telegramId,
+                        userWatchSeconds: secsRef.current,
+                        boosterPoints: String(
+                          tapPointsRef.current + boosterPointsRef.current
+                        ),
+                      };
+                      addWatchSecapiStreak(data);
                     } else {
                       handleClick();
                     }
@@ -1382,7 +1518,7 @@ const Tv = () => {
         className="row"
         style={{ height: "500px" }}
         onTouchStart={handleTap}
-        onMouseDown={handleTap}
+        // onMouseDown={handleTap}
       >
         <div
           className="col-12"

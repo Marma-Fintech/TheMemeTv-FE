@@ -40,6 +40,17 @@ const Thememe = () => {
   useEffect(() => {
     latestUserDetails.current = userDetails;
     latestWatchScreen.current = watchScreen;
+    const storedData1 = localStorage.getItem("watchStreak");
+    const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
+    if (
+      parsedData1 &&
+      parsedData1 !== 0 &&
+      parsedData1.watchSec > 180 &&
+      !parsedData1?.updated
+    ) {
+      // postWatchStreak(String(userData?.id));
+      postWatchStreak(userDetails?.userDetails?.telegramId, parsedData1);
+    }
   }, [userDetails, watchScreen]);
 
   useEffect(() => {
@@ -114,8 +125,6 @@ const Thememe = () => {
       }
     };
     calculateReward();
-
-    // localStorage.clear();
   }, []);
 
   const postWatchStreak = async (id, parsedData1) => {
@@ -642,7 +651,7 @@ const Thememe = () => {
                     onClick={() => {
                       updateUserInfo((prev) => ({
                         ...prev,
-                        tutorialText: "Go to games",
+                        tutorialText: "PLAY GAMES AND EARN POINTS",
                       }));
                     }}
                     style={{ position: "absolute" }}
@@ -809,7 +818,7 @@ const Thememe = () => {
                         onClick={() => {
                           updateUserInfo((prev) => ({
                             ...prev,
-                            tutorialText: "Boosters",
+                            tutorialText: "USE BOOSTERS AND BOOST YOUR POINTS",
                           }));
                         }}
                         style={{ position: "absolute", left: "30%" }}
@@ -978,7 +987,7 @@ const Thememe = () => {
                     onClick={() => {
                       updateUserInfo((prev) => ({
                         ...prev,
-                        tutorialText: "Go to market",
+                        tutorialText: "USE YOUR POINTS TO BUY BOOSTERS",
                       }));
                     }}
                     style={{ position: "absolute" }}
