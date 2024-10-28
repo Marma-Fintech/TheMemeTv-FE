@@ -444,6 +444,135 @@ const Tv = () => {
     }
   };
 
+  const addWatchSecapihelp = async (data) => {
+    setIsLoading(true);
+    clearInterval(intervalRef.current);
+    const res = await addWatchSeconds(data);
+    localStorage.setItem(
+      "pointDetails",
+      JSON.stringify({
+        tapPoints: 0,
+        watchSec: 0,
+        boosterPoints: 0,
+        booster: [0],
+      })
+    );
+    updatewatchScreenInfo((prev) => ({
+      ...prev,
+      // totalReward: res.totalRewards,
+      tapPoints: 0,
+      booster: false,
+      boosterSec: 0,
+      boosterPoints: 0,
+      boosterDetails: {},
+      watchSec: 0,
+      updatedWatchPoints: res?.watchRewards,
+      allrewards: res.totalRewards,
+    }));
+    if (res) {
+      setTimeout(() => {
+        // goToThePage(Streak, "Streak");
+        goToThePage(Info, "Info");
+      }, 500);
+    }
+  };
+
+  const addWatchSecapiwallet = async (data) => {
+    setIsLoading(true);
+    clearInterval(intervalRef.current);
+    const res = await addWatchSeconds(data);
+    localStorage.setItem(
+      "pointDetails",
+      JSON.stringify({
+        tapPoints: 0,
+        watchSec: 0,
+        boosterPoints: 0,
+        booster: [0],
+      })
+    );
+    updatewatchScreenInfo((prev) => ({
+      ...prev,
+      // totalReward: res.totalRewards,
+      tapPoints: 0,
+      booster: false,
+      boosterSec: 0,
+      boosterPoints: 0,
+      boosterDetails: {},
+      watchSec: 0,
+      updatedWatchPoints: res?.watchRewards,
+      allrewards: res.totalRewards,
+    }));
+    if (res) {
+      setTimeout(() => {
+        goToThePage(ConnectWallet, "ConnectWallet");
+      }, 500);
+    }
+  };
+
+  const addWatchSecapirefer = async (data) => {
+    setIsLoading(true);
+    clearInterval(intervalRef.current);
+    const res = await addWatchSeconds(data);
+    localStorage.setItem(
+      "pointDetails",
+      JSON.stringify({
+        tapPoints: 0,
+        watchSec: 0,
+        boosterPoints: 0,
+        booster: [0],
+      })
+    );
+    updatewatchScreenInfo((prev) => ({
+      ...prev,
+      // totalReward: res.totalRewards,
+      tapPoints: 0,
+      booster: false,
+      boosterSec: 0,
+      boosterPoints: 0,
+      boosterDetails: {},
+      watchSec: 0,
+      updatedWatchPoints: res?.watchRewards,
+      allrewards: res.totalRewards,
+    }));
+    if (res) {
+      setTimeout(() => {
+        goToTheRefererPage(ReferPage, "ReferPage");
+      }, 500);
+    }
+  };
+
+  const addWatchSecapicheap = async (data) => {
+    setIsLoading(true);
+    clearInterval(intervalRef.current);
+    const res = await addWatchSeconds(data);
+    localStorage.setItem(
+      "pointDetails",
+      JSON.stringify({
+        tapPoints: 0,
+        watchSec: 0,
+        boosterPoints: 0,
+        booster: [0],
+      })
+    );
+    updatewatchScreenInfo((prev) => ({
+      ...prev,
+      // totalReward: res.totalRewards,
+      tapPoints: 0,
+      booster: false,
+      boosterSec: 0,
+      boosterPoints: 0,
+      boosterDetails: {},
+      watchSec: 0,
+      updatedWatchPoints: res?.watchRewards,
+      allrewards: res.totalRewards,
+    }));
+    if (res) {
+      setTimeout(() => {
+        goToThePage(DoandEarn, "DoandEarn");
+      }, 500);
+    }
+  };
+
   const addWatchSecapiStake = async (data) => {
     setIsLoading(true);
     const res = await addWatchSeconds(data);
@@ -1310,7 +1439,14 @@ const Tv = () => {
           <div
             onClick={() => {
               if (!watchScreen.booster) {
-                goToThePage(Info, "Info");
+                var data = {
+                  telegramId: userDetails.userDetails.telegramId,
+                  userWatchSeconds: secsRef.current,
+                  boosterPoints: String(
+                    tapPointsRef.current + boosterPointsRef.current
+                  ),
+                };
+                addWatchSecapihelp(data);
               } else {
                 handleClick();
               }
@@ -1387,7 +1523,14 @@ const Tv = () => {
           <div
             onClick={() => {
               if (!watchScreen.booster) {
-                goToThePage(ConnectWallet, "ConnectWallet");
+                var data = {
+                  telegramId: userDetails.userDetails.telegramId,
+                  userWatchSeconds: secsRef.current,
+                  boosterPoints: String(
+                    tapPointsRef.current + boosterPointsRef.current
+                  ),
+                };
+                addWatchSecapiwallet(data);
               } else {
                 handleClick();
               }
@@ -1458,7 +1601,14 @@ const Tv = () => {
             style={watchScreen.booster ? { opacity: 0.5 } : { opacity: 1 }}
             onClick={() => {
               if (!watchScreen.booster) {
-                goToTheRefererPage(ReferPage, "ReferPage");
+                var data = {
+                  telegramId: userDetails.userDetails.telegramId,
+                  userWatchSeconds: secsRef.current,
+                  boosterPoints: String(
+                    tapPointsRef.current + boosterPointsRef.current
+                  ),
+                };
+                addWatchSecapirefer(data);
               } else {
                 handleClick();
               }
@@ -1495,7 +1645,14 @@ const Tv = () => {
             className="col-2 text-center"
             onClick={() => {
               if (!watchScreen.booster) {
-                goToThePage(DoandEarn, "DoandEarn");
+                var data = {
+                  telegramId: userDetails.userDetails.telegramId,
+                  userWatchSeconds: secsRef.current,
+                  boosterPoints: String(
+                    tapPointsRef.current + boosterPointsRef.current
+                  ),
+                };
+                addWatchSecapicheap(data);
               } else {
                 handleClick();
               }
