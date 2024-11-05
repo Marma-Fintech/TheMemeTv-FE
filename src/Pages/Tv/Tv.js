@@ -110,7 +110,6 @@ const Tv = () => {
     // Function to start the counter
     const startCounter = () => {
       // if (!intervalRef.current) {
-      console.log("App is in the foreground, starting counter...");
       //   intervalRef.current = setInterval(() => {
       //     setCount((prevCount) => prevCount + 1);
       //   }, 1000); // Increment the counter every second
@@ -132,7 +131,6 @@ const Tv = () => {
 
     // // Start the counter when the app first loads
     startCounter();
-    window.addEventListener("beforeunload", () => console.log("Hiiii"));
     // Cleanup event listeners and stop the counter when the component unmounts
     return () => {
       window.removeEventListener("focus", startCounter);
@@ -142,21 +140,93 @@ const Tv = () => {
   }, []);
 
   useEffect(() => {
-    // Set the volume low
     // audioRef.current.loop = true;
     // audioRef.current.volume = 0.1;
-    // Function to control audio based on visibility
-    // const handleVisibilityChange = () => {
-    //   if (document.visibilityState === "hidden") {
-    //     audioRef.current.pause();
-    //   } else {
-    //     audioRef.current.play();
-    //   }
-    // };
-    // Play audio when the component mounts
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        console.log("hidden");
+        clearInterval(intervalRef.current);
+        // audioRef.current.pause();
+      } else {
+        console.log("visible");
+        console.log("App is in the foreground, starting counter...");
+        const storedData1 = localStorage.getItem("watchStreak");
+        const parsedData1 = JSON.parse(storedData1);
+        const storedData = localStorage.getItem("energyDetails");
+
+        const parsedData = JSON.parse(storedData);
+        const storedDate = new Date(parsedData.date);
+
+        intervalRef.current = setInterval(() => {
+          localStorage.setItem(
+            "pointDetails",
+            JSON.stringify({
+              // totalReward: totalRewardPoints,
+              tapPoints: tapPointsRef.current,
+              watchSec: secsOnlyRef.current,
+              boosterPoints: boosterPointsRef.current,
+              booster: [watchScreenRef.current.boosterDetails.name],
+            })
+          );
+
+          localStorage.setItem(
+            "watchStreak",
+
+            JSON.stringify({
+              // totalReward: totalRewardPoints,
+
+              watchSec:
+                parsedData1 &&
+                parsedData1.date ===
+                  new Date(userDetails?.userDetails?.lastLogin).getDate()
+                  ? parsedData1?.watchSec + secsOnlyRef.current
+                  : secsOnlyRef.current,
+              // date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+              // date: new Date().getDate(),
+              date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+              updated: parsedData1?.updated ? parsedData1?.updated : false,
+            })
+          );
+
+          secsOnlyRef.current = secsOnlyRef.current + 1;
+          if (energy.current < 5000) {
+            SetEnergy((prev) => {
+              return Number(prev) + 1;
+            });
+            energy.current = Number(energy.current) + 1;
+          }
+          const values = {
+            levelUp: currentLevelRef.current + 1,
+            "2x": currentLevelRef.current * 2,
+            "3x": currentLevelRef.current * 3,
+            "5x": currentLevelRef.current * 5,
+          };
+          if (
+            watchScreenRef.current?.boosterDetails?.name === "levelUp" ||
+            watchScreenRef.current?.boosterDetails?.name === "2x" ||
+            watchScreenRef.current?.boosterDetails?.name === "3x" ||
+            watchScreenRef.current?.boosterDetails?.name === "5x"
+          ) {
+            setBoosterPoints(
+              (prevBoosterPoints) =>
+                prevBoosterPoints +
+                values[watchScreenRef.current?.boosterDetails?.name]
+            );
+            boosterPointsRef.current +=
+              values[watchScreenRef.current?.boosterDetails?.name];
+          } else {
+            setSecs((prevSecs) => {
+              const newSecs = prevSecs + currentLevelRef.current;
+              secsRef.current = newSecs;
+              return newSecs;
+            });
+          }
+        }, 1000);
+        // audioRef.current.play();
+      }
+    };
     // audioRef.current.play();
-    // Event listeners for tab changes and window close
-    // document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     // window.addEventListener("beforeunload", () => audioRef.current.pause());
 
     const storedData = localStorage.getItem("tutorial");
@@ -175,50 +245,12 @@ const Tv = () => {
     };
   }, []);
 
-  const level = {
-    1: 500,
-    2: 10000,
-    3: 50000,
-    4: 200000,
-    5: 800000,
-    6: 3000000,
-    7: 10000000,
-    8: 25000000,
-    9: 50000000,
-    10: 80000000,
-  };
-
-  const intervalRef = useRef(null);
-  const [tapAnimations, setTapAnimations] = useState([]);
-
   useEffect(() => {
-    const storedData = localStorage.getItem("energyDetails");
     const storedData1 = localStorage.getItem("watchStreak");
     const parsedData1 = JSON.parse(storedData1);
+    const storedData = localStorage.getItem("energyDetails");
 
-    if (storedData) {
-      try {
-        const parsedData = JSON.parse(storedData);
-        const storedDate = new Date(parsedData.date);
-        const currentDate = new Date();
-
-        const timeDifferenceInSeconds = Math.floor(
-          (currentDate - storedDate) / 1000
-        );
-        const energyIncrement = timeDifferenceInSeconds;
-        const newEnergy = parsedData.energy + energyIncrement;
-
-        if (newEnergy > 5000) {
-          SetEnergy(5000);
-          energy.current = 5000;
-        } else {
-          SetEnergy(newEnergy.toFixed());
-          energy.current = newEnergy.toFixed();
-        }
-      } catch (error) {
-        console.error("Error parsing stored data:", error);
-      }
-    }
+    const parsedData = JSON.parse(storedData);
 
     intervalRef.current = setInterval(() => {
       localStorage.setItem(
@@ -285,6 +317,118 @@ const Tv = () => {
         });
       }
     }, 1000);
+  }, []);
+
+  const level = {
+    1: 500,
+    2: 10000,
+    3: 50000,
+    4: 200000,
+    5: 800000,
+    6: 3000000,
+    7: 10000000,
+    8: 25000000,
+    9: 50000000,
+    10: 80000000,
+  };
+
+  const intervalRef = useRef(null);
+  const [tapAnimations, setTapAnimations] = useState([]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("energyDetails");
+    const storedData1 = localStorage.getItem("watchStreak");
+    const parsedData1 = JSON.parse(storedData1);
+
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        const storedDate = new Date(parsedData.date);
+        const currentDate = new Date();
+
+        const timeDifferenceInSeconds = Math.floor(
+          (currentDate - storedDate) / 1000
+        );
+        const energyIncrement = timeDifferenceInSeconds;
+        const newEnergy = parsedData.energy + energyIncrement;
+
+        if (newEnergy > 5000) {
+          SetEnergy(5000);
+          energy.current = 5000;
+        } else {
+          SetEnergy(newEnergy.toFixed());
+          energy.current = newEnergy.toFixed();
+        }
+      } catch (error) {
+        console.error("Error parsing stored data:", error);
+      }
+    }
+
+    // intervalRef.current = setInterval(() => {
+    //   localStorage.setItem(
+    //     "pointDetails",
+    //     JSON.stringify({
+    //       // totalReward: totalRewardPoints,
+    //       tapPoints: tapPointsRef.current,
+    //       watchSec: secsOnlyRef.current,
+    //       boosterPoints: boosterPointsRef.current,
+    //       booster: [watchScreenRef.current.boosterDetails.name],
+    //     })
+    //   );
+
+    //   localStorage.setItem(
+    //     "watchStreak",
+
+    //     JSON.stringify({
+    //       // totalReward: totalRewardPoints,
+
+    //       watchSec:
+    //         parsedData1 &&
+    //         parsedData1.date ===
+    //           new Date(userDetails?.userDetails?.lastLogin).getDate()
+    //           ? parsedData1?.watchSec + secsOnlyRef.current
+    //           : secsOnlyRef.current,
+    //       // date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+    //       // date: new Date().getDate(),
+    //       date: new Date(userDetails?.userDetails?.lastLogin).getDate(),
+    //       updated: parsedData1?.updated ? parsedData1?.updated : false,
+    //     })
+    //   );
+
+    //   secsOnlyRef.current = secsOnlyRef.current + 1;
+    //   if (energy.current < 5000) {
+    //     SetEnergy((prev) => {
+    //       return Number(prev) + 1;
+    //     });
+    //     energy.current = Number(energy.current) + 1;
+    //   }
+    //   const values = {
+    //     levelUp: currentLevelRef.current + 1,
+    //     "2x": currentLevelRef.current * 2,
+    //     "3x": currentLevelRef.current * 3,
+    //     "5x": currentLevelRef.current * 5,
+    //   };
+    //   if (
+    //     watchScreenRef.current?.boosterDetails?.name === "levelUp" ||
+    //     watchScreenRef.current?.boosterDetails?.name === "2x" ||
+    //     watchScreenRef.current?.boosterDetails?.name === "3x" ||
+    //     watchScreenRef.current?.boosterDetails?.name === "5x"
+    //   ) {
+    //     setBoosterPoints(
+    //       (prevBoosterPoints) =>
+    //         prevBoosterPoints +
+    //         values[watchScreenRef.current?.boosterDetails?.name]
+    //     );
+    //     boosterPointsRef.current +=
+    //       values[watchScreenRef.current?.boosterDetails?.name];
+    //   } else {
+    //     setSecs((prevSecs) => {
+    //       const newSecs = prevSecs + currentLevelRef.current;
+    //       secsRef.current = newSecs;
+    //       return newSecs;
+    //     });
+    //   }
+    // }, 1000);
 
     // Cleanup interval on component unmount
     return () => {
@@ -1487,9 +1631,7 @@ const Tv = () => {
                   STREAK <FaChevronRight style={{ fontSize: "12px" }} />
                 </h2>
               </div>
-              <div className="col-2 phase-p">
-                P{userDetails?.userDetails?.currentPhase}
-              </div>
+              <div className="col-2 phase-p">P{userDetails?.currentPhase}</div>
               <div
                 className="col-5"
                 onClick={() => {

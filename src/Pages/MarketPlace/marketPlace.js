@@ -9,6 +9,7 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 import { purchaseBooster } from "../../apis/user";
 import useUserInfo from "../../Hooks/useUserInfo";
 import { UserDeatils } from "../../apis/user";
+import Tv from "../Tv/Tv";
 
 const MarketPlace = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -23,6 +24,18 @@ const MarketPlace = () => {
 
   const handleClick1 = () => {
     setCount(count + 1);
+  };
+
+  const goToThePage = (component, name) => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      currentComponent: component,
+      currentComponentText: name,
+      lastComponent: userDetails.currentComponent,
+      lastComponentText: userDetails.currentComponentText,
+      centerCount: userDetails.centerCount + 1,
+      isMenu: false,
+    }));
   };
 
   const formatNumber = (num) => {
@@ -128,7 +141,17 @@ const MarketPlace = () => {
   };
 
   return (
-    <div className="info-img">
+    <div className="info-img menupointer">
+      <img
+        onClick={() => {
+          goToThePage(Tv, "TVPage");
+          // console.log("hihihi");
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer" }}
+      />
+
       <div
         className="menupointer "
         style={{

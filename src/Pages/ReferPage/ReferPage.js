@@ -4,6 +4,8 @@ import useUserInfo from "../../Hooks/useUserInfo";
 import Invite from "../../assets/images/Invitefriends.png";
 import { myReferrel } from "../../apis/user";
 import Milestone from "../Milestone/milestone";
+import { RWebShare } from "react-web-share";
+
 const ReferPage = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
 
@@ -112,12 +114,23 @@ const ReferPage = () => {
       <div
         className="row"
         onClick={() => {
-          shareToTelegram();
+          // shareToTelegram();
         }}
       >
         <div className="col-12">
           <div className="invite-fri">
-            <h2>invite Friends</h2>
+            {/* <h2>invite Friends</h2> */}
+            <RWebShare
+              data={{
+                text: "Like humans, flamingos make friends for life",
+                url: `https://t.me/the_meme_tv_bot?start=${userDetails?.userDetails?.refId}`,
+                title: "",
+              }}
+              onClick={() => console.log("shared successfully!")}
+              disableNative={true}
+            >
+              <h2>invite Friends</h2>
+            </RWebShare>
           </div>
         </div>
       </div>

@@ -75,6 +75,11 @@ const loadSelectedCards = () => {
   if (lastCardDate === today) {
     return selectedCards ? JSON.parse(selectedCards) : Array(9).fill(null);
   } else {
+    let updatedResults = {
+      points: 0,
+      boosts: [],
+    };
+    localStorage.setItem("gameResults", JSON.stringify(updatedResults));
     return Array(9).fill(null);
   }
 };

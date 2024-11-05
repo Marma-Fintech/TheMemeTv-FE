@@ -9,7 +9,7 @@ import bottomShape from "../assets/images/bottomshapemain.png";
 import bottomLeft from "../assets/images/RectangleLeft.svg";
 import bottomRight from "../assets/images/RectangleRight.svg";
 import bottomcenter from "../assets/images/bottomcenter.png";
-import greenLineBottom from "../assets/images/greenLinebottom.svg";
+import greenLineBottom from "../assets/images/greenLinebottom.png";
 import boosterText from "../assets/images/boostText.png";
 import menuIcon from "../assets/images/gameIcon.svg";
 import referIcon from "../assets/images/marketp.svg";
@@ -51,6 +51,10 @@ const Thememe = () => {
       // postWatchStreak(String(userData?.id));
       postWatchStreak(userDetails?.userDetails?.telegramId, parsedData1);
     }
+
+    console.log(
+      JSON.stringify(userDetails?.currentPhase) + "kjhfdfghjkhgfgfghkjhhg"
+    );
   }, [userDetails, watchScreen]);
 
   useEffect(() => {
@@ -82,12 +86,12 @@ const Thememe = () => {
         telegramDetails: userData,
       }));
     }
-    // const data1 = {
-    //   name: "Karthikeyan",
-    //   telegramId: "62655jln9lugkyu18",
-    // };
-    // getUserDetails(data1);
-    // s;
+    const data1 = {
+      name: "Karthikeyan",
+      telegramId: "62655jln9lugkyu18",
+    };
+    getUserDetails(data1);
+
     const storedData1 = localStorage.getItem("watchStreak");
     const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
 
@@ -97,14 +101,14 @@ const Thememe = () => {
       parsedData1.watchSec > 180 &&
       !parsedData1?.updated
     ) {
-      postWatchStreak(String(userData?.id));
-      // postWatchStreak(data1.telegramId, parsedData1);
+      // postWatchStreak(String(userData?.id));
+      postWatchStreak(data1.telegramId, parsedData1);
     }
 
     const calculateReward = async () => {
       const data24 = {
-        telegramId: String(userData?.id),
-        // telegramId: data1.telegramId,
+        // telegramId: String(userData?.id),
+        telegramId: data1.telegramId,
         userWatchSeconds: 0,
       };
       // Calculate streak data and update the state
@@ -787,7 +791,7 @@ const Thememe = () => {
                     padding: "10px",
                     position: "absolute",
                   }}
-                  className="bottomImg"
+                  className="bottomImg pulse-image"
                 />
               </div>
               {userDetails.currentComponentText === "TVPage" ? (

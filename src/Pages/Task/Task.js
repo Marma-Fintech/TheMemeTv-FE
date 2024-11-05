@@ -8,6 +8,9 @@ import useUserInfo from "../../Hooks/useUserInfo";
 import PickaWord from "./PickaWord/PickaWord";
 import quiz from "./QuizTask/QuizTask";
 import scramble from "./ScrambleaWord/ScrambleaWord";
+import cancelIcon from "../../assets/Task/cancelicon.png";
+import Tv from "../Tv/Tv";
+
 const Task = () => {
   useEffect(() => {
     updateUserInfo((prev) => ({
@@ -36,6 +39,16 @@ const Task = () => {
       className="task-page"
       style={{ justifyContent: "center", marginTop: "0%" }}
     >
+      <img
+        onClick={() => {
+          goToThePage(Tv, "TVPage");
+          // console.log("hihihi");
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer" }}
+      />
+
       <div>
         <h2 className="txt-color mb15">Games</h2>
       </div>

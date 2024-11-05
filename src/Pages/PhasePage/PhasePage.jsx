@@ -10,9 +10,7 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 
 const PhasePage = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
-  const [currentLevel, setCurrentLevel] = useState(
-    userDetails?.userDetails?.level
-  );
+  const [currentLevel, setCurrentLevel] = useState(userDetails?.currentPhase);
   const [TotalRewards, setTotalRewards] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,6 +55,11 @@ const PhasePage = () => {
         booster: [0],
       })
     );
+
+    updateUserInfo((prev) => ({
+      ...prev,
+      isLoading: false,
+    }));
   }, []);
 
   useEffect(() => {

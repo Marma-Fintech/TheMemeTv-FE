@@ -66,10 +66,10 @@
   }
 }
 .scrollable {
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
   width: 100%;
-  margin-bottom: 10%;
+  /* margin-bottom: 10%; */
 }
 .tvContainer {
   background-position: center;
@@ -87,6 +87,9 @@
   padding: 2px;
   border-radius: 0px !important;
   background: #303230 !important;
+}
+.progress-bar {
+  background-size: 14px 100% !important;
 }
 
 .level-div {
