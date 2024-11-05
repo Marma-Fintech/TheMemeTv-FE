@@ -8,6 +8,8 @@ import telegram from "../../assets/images/telegram.svg";
 import dobottom from "../../assets/images/stuff.gif";
 import { cheapStuff } from "../../apis/user";
 import useUserInfo from "../../Hooks/useUserInfo";
+import cancelIcon from "../../assets/Task/cancelicon.png";
+import Tv from "../Tv/Tv";
 
 const DoEarn = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
@@ -117,8 +119,29 @@ const DoEarn = () => {
     }
   }, []);
 
+  const toogleMenu = () => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isPlay: false,
+      currentComponent: Tv,
+      currentComponentText: "TVPage",
+      lastComponent: userDetails?.userDetails.currentComponent,
+      lastComponentText: userDetails?.userDetails.currentComponentText,
+      isMenu: false,
+      menuCount: userDetails?.userDetails?.menuCount + 1,
+    }));
+  };
+
   return (
     <div className="info-img">
+      <img
+        onClick={() => {
+          toogleMenu();
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer", pointerEvents: "all" }}
+      />
       <div
         className="menupointer stuff-body"
         style={{
@@ -126,7 +149,7 @@ const DoEarn = () => {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          marginTop: "7%",
+          marginTop: "15%",
           flexDirection: "column",
           pointerEvents: "all",
         }}

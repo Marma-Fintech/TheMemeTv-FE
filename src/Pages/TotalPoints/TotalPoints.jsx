@@ -46,8 +46,29 @@ const TotalPoints = () => {
     getUserDetails(data1);
   }, []);
 
+  const toogleMenu = () => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isPlay: false,
+      currentComponent: Tv,
+      currentComponentText: "TVPage",
+      lastComponent: userDetails?.userDetails.currentComponent,
+      lastComponentText: userDetails?.userDetails.currentComponentText,
+      isMenu: false,
+      menuCount: userDetails?.userDetails?.menuCount + 1,
+    }));
+  };
+
   return (
     <>
+      <img
+        onClick={() => {
+          toogleMenu();
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer", pointerEvents: "all" }}
+      />
       <div className="info-img scroll">
         <div
           className="menupointer stuff-body"

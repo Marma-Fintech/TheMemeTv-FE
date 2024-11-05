@@ -32,6 +32,7 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 import { debounce } from "lodash";
 import wallet from "../../assets/images/wallet.svg";
 import DashedProgressBar from "../../components/dashedprogress/Dashedprogress";
+import twox from "../../assets/images/2X.png";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -72,6 +73,9 @@ const Tv = () => {
   };
 
   useEffect(() => {
+    console.log(
+      JSON.stringify(watchScreen.boosterDetails.name) + "watchScreenwatchScreen"
+    );
     // Function to start the counter
     // const startCounter = () => {
     //   if (!intervalRef.current) {
@@ -104,7 +108,7 @@ const Tv = () => {
       // window.removeEventListener("blur", pauseCounter);
       // pauseCounter(); // Clear the interval when the component is unmounted
     };
-  }, []);
+  }, [watchScreen]);
 
   useEffect(() => {
     // Function to start the counter
@@ -1819,6 +1823,27 @@ const Tv = () => {
         onTouchStart={handleTap}
         // onMouseDown={handleTap}
       >
+        <div style={{ height: "200px", width: "200px" }}>
+          <p
+            className="boosterText"
+            style={{
+              fontSize: "80px",
+              fontFamily: "Press Start 2P",
+              color: "white",
+              zIndex: 10000000000000,
+              marginLeft:
+                watchScreen.boosterDetails.name === "tap" ? "40%" : "55%",
+              marginTop: "-30%",
+              opacity: 0.15,
+            }}
+          >
+            {watchScreen.boosterDetails.name === "2x" ? "2X" : null}
+            {watchScreen.boosterDetails.name === "3x" ? "3X" : null}
+            {watchScreen.boosterDetails.name === "5x" ? "5X" : null}
+            {watchScreen.boosterDetails.name === "levelUp" ? "Up" : null}
+            {watchScreen.boosterDetails.name === "tap" ? "Tap" : null}
+          </p>
+        </div>
         <div
           className="col-12"
           style={{
@@ -1833,6 +1858,7 @@ const Tv = () => {
             height="272"
             alt="8-bit dancing Karateka guy"
           />
+
           {tapAnimations.map((animation) => (
             <div
               key={animation.id}

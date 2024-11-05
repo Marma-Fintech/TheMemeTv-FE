@@ -415,3 +415,6 @@
   border-radius: 50%;
   z-index: 10;
 }
+.boosterText {
+  font-family: press;
+}

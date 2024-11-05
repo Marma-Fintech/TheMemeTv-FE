@@ -627,8 +627,30 @@ const Streak = () => {
     }, 1000);
   }, []);
 
+  const toogleMenu = () => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isPlay: false,
+      currentComponent: Tv,
+      currentComponentText: "TVPage",
+      lastComponent: userDetails?.userDetails.currentComponent,
+      lastComponentText: userDetails?.userDetails.currentComponentText,
+      isMenu: true,
+      menuCount: userDetails?.userDetails?.menuCount + 1,
+    }));
+  };
+
   return (
     <>
+      <img
+        onClick={() => {
+          toogleMenu();
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer", pointerEvents: "all" }}
+      />
+
       <div className=" menupointer zindex">
         <div className="streakContainer mt-15">
           <h1 className="streaktext">STREAK</h1>

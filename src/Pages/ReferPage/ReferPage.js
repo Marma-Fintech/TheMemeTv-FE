@@ -5,6 +5,8 @@ import Invite from "../../assets/images/Invitefriends.png";
 import { myReferrel } from "../../apis/user";
 import Milestone from "../Milestone/milestone";
 import { RWebShare } from "react-web-share";
+import Tv from "../Tv/Tv";
+import cancelIcon from "../../assets/Task/cancelicon.png";
 
 const ReferPage = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
@@ -53,8 +55,29 @@ const ReferPage = () => {
     }));
   };
 
+  const toogleMenu = () => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isPlay: false,
+      currentComponent: Tv,
+      currentComponentText: "TVPage",
+      lastComponent: userDetails?.userDetails.currentComponent,
+      lastComponentText: userDetails?.userDetails.currentComponentText,
+      isMenu: true,
+      menuCount: userDetails?.userDetails?.menuCount + 1,
+    }));
+  };
+
   return (
     <div className="info-img menupointer">
+      <img
+        onClick={() => {
+          toogleMenu();
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer", pointerEvents: "all" }}
+      />
       <div
         className="menupointer"
         style={{
@@ -76,7 +99,7 @@ const ReferPage = () => {
         <div className="row d-flex align-items-center justify-content-center">
           <div className="col-7 refer-head">
             <p className="refer-earn">
-              Get a 10,000 MTV and 5 Booster for each referral
+              Get 10,000 MTV and 5 2x Booster for each referral
             </p>
             <p
               className="works-p"

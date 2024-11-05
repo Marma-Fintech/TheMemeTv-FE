@@ -2,9 +2,36 @@ import React from "react";
 import PhaseDetails from "../PhaseDetails/PhaseDetails";
 import useUserInfo from "../../Hooks/useUserInfo";
 import "../PhaseDetails/PhaseDetails.css";
+import Tv from "../Tv/Tv";
+import cancelIcon from "../../assets/Task/cancelicon.png";
+
 const Info = () => {
+  const { userDetails, updateUserInfo } = useUserInfo();
+
+  const toogleMenu = () => {
+    updateUserInfo((prev) => ({
+      ...prev,
+      isPlay: false,
+      currentComponent: Tv,
+      currentComponentText: "TVPage",
+      lastComponent: userDetails?.userDetails.currentComponent,
+      lastComponentText: userDetails?.userDetails.currentComponentText,
+      isMenu: false,
+      menuCount: userDetails?.userDetails?.menuCount + 1,
+    }));
+  };
+
   return (
     <div className="info-img">
+      <img
+        onClick={() => {
+          toogleMenu();
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer", pointerEvents: "all" }}
+      />
+
       <div
         className="menupointer "
         style={{
@@ -42,7 +69,7 @@ const Info = () => {
               STAKE, <br />
               YOU GET POINTS
             </p>
-            <h3 className="fonth3">ITS THAT SIMPLE !</h3>
+            <h3 className="fonth3">REPEAT !!!</h3>
           </div>
         </div>
       </div>
