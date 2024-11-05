@@ -1823,25 +1823,25 @@ const Tv = () => {
         onTouchStart={handleTap}
         // onMouseDown={handleTap}
       >
-        <div style={{ height: "200px", width: "200px" }}>
+        <div style={{ height: "200px", width: "100%" }}>
           <p
             className="boosterText"
             style={{
               fontSize: "80px",
               fontFamily: "Press Start 2P",
               color: "white",
+              textAlign: "center",
               zIndex: 10000000000000,
-              marginLeft:
-                watchScreen.boosterDetails.name === "tap" ? "40%" : "55%",
-              marginTop: "-30%",
+
+              marginTop: "-30px",
               opacity: 0.15,
             }}
           >
             {watchScreen.boosterDetails.name === "2x" ? "2X" : null}
             {watchScreen.boosterDetails.name === "3x" ? "3X" : null}
             {watchScreen.boosterDetails.name === "5x" ? "5X" : null}
-            {watchScreen.boosterDetails.name === "levelUp" ? "Up" : null}
-            {watchScreen.boosterDetails.name === "tap" ? "Tap" : null}
+            {watchScreen.boosterDetails.name === "levelUp" ? "UP" : null}
+            {watchScreen.boosterDetails.name === "tap" ? "TAP" : null}
           </p>
         </div>
         <div

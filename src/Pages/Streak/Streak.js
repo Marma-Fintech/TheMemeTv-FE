@@ -642,18 +642,8 @@ const Streak = () => {
 
   return (
     <>
-      <img
-        onClick={() => {
-          toogleMenu();
-        }}
-        src={cancelIcon}
-        className="cancel-imgpoints"
-        style={{ cursor: "pointer", pointerEvents: "all" }}
-      />
-
       <div className=" menupointer zindex">
         <div className="streakContainer mt-15">
-          <h1 className="streaktext">STREAK</h1>
           <img
             onMouseEnter={() => {
               goToThePage(StreakBreakPoints, "streakBreakPoints");
@@ -661,6 +651,17 @@ const Streak = () => {
             src={questionMarkIcon}
             alt="Question Mark Icon"
             className="questionMarkIcon"
+            style={{ marginLeft: "5px" }}
+          />
+          <h1 className="streaktext">STREAK</h1>
+          <img
+            onClick={() => {
+              toogleMenu();
+            }}
+            src={cancelIcon}
+            // className="cancel-imgpoints"
+            className="questionMarkIcon"
+            style={{ cursor: "pointer", pointerEvents: "all" }}
           />
         </div>
         <div
