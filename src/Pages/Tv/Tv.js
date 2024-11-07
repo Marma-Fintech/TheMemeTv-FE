@@ -33,6 +33,7 @@ import { debounce } from "lodash";
 import wallet from "../../assets/images/wallet.svg";
 import DashedProgressBar from "../../components/dashedprogress/Dashedprogress";
 import twox from "../../assets/images/2X.png";
+import mask from "../../assets/images/mask.png";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -1851,6 +1852,14 @@ const Tv = () => {
           }}
         >
           <div className="floor"></div>
+
+          <img
+            src={mask}
+            className="woot-dance booster-mask"
+            width="328"
+            height="272"
+            alt="8-bit dancing Karateka guy"
+          />
           <img
             src={karathe}
             className="woot-dance"

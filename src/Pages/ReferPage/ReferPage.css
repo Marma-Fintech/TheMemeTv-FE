@@ -18,9 +18,10 @@
 }
 .phasediv {
   border: 1px solid #4cf038;
-  border-radius: 30px;
+  border-radius: 20px;
   background: #1d1d1d;
-  padding-bottom: 60px;
+  padding: 5px;
+  /* padding-bottom: 60px; */
 }
 .refer-head {
   border: 1px solid #4cf038;

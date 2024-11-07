@@ -12,7 +12,7 @@
   padding: 10%;
 }
 .streakBreakText {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
   background: linear-gradient(
@@ -29,7 +29,7 @@
   font-family: mySecondFont;
   /* align-items: center;
   justify-content: center; */
-  margin-left: 28px;
+  /* margin-left: 28px; */
 }
 .pointsText {
   background: linear-gradient(

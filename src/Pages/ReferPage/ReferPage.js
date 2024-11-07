@@ -95,12 +95,17 @@ const ReferPage = () => {
           <h3>
             <img src={Invite} />
           </h3>
+          <p className="refer-earn">
+            EARN 10,000 MEMETV TOKENS <br />& <br />5 2X BOOSTERS FOR EVERY
+            REFERRAL
+          </p>
         </div>
         <div className="row d-flex align-items-center justify-content-center">
-          <div className="col-7 refer-head">
-            <p className="refer-earn">
-              Get 10,000 MTV and 5 2x Booster for each referral
-            </p>
+          {/* <div className="refer-head" style={{ width: "100%" }}>
+            <p className="refer-earn">EARN 10,000 MEMETV TOKENS</p>
+            <p className="refer-earn">&</p>
+            <p className="refer-earn">5 2X BOOSTERS FOR EVERY REFERRAL</p>
+
             <p
               className="works-p"
               onClick={() => {
@@ -109,13 +114,37 @@ const ReferPage = () => {
             >
               HoW IT’S WORK
             </p>
-          </div>
+          </div> */}
         </div>
         <div className="col-9 mt-20 refer">
           <div className="row claim-ref">
             <div className="col-8">
-              <h2 className="refer-table text-color">My Referral</h2>
+              <h2
+                className="refer-table text-color"
+                style={{ fontSize: "14px", textAlign: "left" }}
+              >
+                {" "}
+                MY REFERRALS
+              </h2>
+              {/* <h2 className="refer-table text-color">MILESTONES</h2> */}
             </div>
+            <div className="col-4">
+              <h2
+                onClick={() => {
+                  goToTheMilstonePage(Milestone, "Milestone");
+                }}
+                className=""
+                style={{
+                  fontSize: "12px",
+                  textAlign: "right",
+                  color: "yellow",
+                  textDecorationLine: "underline",
+                }}
+              >
+                MILESTONES
+              </h2>
+            </div>
+
             <div className="col-4"></div>
           </div>
 

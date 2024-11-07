@@ -20,6 +20,7 @@ import cancelIcon from "../../../src/assets/Task/cancelicon.png";
 import { getPopularUser } from "../../apis/user";
 import Tv from "../Tv/Tv";
 import axios from "axios";
+import DashedProgressBar from "../../components/dashedprogress/Dashedprogress";
 
 const images = [
   { src: fruitfly, name: "Fruitfly" },
@@ -157,7 +158,7 @@ const LeaderBoard = ({ telegramId }) => {
               </h2>
             )}
             <div style={{ height: "10px", marginBottom: "10px" }}>
-              <ProgressBar style={{ height: "10px" }}>
+              {/* <ProgressBar style={{ height: "10px" }}>
                 <ProgressBar
                   variant="warning"
                   now={Number(
@@ -170,9 +171,22 @@ const LeaderBoard = ({ telegramId }) => {
                   ).toFixed()}
                   key={1}
                 />
-              </ProgressBar>
+              </ProgressBar> */}
+
+              <DashedProgressBar
+                dashcolor={"lightgreen"}
+                lengthColor={"lightgreen"}
+                progress={Number(
+                  ((watchScreen.totalReward +
+                    secs +
+                    tapPoints +
+                    Number(boosterPoints)) /
+                    level[currentLevel + 1]) *
+                    100
+                ).toFixed()}
+              />
             </div>
-            <h3 className="leaderboard-text">OVERALL LEADERBOARD</h3>
+            <h3 className="leaderboard-text">LEADERBOARD</h3>
           </div>
           <div className="cheap-stuff-container">
             <div className="row mt0 cheap-stuff1" style={{ width: "100%" }}>

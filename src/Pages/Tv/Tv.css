@@ -6,6 +6,10 @@
   font-family: press;
   src: url("../../assets/FontFamily/PressStart.ttf");
 }
+.press {
+  font-family: press;
+  font-size: 16px;
+}
 .mb10 {
   margin-bottom: 15%;
 }
@@ -66,7 +70,7 @@
   }
 }
 .scrollable {
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
   width: 100%;
   /* margin-bottom: 10%; */
@@ -417,4 +421,9 @@
 }
 .boosterText {
   font-family: press;
+}
+.booster-mask {
+  padding-top: 2px;
+  z-index: 9;
+  mix-blend-mode: hue;
 }

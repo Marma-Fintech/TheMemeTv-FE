@@ -55,7 +55,8 @@ const Info = () => {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          // justifyContent: "center",
+          marginTop: "100px",
           flexDirection: "column",
           pointerEvents: "all",
         }}
@@ -70,13 +71,13 @@ const Info = () => {
         >
           <TonConnectUIProvider manifestUrl="https://sapphire-large-cougar-300.mypinata.cloud/ipfs/QmYaJ9J2XgrPVsj6hQc5M2M23Wf41DwRvJptcKPKQXmr8N">
             <div className="phase-details">
-              <h4 className="airdrop-tasks">AIRDROP TASKS</h4>
+              {/* <h4 className="airdrop-tasks">AIRDROP TASKS</h4>
               <h4 className="airdrop">
                 Get ready for upcoming tasks! Soon, you'll see a list of
                 challenges below. Complete them to qualify for the Airdrop
               </h4>
               <br />
-              <h1 className="taskList">TASK LIST</h1>
+              <h1 className="taskList">TASK LIST</h1> */}
               <ConnectWalletPage></ConnectWalletPage>
             </div>
           </TonConnectUIProvider>

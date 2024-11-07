@@ -63,29 +63,27 @@ const StreakBreakPoints = () => {
 
   return (
     <div className="tv-body">
+      <img
+        onClick={() => {
+          goToThePage(Streak, "Streak");
+        }}
+        src={cancelIcon}
+        className="cancel-imgpoints"
+        style={{ cursor: "pointer" }}
+      />
+
       <div className="streakBreakPointsContainer">
         <div className="streakBreakRow">
-          <span className="streakBreakText">STREAK POINTS</span>
-          <img
-            onClick={() => {
-              goToThePage(Streak, "Streak");
-            }}
-            src={cancelIcon}
-            alt="Cancel Icon"
-            className="cancelIcon"
-          />
+          <span className="streakBreakText">STREAK TOKENS</span>
         </div>
         <span className="pointsText">EXPLAINED</span>
-        <div className="scrollableContainer">
-          <h3 className="additionalText">
+        <div className="scrollableContainer" style={{ width: "280px" }}>
+          {/* <h3 className="additionalText">
             Login daily to unlock the <b>STREAK OF STREAK</b> bonus and keep
             your SOS alive throughout the entire reward cycle!
-          </h3>
-          <h3 className="additionalText1">
-            Complete your daily tasks to win Streaks and unlock rewards at every
-            new phase!
-          </h3>
-          <h1 className="check-text">check out the point system</h1>
+          </h3> */}
+
+          {/* <h1 className="check-text">check out the point system</h1> */}
           {Array.from({ length: 7 }).map((_, dayIndex) => (
             <div className="containerbox-main" key={dayIndex}>
               <div

@@ -30,18 +30,27 @@ const Milestone = () => {
         className="cancel-imgpoints"
         style={{ cursor: "pointer" }}
       />
-      <div className="phase-details">
-        <h3>Here’s how it works</h3>
-      </div>
+      <div className="phase-details">{/* <h3>Here’s how it works</h3> */}</div>
       <div className="phase-para1">
-        <p className="font-2">Create Your Unique Referral Link</p>
+        {/* <p className="font-2">Create Your Unique Referral Link</p> */}
+        <div className="phase-details">
+          <p className="press">
+            REFERRAL MILESTONE
+            <hr style={{ margin: "10px", paddingBottom: "0px" }} />
+          </p>
+        </div>
+      </div>
+      {/* <div
+        className="phase-para1"
+        style={{ visibility: "hidden", fontSize: "3px" }}
+      >
         <p>
           Click the "Invite" button to generate your personalized referral link.
           <hr style={{ margin: "10px", paddingBottom: "0px" }} />
         </p>
-      </div>
+      </div> */}
 
-      <div className="container scrollable" style={{ maxWidth: "320px" }}>
+      <div className="container scrollable" style={{ width: "320px" }}>
         <div className="row mt10 cheap-stuff">
           <div className="col-2">
             <img src={Cup} alt="milestone" className="image" />

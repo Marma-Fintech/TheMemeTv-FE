@@ -93,7 +93,7 @@ const TotalPoints = () => {
               style={{ cursor: "pointer" }}
             /> */}
               <div className="row mt10 cheap-stuff" style={{ width: "100%" }}>
-                <h4 className="totalPointsText">TOTAL POINTS</h4>
+                <h4 className="totalPointsText">TOTAL TOKENS</h4>
                 <div>
                   <p className="rewardstext pb0">
                     <img src={logo} /> {watchScreen.allrewards}
@@ -103,7 +103,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">WATCH POINTS</h4>
+                <h4 className="textcolor">WATCH TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -116,7 +116,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">REFERRAL POINTS</h4>
+                <h4 className="textcolor">REFERRAL TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -129,7 +129,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">STREAK POINTS</h4>
+                <h4 className="textcolor">STREAK TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -142,7 +142,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">GAMING POINTS</h4>
+                <h4 className="textcolor">GAMING TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -155,7 +155,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">STAKING POINTS</h4>
+                <h4 className="textcolor">STAKING TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -168,7 +168,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">TASK POINTS</h4>
+                <h4 className="textcolor">TASK TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -181,7 +181,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">Levelup POINTS</h4>
+                <h4 className="textcolor">Levelup TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
@@ -194,7 +194,7 @@ const TotalPoints = () => {
             </div>
             <div className="row mt10 cheap-stuff display-flex">
               <div className="col-7">
-                <h4 className="textcolor">SPENDING POINTS</h4>
+                <h4 className="textcolor">SPENDING TOKENS</h4>
               </div>
               <div className="col-5">
                 <div className="btn-bg">
