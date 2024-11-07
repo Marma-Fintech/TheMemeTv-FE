@@ -11,6 +11,7 @@ import thousandPointsImg from "../../../assets/Task/1000points.png";
 import fiveThousandPointsImg from "../../../assets/Task/5000points.png";
 import betterLuckNextTimeImg from "../../../assets/Task/nexttime.png";
 import Spinner from "../../Streak/Spinner";
+import logo from "../../../assets/images/meme-logo.svg";
 
 import {
   getUserDetails,
@@ -396,14 +397,54 @@ const PickaWord = () => {
                     Pick Next
                   </button>
                 ) : purchasesRemaining != 0 ? (
-                  <button
-                    className="btn-reward"
-                    onClick={() => {
-                      handlePlayAgain();
-                    }}
-                  >
-                    {claimButtonLoading ? <Spinner /> : "PAY 500"}
-                  </button>
+                  selectedCard ? (
+                    <>
+                      <p className="pick-para">PICK AGAIN</p>
+                      <button
+                        className="btn-reward"
+                        onClick={() => {
+                          handlePlayAgain();
+                        }}
+                      >
+                        {claimButtonLoading ? (
+                          <Spinner />
+                        ) : (
+                          <p className="pickcard-points">
+                            <img
+                              style={{
+                                width: "25px",
+                              }}
+                              src={logo}
+                            ></img>{" "}
+                            500
+                          </p>
+                        )}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="btn-reward"
+                        onClick={() => {
+                          handlePlayAgain();
+                        }}
+                      >
+                        {claimButtonLoading ? (
+                          <Spinner />
+                        ) : (
+                          <p className="pickcard-points">
+                            <img
+                              style={{
+                                width: "25px",
+                              }}
+                              src={logo}
+                            ></img>{" "}
+                            500
+                          </p>
+                        )}
+                      </button>
+                    </>
+                  )
                 ) : null}
               </>
             ) : (
@@ -431,7 +472,7 @@ const PickaWord = () => {
                           )}
                         </>
                       )}
-                      {selectedCard ? (
+                      {/* {selectedCard ? (
                         results.points > 0 && results.boosts.length > 0 ? (
                           <h3 className="rw-popup">
                             You won {results.points} points and{" "}
@@ -456,19 +497,62 @@ const PickaWord = () => {
                         )
                       ) : (
                         <h3 className="rw-popup">FOR AN EXTRA PICK</h3>
+                      )} */}
+                      {selectedCard ? null : (
+                        <h3 className="rw-popup">FOR AN EXTRA PICK</h3>
                       )}
                     </div>
                   </div>
                 </div>
                 {purchasesRemaining !== 0 ? (
-                  <button
-                    className="btn-reward"
-                    onClick={() => {
-                      handlePlayAgain();
-                    }}
-                  >
-                    {claimButtonLoading ? <Spinner /> : "PAY 500"}
-                  </button>
+                  selectedCard ? (
+                    <>
+                      <p className="pick-para">PICK AGAIN</p>
+                      <button
+                        className="btn-reward"
+                        onClick={() => {
+                          handlePlayAgain();
+                        }}
+                      >
+                        {claimButtonLoading ? (
+                          <Spinner />
+                        ) : (
+                          <p className="pickcard-points">
+                            <img
+                              style={{
+                                width: "25px",
+                              }}
+                              src={logo}
+                            ></img>{" "}
+                            500
+                          </p>
+                        )}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="btn-reward"
+                        onClick={() => {
+                          handlePlayAgain();
+                        }}
+                      >
+                        {claimButtonLoading ? (
+                          <Spinner />
+                        ) : (
+                          <p className="pickcard-points">
+                            <img
+                              style={{
+                                width: "25px",
+                              }}
+                              src={logo}
+                            ></img>{" "}
+                            500
+                          </p>
+                        )}
+                      </button>
+                    </>
+                  )
                 ) : null}
               </>
             )}

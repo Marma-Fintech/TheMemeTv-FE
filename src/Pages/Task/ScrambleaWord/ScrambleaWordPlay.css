@@ -19,6 +19,7 @@
 .custom-search-input {
   width: 100%;
   font-size: 14px;
+  text-transform: uppercase;
   border: 1px solid #4cf038;
   border-radius: 5px;
   padding: 15px 110px 15px 20px;
@@ -33,6 +34,7 @@
   right: 3px;
   top: 3px;
   bottom: 3px;
+  text-transform: uppercase;
   border: 0;
   background: #03440a;
   color: #fff;
@@ -79,7 +81,7 @@
   border-radius: 3.209px;
   background-color: rgba(243, 213, 213, 0.453); /* Default gray background */
   min-height: 44px;
-  width: 35px;
+  width: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +150,7 @@
 }
 
 .custom-search-botton:disabled {
-  background-color: #ccc;
+  background-color: #6e6161;
   cursor: not-allowed;
 }
 .points-display {
@@ -203,6 +205,7 @@
   font-family: myFirstFont;
   text-align: center;
   margin-top: 10px;
+  text-transform: uppercase;
 }
 .pointsInnerContainer {
   display: flex;

@@ -1627,7 +1627,7 @@ const ScrambleaWordPlay = ({ day }) => {
       <div className="ScrambleaWordPlay">
         <h1 className="text-heading">WORD SCRAMBLE</h1>
         <h3 className="scramble-count">
-          YOU HAVE {scrambleIndex + 1}/5 SCRAMBLE
+          YOU HAVE {5 - scrambleIndex}/5 SCRAMBLE
         </h3>
       </div>
       <div>

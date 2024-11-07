@@ -19,6 +19,7 @@
 .question-count {
   text-align: center;
   color: gray;
+  text-transform: uppercase;
 }
 .quizgame-datetext {
   font-size: 20px;

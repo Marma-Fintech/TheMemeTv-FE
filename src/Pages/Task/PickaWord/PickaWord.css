@@ -129,14 +129,14 @@ button {
   font-size: 18px;
   text-align: center;
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 .epic-div {
   border: 2px solid #55545421;
   padding: 30px 12px;
-  margin: 20px;
+  margin: 10px;
   background: #1e1e1eab;
-  border-radius: 60px;
+  border-radius: 40px;
 }
 .popup-content {
   display: flex;
@@ -150,10 +150,10 @@ button {
 }
 .popup-card-image-popup {
   width: 33%;
-  margin-top: -53px;
-  margin-bottom: 35px;
+  /* margin-top: -15px; */
+  /* margin-bottom: 20px; */
   padding: 5px;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
 }
 .rw-popup {
   font-size: 18px;
@@ -175,4 +175,24 @@ button {
   position: absolute;
   right: 25px;
   top: 25px;
+}
+.pickcard-points {
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.pick-para {
+  color: #2cff2c;
+  margin-bottom: 7px;
+}
+.epic-pick {
+  padding: 10px 10px;
+  margin: 15px;
+  width: 265px;
+  height: 100%;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("../../../assets/images/epic-bg.svg");
 }

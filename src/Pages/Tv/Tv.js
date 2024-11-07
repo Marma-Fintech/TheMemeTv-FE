@@ -33,7 +33,7 @@ import { debounce } from "lodash";
 import wallet from "../../assets/images/wallet.svg";
 import DashedProgressBar from "../../components/dashedprogress/Dashedprogress";
 import twox from "../../assets/images/2X.png";
-import mask from "../../assets/images/mask.png";
+import mask from "../../assets/images/mask.webp";
 
 const Tv = () => {
   const { userDetails, watchScreen, updatewatchScreenInfo, updateUserInfo } =
@@ -1851,22 +1851,75 @@ const Tv = () => {
             zIndex: "-1",
           }}
         >
-          <div className="floor"></div>
-
-          <img
-            src={mask}
-            className="woot-dance booster-mask"
-            width="328"
-            height="272"
-            alt="8-bit dancing Karateka guy"
-          />
-          <img
-            src={karathe}
-            className="woot-dance"
-            width="328"
-            height="272"
-            alt="8-bit dancing Karateka guy"
-          />
+          <div
+            className="floor"
+            style={
+              watchScreen.boosterDetails.name === "5x"
+                ? {
+                    position: "fixed",
+                    bottom: "15%",
+                    width: "100%",
+                    height: "96px",
+                    backgroundColor: "#670000",
+                  }
+                : {
+                    position: "fixed",
+                    bottom: "15%",
+                    width: "100%",
+                    height: "96px",
+                    backgroundColor: "#2800b8",
+                  }
+            }
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+            }}
+          >
+            {/* {watchScreen.boosterDetails.name === "5x" ? ( */}
+            <>
+              <div style={{ position: "relative" }}>
+                <img
+                  src={karathe}
+                  className="woot-dance"
+                  width="328"
+                  height="272"
+                  alt="8-bit dancing Karateka guy"
+                />
+                <div
+                  style={{
+                    position: "",
+                    height: "100%",
+                    width: "100%",
+                    top: 0,
+                    left: 0,
+                  }}
+                >
+                  <img
+                    src={mask}
+                    className="woot-dance booster-mask"
+                    width="328"
+                    height="272"
+                    alt="8-bit dancing Karateka guy"
+                    style={
+                      watchScreen.boosterDetails.name === "5x"
+                        ? { visibility: "visible" }
+                        : { visibility: "hidden" }
+                    }
+                  />
+                </div>
+              </div>
+            </>
+            {/* ) : (
+              <img
+                src={karathe}
+                className="woot-dance"
+                width="328"
+                height="272"
+                alt="8-bit dancing Karateka guy"
+              /> */}
+            {/* )} */}
+          </div>
 
           {tapAnimations.map((animation) => (
             <div

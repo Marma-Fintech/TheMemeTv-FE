@@ -179,7 +179,7 @@ const ReferPage = () => {
                 title: "",
               }}
               onClick={() => console.log("shared successfully!")}
-              disableNative={true}
+              // disableNative={true}
             >
               <h2>invite Friends</h2>
             </RWebShare>

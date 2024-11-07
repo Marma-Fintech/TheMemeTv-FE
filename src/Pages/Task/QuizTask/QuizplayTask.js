@@ -470,8 +470,11 @@ const QuizPlayTask = () => {
       ) : (
         <>
           <div className="question-count">
-            <span> YOU HAVE {currentQuestionIndex + 1}</span>/
-            {currentQuestions.length} Question
+            <span>
+              {" "}
+              YOU HAVE {currentQuestions.length - currentQuestionIndex}
+            </span>
+            /{currentQuestions.length} Question
           </div>
           <div className="question-section">
             <div className="question-text">
