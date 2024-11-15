@@ -425,5 +425,11 @@
 .booster-mask {
   padding-top: 2px;
   z-index: 9;
-  mix-blend-mode: hue;
+  mix-blend-mode: color; /* Try alternatives like overlay, color */
+  filter: hue-rotate(360deg); /* Adjust angle as needed */
+}
+.boosterfilter {
+  filter: hue-rotate(507deg);
+  /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
+  -webkit-filter: hue-rotate(60deg); */
 }

@@ -69,7 +69,12 @@ function Card(props) {
 
   return (
     <div
-      style={{ height: "100%", width: "100%", position: "relative" }}
+      style={{
+        height: "100%",
+        width: "100%",
+        position: "relative",
+        display: "contents",
+      }}
       onClick={() => {
         if (value !== 0) {
           boosterSelected();
@@ -78,7 +83,7 @@ function Card(props) {
     >
       <div
         className="boostNumber"
-        style={{ position: "absolute", top: -2, left: "42%", fontSize: 9 }}
+        style={{ position: "absolute", top: -2, fontSize: 9 }}
       >
         {value}
       </div>

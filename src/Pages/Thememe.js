@@ -17,7 +17,7 @@ import porotta from "../assets/audio/videoplayback.m4a";
 import ReferPage from "./ReferPage/ReferPage";
 import Boosters from "../Pages/Boosters/Boosters";
 import ContinueText from "../assets/images/continue.svg";
-import switchOnTv from "../assets/images/switch-on.svg";
+import switchOnTv from "../assets/images/doNothing.svg";
 import marketPlace from "./MarketPlace/marketPlace";
 
 import {
@@ -58,6 +58,22 @@ const Thememe = () => {
   }, [userDetails, watchScreen]);
 
   useEffect(() => {
+    const data = localStorage.getItem("tutorial");
+    const parsedData = JSON.parse(data);
+    if (parsedData?.watched) {
+      updateUserInfo((prev) => ({
+        ...prev,
+        isTutorial: false,
+      }));
+    } else {
+      updateUserInfo((prev) => ({
+        ...prev,
+        isTutorial: true,
+      }));
+    }
+  }, []);
+
+  useEffect(() => {
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.expand();
     const userData = window.Telegram.WebApp.initDataUnsafe.user;
@@ -86,11 +102,11 @@ const Thememe = () => {
         telegramDetails: userData,
       }));
     }
-    const data1 = {
-      name: "Karthikeyan",
-      telegramId: "62655jln9lugkyu18",
-    };
-    getUserDetails(data1);
+    // const data1 = {
+    //   name: "Karthikeyan",
+    //   telegramId: "62655jln9lugkyu18",
+    // };
+    // getUserDetails(data1);
 
     const storedData1 = localStorage.getItem("watchStreak");
     const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
@@ -101,14 +117,14 @@ const Thememe = () => {
       parsedData1.watchSec > 180 &&
       !parsedData1?.updated
     ) {
-      // postWatchStreak(String(userData?.id));
-      postWatchStreak(data1.telegramId, parsedData1);
+      postWatchStreak(String(userData?.id));
+      // postWatchStreak(data1.telegramId, parsedData1);
     }
 
     const calculateReward = async () => {
       const data24 = {
-        // telegramId: String(userData?.id),
-        telegramId: data1.telegramId,
+        telegramId: String(userData?.id),
+        // telegramId: data1.telegramId,
         userWatchSeconds: 0,
       };
       // Calculate streak data and update the state
@@ -389,7 +405,6 @@ const Thememe = () => {
   useEffect(() => {
     if (
       latestUserDetails.current.centerCount === 3 &&
-      latestUserDetails.current.menuCount === 2 &&
       latestUserDetails.current.refererCount === 5
     ) {
       audioRef.current.play();
@@ -655,7 +670,7 @@ const Thememe = () => {
                     onClick={() => {
                       updateUserInfo((prev) => ({
                         ...prev,
-                        tutorialText: "PLAY GAMES AND EARN POINTS",
+                        tutorialText: "PLAY GAMES AND EARN TOKENS",
                       }));
                     }}
                     style={{ position: "absolute" }}
@@ -822,7 +837,7 @@ const Thememe = () => {
                         onClick={() => {
                           updateUserInfo((prev) => ({
                             ...prev,
-                            tutorialText: "USE BOOSTERS AND BOOST YOUR POINTS",
+                            tutorialText: "USE BOOSTERS AND BOOST YOUR TOKENS",
                           }));
                         }}
                         style={{ position: "absolute", left: "30%" }}
@@ -991,7 +1006,7 @@ const Thememe = () => {
                     onClick={() => {
                       updateUserInfo((prev) => ({
                         ...prev,
-                        tutorialText: "USE YOUR POINTS TO BUY BOOSTERS",
+                        tutorialText: "USE YOUR TOKENS TO BUY BOOSTERS",
                       }));
                     }}
                     style={{ position: "absolute" }}

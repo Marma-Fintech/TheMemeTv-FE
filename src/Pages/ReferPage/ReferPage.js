@@ -7,6 +7,7 @@ import Milestone from "../Milestone/milestone";
 import { RWebShare } from "react-web-share";
 import Tv from "../Tv/Tv";
 import cancelIcon from "../../assets/Task/cancelicon.png";
+import copy from "../../assets/images/copy.png";
 
 const ReferPage = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
@@ -163,16 +164,44 @@ const ReferPage = () => {
           </table>
         </div>
       </div>
-      <div
-        className="row"
-        onClick={() => {
-          // shareToTelegram();
-        }}
-      >
+      <div className="row">
         <div className="col-12">
-          <div className="invite-fri">
-            {/* <h2>invite Friends</h2> */}
-            <RWebShare
+          <div
+            className="invite-fri"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+          >
+            <h2
+              onClick={() => {
+                shareToTelegram();
+              }}
+            >
+              invite Friends
+            </h2>
+            <div
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(
+                    `https://t.me/the_meme_tv_bot?start=${userDetails?.userDetails?.refId}`
+                  )
+                  .then(() => {})
+                  .catch((err) => {
+                    console.error("Failed to copy text: ", err);
+                  });
+              }}
+            >
+              <img
+                src={copy}
+                style={{ marginLeft: "20px", marginBottom: "10px" }}
+              />
+            </div>
+
+            {/* <RWebShare
               data={{
                 text: "Like humans, flamingos make friends for life",
                 url: `https://t.me/the_meme_tv_bot?start=${userDetails?.userDetails?.refId}`,
@@ -182,7 +211,7 @@ const ReferPage = () => {
               // disableNative={true}
             >
               <h2>invite Friends</h2>
-            </RWebShare>
+            </RWebShare> */}
           </div>
         </div>
       </div>

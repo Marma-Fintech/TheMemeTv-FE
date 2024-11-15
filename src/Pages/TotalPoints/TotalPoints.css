@@ -28,6 +28,12 @@
   right: 12%;
   top: 7%;
 }
+.cancel-imgpoints1 {
+  width: 20px;
+  position: absolute;
+  left: 12%;
+  top: 7%;
+}
 .rewardstext {
   text-align: center;
   background: linear-gradient(

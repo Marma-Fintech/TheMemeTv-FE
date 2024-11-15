@@ -5,6 +5,8 @@ import logo from "../../assets/images/meme-logo.svg";
 import Tv from "../Tv/Tv";
 import "./TotalPoints.css";
 import { UserDeatils } from "../../apis/user";
+import questionMarkIcon from "../../assets/Task/ReferImg.png";
+import Info from "../PhaseDetails/PhaseDetails";
 
 const TotalPoints = () => {
   const { userDetails, updatewatchScreenInfo, updateUserInfo, watchScreen } =
@@ -15,7 +17,7 @@ const TotalPoints = () => {
         ...prev,
         ...{
           currentComponent: component,
-          currentComponentText: "TVPage",
+          currentComponentText: name,
           lastComponent: userDetails.currentComponent,
           lastComponentText: userDetails.currentComponentText,
           centerCount: userDetails.centerCount + 1,
@@ -68,6 +70,15 @@ const TotalPoints = () => {
         src={cancelIcon}
         className="cancel-imgpoints"
         style={{ cursor: "pointer", pointerEvents: "all" }}
+      />
+      <img
+        onMouseEnter={() => {
+          goToThePage(Info, "InfoPage");
+        }}
+        src={questionMarkIcon}
+        alt="Question Mark Icon"
+        className="cancel-imgpoints1"
+        style={{ marginLeft: "5px", pointerEvents: "all" }}
       />
       <div className="info-img scroll">
         <div

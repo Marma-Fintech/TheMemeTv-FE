@@ -4,6 +4,7 @@ import useUserInfo from "../../Hooks/useUserInfo";
 import "../PhaseDetails/PhaseDetails.css";
 import Tv from "../Tv/Tv";
 import cancelIcon from "../../assets/Task/cancelicon.png";
+import Totalpoints from "../TotalPoints/TotalPoints";
 
 const Info = () => {
   const { userDetails, updateUserInfo } = useUserInfo();
@@ -12,8 +13,8 @@ const Info = () => {
     updateUserInfo((prev) => ({
       ...prev,
       isPlay: false,
-      currentComponent: Tv,
-      currentComponentText: "TVPage",
+      currentComponent: Totalpoints,
+      currentComponentText: "TotalpointsPage",
       lastComponent: userDetails?.userDetails.currentComponent,
       lastComponentText: userDetails?.userDetails.currentComponentText,
       isMenu: false,

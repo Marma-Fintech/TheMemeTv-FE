@@ -58,7 +58,7 @@ const Tv = () => {
 
   // const audioRef = useRef(new Audio(beatAudio));
   const [isLoading, setIsLoading] = useState(false);
-  const [isTutorial, setIsTutorial] = useState(userDetails?.isTutorial);
+  const [isTutorial, setIsTutorial] = useState(false);
   const [showInstructions, setShowInstructions] = useState("");
 
   const handleClick = () => {
@@ -74,9 +74,7 @@ const Tv = () => {
   };
 
   useEffect(() => {
-    console.log(
-      JSON.stringify(watchScreen.boosterDetails.name) + "watchScreenwatchScreen"
-    );
+    console.log(JSON.stringify(watchScreen.booster) + "watchScreenwatchScreen");
     // Function to start the counter
     // const startCounter = () => {
     //   if (!intervalRef.current) {
@@ -594,37 +592,59 @@ const Tv = () => {
   };
 
   const addWatchSecapihelp = async (data) => {
-    setIsLoading(true);
-    clearInterval(intervalRef.current);
-    const res = await addWatchSeconds(data);
-    localStorage.setItem(
-      "pointDetails",
-      JSON.stringify({
-        tapPoints: 0,
-        watchSec: 0,
-        boosterPoints: 0,
-        booster: [0],
-      })
-    );
-    updatewatchScreenInfo((prev) => ({
+    // setIsLoading(true);
+    // clearInterval(intervalRef.current);
+    // const res = await addWatchSeconds(data);
+    // localStorage.setItem(
+    //   "pointDetails",
+    //   JSON.stringify({
+    //     tapPoints: 0,
+    //     watchSec: 0,
+    //     boosterPoints: 0,
+    //     booster: [0],
+    //   })
+    // );
+    // updatewatchScreenInfo((prev) => ({
+    //   ...prev,
+    //   // totalReward: res.totalRewards,
+    //   tapPoints: 0,
+    //   booster: false,
+    //   boosterSec: 0,
+    //   boosterPoints: 0,
+    //   boosterDetails: {},
+    //   watchSec: 0,
+    //   updatedWatchPoints: res?.watchRewards,
+    //   allrewards: res.totalRewards,
+    // }));
+    // if (res) {
+    //   setTimeout(() => {
+    //     // goToThePage(Streak, "Streak");
+    //     goToThePage(Info, "Info");
+    //   }, 500);
+    // }
+
+    updateUserInfo((prev) => ({
       ...prev,
-      // totalReward: res.totalRewards,
-      tapPoints: 0,
-      booster: false,
-      boosterSec: 0,
-      boosterPoints: 0,
-      boosterDetails: {},
-      watchSec: 0,
-      updatedWatchPoints: res?.watchRewards,
-      allrewards: res.totalRewards,
+      // currentComponent: component,
+      // currentComponentText: name,
+      // lastComponent: userDetails.currentComponent,
+      // lastComponentText: userDetails.currentComponentText,
+      // centerCount: userDetails.centerCount + 1,
+      isTutorial: true,
     }));
-    if (res) {
-      setTimeout(() => {
-        // goToThePage(Streak, "Streak");
-        goToThePage(Info, "Info");
-      }, 500);
-    }
+
+    // setIsTutorial(true);
   };
+
+  useEffect(() => {
+    const data = localStorage.getItem("tutorial");
+    const parsedData = JSON.parse(data);
+    if (parsedData?.watched) {
+      setIsTutorial(false);
+    } else {
+      setIsTutorial(true);
+    }
+  }, []);
 
   const addWatchSecapiwallet = async (data) => {
     setIsLoading(true);
@@ -1008,7 +1028,7 @@ const Tv = () => {
       className="tvContainer menupointer"
       style={{ height: "100%", width: "100%" }}
     >
-      {userDetails?.isTutorial ? (
+      {userDetails.isTutorial ? (
         <div
           className="tutorial"
           style={{
@@ -1227,7 +1247,7 @@ const Tv = () => {
                         updateUserInfo((prev) => ({
                           ...prev,
                           tutorialText:
-                            "STAKE YOUR POINTS TO DOUBLE YOUR REWARDS",
+                            "STAKE YOUR TOKENS TO DOUBLE YOUR REWARDS",
                         }));
                       }}
                       style={{
@@ -1294,7 +1314,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "POINTS EARNED PER SECOND",
+                      tutorialText: "TOKENS EARNED PER SECOND",
                     }));
                   }}
                   style={{ position: "absolute", top: -10, left: -10 }}
@@ -1321,7 +1341,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "CHECK YOUR TOTAL EARNED POINTS",
+                      tutorialText: "CHECK YOUR TOTAL EARNED TOKENS",
                     }));
                   }}
                   style={{ position: "absolute", top: -10, left: 65 }}
@@ -1344,7 +1364,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "POINTS EARNED PER TAP",
+                      tutorialText: "TOKENS EARNED PER TAP",
                     }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
@@ -1423,7 +1443,7 @@ const Tv = () => {
                   onClick={() => {
                     updateUserInfo((prev) => ({
                       ...prev,
-                      tutorialText: "DO TASKS AND EARN POINTS",
+                      tutorialText: "DO TASKS AND EARN TOKENS",
                     }));
                   }}
                   style={{ position: "absolute", top: -20, left: -10 }}
@@ -1445,10 +1465,14 @@ const Tv = () => {
             // className="cancel-img"
             onClick={() => {
               // closePopUp();
+              // setIsTutorial(false);
+
+              // setIsTutorial(false);
               updateUserInfo((prev) => ({
                 ...prev,
                 isTutorial: false,
               }));
+
               localStorage.setItem(
                 "tutorial",
                 JSON.stringify({
@@ -1691,7 +1715,7 @@ const Tv = () => {
         <div className="row">
           <div className="col-2">
             <div className="token-div">
-              <p className="token-mint">POINT MINT</p>
+              <p className="token-mint">TOKEN MINT</p>
               <p className="earn-p">
                 {watchScreen?.boosterDetails?.name === "levelUp"
                   ? currentLevel + 1
@@ -1854,7 +1878,7 @@ const Tv = () => {
           <div
             className="floor"
             style={
-              watchScreen.boosterDetails.name === "5x"
+              watchScreen.booster
                 ? {
                     position: "fixed",
                     bottom: "15%",
@@ -1881,14 +1905,47 @@ const Tv = () => {
               <div style={{ position: "relative" }}>
                 <img
                   src={karathe}
-                  className="woot-dance"
+                  className={
+                    watchScreen.booster
+                      ? "woot-dance boosterfilter"
+                      : "woot-dance"
+                  }
                   width="328"
                   height="272"
                   alt="8-bit dancing Karateka guy"
                 />
+
                 <div
                   style={{
-                    position: "",
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                    top: 0,
+                    left: 0,
+                  }}
+                >
+                  {/* <img
+                    src={mask}
+                    className={
+                      watchScreen.boosterDetails.name
+                        ? "woot-dance booster-mask boosterfilter"
+                        : "woot-dance booster-mask"
+                    }
+                    width="328"
+                    height="272"
+                    alt="8-bit dancing Karateka guy"
+                    style={
+                      // watchScreen.boosterDetails.name === "5x"
+                      //   ? { visibility: "visible" }
+                      //   :
+                      { visibility: "hidden" }
+                    }
+                  /> */}
+                </div>
+
+                {/* <div
+                  style={{
+                    position: "absolute",
                     height: "100%",
                     width: "100%",
                     top: 0,
@@ -1907,7 +1964,7 @@ const Tv = () => {
                         : { visibility: "hidden" }
                     }
                   />
-                </div>
+                </div> */}
               </div>
             </>
             {/* ) : (
