@@ -433,3 +433,29 @@
   /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
   -webkit-filter: hue-rotate(60deg); */
 }
+
+.boosterfilter1 {
+  filter: hue-rotate(-50deg);
+  /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
+  -webkit-filter: hue-rotate(60deg); */
+}
+.boosterfilter2 {
+  filter: hue-rotate(385deg);
+  /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
+  -webkit-filter: hue-rotate(60deg); */
+}
+.boosterfilter3 {
+  filter: hue-rotate(120deg);
+  /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
+  -webkit-filter: hue-rotate(60deg); */
+}
+.boosterfilter4 {
+  filter: hue-rotate(560deg);
+  /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
+  -webkit-filter: hue-rotate(60deg); */
+}
+.boosterfilter5 {
+  filter: hue-rotate(560deg);
+  /* filter: hue-rotate(507deg) brightness(387%) saturate(114%);
+  -webkit-filter: hue-rotate(60deg); */
+}

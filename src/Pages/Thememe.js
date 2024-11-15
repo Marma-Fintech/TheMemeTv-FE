@@ -102,11 +102,11 @@ const Thememe = () => {
         telegramDetails: userData,
       }));
     }
-    // const data1 = {
-    //   name: "Karthikeyan",
-    //   telegramId: "62655jln9lugkyu18",
-    // };
-    // getUserDetails(data1);
+    const data1 = {
+      name: "Karthikeyan",
+      telegramId: "62655jln9lugkyu18",
+    };
+    getUserDetails(data1);
 
     const storedData1 = localStorage.getItem("watchStreak");
     const parsedData1 = storedData1 ? JSON.parse(storedData1) : 0;
@@ -117,14 +117,14 @@ const Thememe = () => {
       parsedData1.watchSec > 180 &&
       !parsedData1?.updated
     ) {
-      postWatchStreak(String(userData?.id));
-      // postWatchStreak(data1.telegramId, parsedData1);
+      // postWatchStreak(String(userData?.id));
+      postWatchStreak(data1.telegramId, parsedData1);
     }
 
     const calculateReward = async () => {
       const data24 = {
-        telegramId: String(userData?.id),
-        // telegramId: data1.telegramId,
+        // telegramId: String(userData?.id),
+        telegramId: data1.telegramId,
         userWatchSeconds: 0,
       };
       // Calculate streak data and update the state
