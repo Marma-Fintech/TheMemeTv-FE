@@ -4,7 +4,7 @@ import useUserInfo from "../../../Hooks/useUserInfo";
 import questionmark from "../../../assets/Task/Questionmark.png";
 import levelUpBoostImg from "../../../assets/Task/1levelup.png";
 import twoXBoostImg from "../../../assets/Task/2xboost.png";
-import threeXBoostImg from "../../../assets/Task/3xboost.png";
+import threeXBoostImg from "../../../assets/images/threex.png";
 import fiveXBoostImg from "../../../assets/Task/5xboost.png";
 import tapBoosterImg from "../../../assets/Task/TapBoost.png";
 import thousandPointsImg from "../../../assets/Task/1000points.png";

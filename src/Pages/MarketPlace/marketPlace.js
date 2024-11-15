@@ -3,7 +3,7 @@ import "./marketPlace.css";
 import memetv from "../../assets/images/rewards.svg";
 import booster from "../../assets/images/boost-tap.png";
 import ligthing from "../../assets/images/lighting.png";
-import booster3 from "../../assets/images/3x-ligthing.png";
+import booster3 from "../../assets/images/threex.png";
 import booster2 from "../../assets/images/2booster.png";
 import cancelIcon from "../../assets/Task/cancelicon.png";
 import { purchaseBooster } from "../../apis/user";
