@@ -3,7 +3,7 @@ import React from "react";
 import levelupBoostImg from "../../assets/images/levelupImg.svg";
 import tapBoostImg from "../../assets/images/tapboostimg.svg";
 import twoxboost from "../../assets/images/2xboostimg.png";
-import threexboost from "../../assets/images/3xturboimg.png";
+import threexboost from "../../assets/images/threex.svg";
 import fivexboost from "../../assets/images/5xboostimg.png";
 import useUserInfo from "../../Hooks/useUserInfo";
 

@@ -353,7 +353,11 @@ const MarketPlace = () => {
                     purchaseCards();
                   }}
                   className="btn-reward1"
-                  style={err === "" ? {} : { color: "red" }}
+                  style={
+                    err === ""
+                      ? {}
+                      : { color: "#fff", textTransform: "uppercase" }
+                  }
                 >
                   {err === ""
                     ? selected.price * count
