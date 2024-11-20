@@ -5,7 +5,8 @@ import cancelIcon from "../../assets/Task/cancelicon.png";
 import useUserInfo from "../../Hooks/useUserInfo";
 import Streak from "../Streak/Streak";
 import coinImg from "../../assets/images/coinlogo.png";
-import booster3 from "./booster3.png";
+import booster3 from "../../assets/images/threex.png";
+// import booster3 from "./booster3.png";
 import booster5 from "./booster5.png";
 
 const streakData = [

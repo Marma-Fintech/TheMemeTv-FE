@@ -1,7 +1,7 @@
 import React from "react";
 
-import levelupBoostImg from "../../assets/images/levelupImg.svg";
-import tapBoostImg from "../../assets/images/tapboostimg.svg";
+import levelupBoostImg from "../../assets/images/levelupImg.png";
+import tapBoostImg from "../../assets/images/tapboostimg.png";
 import twoxboost from "../../assets/images/2xboostimg.png";
 import threexboost from "../../assets/images/threex.svg";
 import fivexboost from "../../assets/images/5xboostimg.png";

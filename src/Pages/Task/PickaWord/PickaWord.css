@@ -68,7 +68,7 @@ task-page {
   justify-content: center;
 }
 button {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   padding: 10px;
   background-color: rgb(243, 95, 95);
   font: bolder;
